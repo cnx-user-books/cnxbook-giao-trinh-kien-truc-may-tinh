@@ -1,0 +1,177 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Nhập - Xuất</title>
+  <metadata>
+  <md:content-id>m30574</md:content-id><md:title>Nhập - Xuất</md:title>
+  <md:abstract>Mục đích: 
+Giới thiệu một số thiết bị lưu trữ ngoài như: đĩa từ, đĩa quang, thẻ nhớ, băng từ. Giới thiệu hệ thống kết nối cơ bản các bộ phận bên trong máy tính. Cách giao tiếp giữa các ngoại vi và bộ xử lý.  Phương pháp an toàn dữ liệu trên thiết bị lưu trữ ngoài.
+Yêu cầu: 
+Sinh viên phải nắm vững các kiến thức về hệ thống kết nối cơ bản các bộ phận bên trong máy tính, cách giao tiếp giữa các ngoại vi và bộ xử lý. Biết được cấu tạo và các vận hành của các loại thiết bị lưu trữ ngoài và phương pháp an toàn dữ liệu trên đĩa cứng.</md:abstract>
+  <md:uuid>e2f5af47-d8a0-43b2-ae7c-e05abe7818b5</md:uuid>
+</metadata>
+
+<content>
+    <para id="id7793204">DẪN NHẬP</para>
+    <para id="id7793209">Bộ xử lý của máy tính điện tử liên hệ với bên ngoài nhờ các bộ phận xuất nhập (I/O) mà ta còn gọi là ngoại vi.</para>
+    <para id="id7793218">Các ngoại vi thông dụng là:</para>
+    <para id="id7793224">- Màn hình, bàn phím, chuột, máy in, thẻ mạng... là những bộ phận giúp con người sử dụng máy tính dễ dàng.</para>
+    <para id="id7671619">- Các đĩa từ, băng từ, đĩa quang, các loại thẻ nhớ là những bộ phận lưu trữ thông tin trữ lượng lớn.</para>
+    <para id="id7671628">Tất cả các ngoại vi đều được nối vào bộ xử lý và bộ nhớ trong bằng một hệ thống dây nối phức tạp vì tính đa dạng của các ngoại vi.</para>
+    <para id="id7671638">Trong chương này chúng ta tập trung nói đến các bộ phận lưu trữ số liệu có trữ lượng cao (đĩa từ, đĩa quang, băng từ) và sự kết nối các bộ phận này vào máy tính.</para>
+    <section id="id-841325338354">
+      <title>ĐĨA TỪ</title>
+      <para id="id7671662">Dù rằng công nghệ mới không ngừng phát minh nhiều loại bộ phận lưu trữ một lượng thông tin lớn nhưng đĩa từ vẫn giữ vị trí quan trọng từ năm 1965. Đĩa từ có hai nhiệm vụ trong máy tính.</para>
+      <para id="id7793228">- Lưu trữ dài hạn các tập tin.</para>
+      <para id="id7671678">- Thiết lập một cấp bộ nhớ bên dưới bộ nhớ trong để làm bộ nhớ ảo lúc chạy chương trình.</para>
+      <para id="id7671687">Do đĩa mềm dần được các thiết bị lưu trữ khác có các tính năng ưu việt hơn nên chúng ta không xét đến thiết bị này trong chương trình mà chỉ nói đến đĩa cứng. Trong tài liệu này mô tả một cách khái quát cấu tạo, cách vận hành cũng như đề cập đến các tính chất quan trọng của đĩa cứng.</para>
+      <para id="id7671701">Một đĩa cứng chứa nhiều lớp đĩa (từ 1 đến 4) quay quanh một trục khoảng 3.600-15.000 vòng mỗi phút. Các lớp đĩa này được làm bằng kim loại với hai mặt được phủ một chất từ tính (hình V.1). Đường kính của đĩa thay đổi từ 1,3 inch đến 8 inch. Mỗi mặt của một lớp đĩa được chia thành nhiều đường tròn đồng trục gọi là rãnh. Thông thường mỗi mặt của một lớp đĩa có từ 10.000 đến gần 30.000 rãnh. Mỗi rãnh được chia thành nhiều cung (sector) dùng chứa thông tin. Một rãnh có thể chứa từ 64 đến 800 cung. Cung là đơn vị nhỏ nhất mà máy tính có thể đọc hoặc viết (thông thường khoảng 512 bytes). Chuỗi thông tin ghi trên mỗi cung gồm có: số thứ tự của cung, một khoảng trống, số liệu của cung đó bao gồm cả các mã sửa lỗi, một khoảng trống, số thứ tự của cung tiếp theo.</para>
+      <para id="id6516322">Với kỹ thuật ghi mật độ không đều, tất cả các rãnh đều có cùng một số cung, điều này làm cho các cung dài hơn ở các rãnh xa trục quay có mật độ ghi thông tin thấp hơn mật độ ghi trên các cung nằm gần trục quay.</para>
+      <figure id="id6516339">
+        <media id="id7081244" alt=""><image src="../../media/graphics1-915d.png" mime-type="image/png" height="383" width="650"/></media>
+      </figure>
+      <para id="id6516363">Hình V.1: Cấu tạo của một đĩa cứng</para>
+      <para id="id6516376"><figure id="id6516387"><media id="id6805509" alt=""><image src=".png" mime-type="image/png" height="289" width="563"/></media></figure>Mật độ ghi không đềuMật độ ghi đềuVới công nghệ ghi với mật độ đều, người ta cho ghi nhiều thông tin hơn ở các rãnh xa trục quay. Công nghệ ghi này ngày càng được dùng nhiều với sự ra đời của các chuẩn giao diện thông minh như chuẩn SCSI.</para>
+      <para id="id7574059">Hình V.2: Mật độ ghi dữ liệu trên các loại đĩa cứng</para>
+      <para id="id7574073">Để đọc hoặc ghi thông tin vào một cung, ta dùng một đầu đọc ghi di động áp vào mỗi mặt của mỗi lớp đĩa. Các đầu đọc/ghi này được gắn chặt vào một thanh làm cho chúng cùng di chuyển trên một đường bán kính của mỗi lớp đĩa và như thế tất cả các đầu này đều ở trên những rãnh có cùng bán kính của các lớp đĩa. Từ “trụ“ (cylinder) được dùng để gọi tất cả các rãnh của các lớp đĩa có cùng bán kính và nằm trên một hình trụ.</para>
+      <para id="id7158915">Người ta luôn muốn đọc nhanh đĩa từ nên thông thường ổ đĩa đọc nhiều hơn số dữ liệu cần đọc; người ta nói đây là cách đọc trước. Để quản lý các phức tạp khi kết nối (hoặc ngưng kết nối) lúc đọc (hoặc ghi) thông tin, và việc đọc trước, ổ đĩa cần có bộ điều khiển đĩa.</para>
+      <para id="id7158930"><figure id="id7158933"><media id="id7072675" alt=""><image src="../../media/graphics2-53d7.png" mime-type="image/png" height="365" width="464"/></media></figure>Công nghiệp chế tạo đĩa từ tập trung vào việc nâng cao dung lượng của đĩa mà đơn vị đo lường là mật độ trên một đơn vị bề mặt. </para>
+      <para id="id7158968">Bảng V.1: Thông số kỹ thuật của đĩa cứng</para>
+    </section>
+    <section id="id-796155271982">
+      <title>ĐĨA QUANG</title>
+      <para id="id7158989">Các thiết bị lưu trữ quang rất thích hợp cho việc phát hành các sản phẩm văn hoá, sao lưu dữ liệu trên các hệ thống máy tính hiện nay. Ra đời vào năm 1978, đây là sản phẩm của sự hợp tác nghiên cứu giữa hai công ty Sony và Philips trong công nghiệp giải trí. Từ năm 1980 đến nay, công nghiệp đĩa quang phát triển mạnh trong cả hai lĩnh vực giải trí và lưu trữ dữ liệu máy tính. Quá trình đọc thông tin dựa trên sự phản chiếu của các tia laser năng lượng thấp từ lớp lưu trữ dữ liệu. Bộ phận tiếp nhận ánh sáng sẽ nhận biết được những điểm mà tại đó tia laser bị phản xạ mạnh hay biến mất do các vết khắc (pit) trên bề mặt đĩa. Các tia phản xạ mạnh chỉ ra rằng tại điểm đó không có lỗ khắc và điểm này được gọi là điểm nền (land). Bộ nhận ánh sáng trong ổ đĩa thu nhận các tia phản xạ và khuếch tán được khúc xạ từ bề mặt đĩa. Khi các nguồn sáng được thu nhận, bộ vi xử lý sẽ dịch các mẫu sáng thành các bit dữ liệu hay âm thanh. Các lỗ trên CD sâu 0,12 micron và rộng 0,6 micron (1 micron bằng một phần ngàn mm). Các lỗ này được khắc theo một track hình xoắn ốc với khoảng cách 1,6 micron giữa các vòng, khoảng 16.000 track/inch. Các lỗ (pit) và nền (land) kéo dài khoản 0,9 đến 3,3 micron. Track bắt đầu từ phía trong và kết thúc ở phía ngoài theo một đường khép kín các rìa đĩa 5mm. Dữ liệu lưu trên CD thành từng khối, mỗi khối chứa 2.352 byte. Trong đó, 304 byte chứa các thông tin về bit đồng bộ, bit nhận dạng (ID), mã sửa lỗi (ECC), mã phát hiện lỗi (EDC). Còn lại 2.048 byte chứa dữ liệu. Tốc độ đọc chuẩn của CD-ROM là 75 khối/s hay 153.600 byte/s hay 150KB/s (1X). </para>
+      <para id="id7158994">Dưới đây là một số loại đĩa quang thông dụng.</para>
+      <para id="id7159000">CD (Compact Disk): Đĩa quang không thể xoá được, dùng trong công nghiệp giải trí (các đĩa âm thanh được số hoá). Chuẩn đĩa có đường kính 12 cm, âm thanh phát từ đĩa khoảng 60 phút (không dừng).</para>
+      <para id="id7800141">CD-ROM (Compact Disk Read Only Memory): Đĩa không xoá dùng để chứa các dữ liệu máy tính. Chuẩn đĩa có đường kính 12 cm, lưu trữ dữ liệu hơn 650 MB. Khi phát hành, đĩa CD-ROM đã có chứa nội dung. Thông thường, dĩa CD-ROM được dùng để chứa các phần mềm và các chương trình điều khiển thiết bị.</para>
+      <para id="id7800157">CD-R (CD-Recordable): Giống như đĩa CD, đĩa mới chưa có thông tin, người dùng có thể ghi dữ liệu lên đĩa một lần và đọc được nhiều lần. Dữ liệu trên đĩa CD-R không thể bị xoá.</para>
+      <para id="id7488467">CD-RW (CD-Rewritable): Giống như đĩa CD, đĩa mới chưa có thông tin, người dùng có thể ghi dữ liệu lên đĩa, xoá và ghi lại dữ liệu trên đĩa nhiều lần.</para>
+      <para id="id7488477">DVD (Digital Video Disk - Digital Versatile Disk): Ra đời phục vụ cho công nghiệp giải trí, đĩa chứa các hình ảnh video được số hoá. Ngày nay, DVD được sử dụng rộng rãi trong các ứng dụng công nghệ thông tin. Kích thước đĩa có hai loại: 8cm và 12 cm. Đĩa DVD có thể chứa dữ liệu trên cả hai mặt đĩa, dung lượng tối đa lên đến 17GB. Các thông số kỹ thuật của đĩa DVD-ROM (loại đĩa chỉ đọc) so với CD-ROM. Tốc độ đọc chuẩn (1X) của DVD là 1.3MB/s (1X của DVD tương đương khoảng 9X của CDROM).</para>
+      <para id="id7800161">DVD-R (DVD-Recordable): Giống như đĩa DVD-ROM, người dùng có thể ghi dữ liệu lên đĩa một lần và đọc được nhiều lần. Đĩa này chỉ có thể ghi được trên một mặt đĩa, dung lượng ghi trên mỗi mặt tối đa là 4.7 GB.</para>
+      <para id="id7488503">DVD-RW (DVD-Rewritable): Giống như đĩa DVD-ROM, người dùng có thể ghi, xoá và ghi lại dữ liệu lên đĩa nhiều lần.. Đĩa này cũng có thể ghi được trên một mặt đĩa, dung lượng ghi trên mỗi mặt tối đa là 4.7 GB.</para>
+      <figure id="id7488520">
+        <media id="id7291898" alt=""><image src="../../media/graphics3-1419.png" mime-type="image/png" height="296" width="621"/></media>
+      </figure>
+      <para id="id7488544">Bảng V.2: So sánh một số thông số của hai loại đĩa CDROM và DVDROM</para>
+      <para id="id7488558">Với các đặc tính của đĩa quang, giá thành ngày càng thấp, được xem như một phương tiện thích hợp để phân phối các phần mềm cho máy vi tính. Ngoài ra, đĩa quang còn được dùng để lưu trữ lâu dài các dữ liệu thay thế cho băng từ. </para>
+    </section>
+    <section id="id-823041572307">
+      <title>CÁC LOẠI THẺ NHỚ</title>
+      <para id="id6270025"><figure id="id6270035"><media id="id7085785" alt=""><image src=".png" mime-type="image/png" height="181" width="325"/></media></figure><figure id="id6270059"><media id="id7141745" alt=""><image src=".png" mime-type="image/png" height="176" width="310"/></media></figure>Hiện nay, thẻ nhớ là một trong những công nghệ mới nhất được dùng làm thiết bị lưu trữ. Thẻ nhớ flash là một dạng bộ nhớ bán dẫn EEPROM(công nghệ dùng để chế tạo các chip BIOS trên các vỉ mạch chính), được cấu tạo bởi các hàng và các cột. Mỗi vị trí giao nhau là một ô nhớ gồm có hai transistor, hai transistor này cách nhau bởi một lớp ô-xít mỏng. Một transistor được gọi là floating gate và transistor còn lại được gọi là control gate. Floating gate chỉ có thể nối kết với hàng (word line) thông qua control gate. Khi đường kết nối được thiết lập, bit có giá trị 1. Để chuyển sang giá trị 0 theo một qui trình có tên Fowler-Nordheim tunneling. Tốc độ, yêu cầu về dòng điện cung cấp thấp và đặc biệt với kích thước nhỏ gọn của các loại thẻ nhớ làm cho kiểu bộ nhớ này được dùng rộng rãi trong công nghệ lưu trữ và giải trí hiện nay. </para>
+      <para id="id7860971">Hình V.3: Minh hoạ hai trạng thái của một bit nhớ trong thẻ nhớ</para>
+    </section>
+    <section id="id-505992900911">
+      <title>BĂNG TỪ</title>
+      <para id="id7860994">Băng từ có cùng công nghệ với các đĩa từ nhưng khác đĩa từ hai điểm:</para>
+      <para id="id7861001">- Việc thâm nhập vào đĩa từ là ngẫu nhiên còn việc thâm nhập vào băng từ là tuần tự. Như vậy việc tìm thông tin trên băng từ mất nhiều thời gian hơn việc tìm thông tin trên đĩa từ.</para>
+      <para id="id7861013">- Đĩa từ có dung lượng hạn chế còn băng từ gồm có nhiều cuộn băng có thể lấy ra khỏi máy đọc băng nên dung lượng của băng từ là rất lớn (hàng trăm GB). Với chi phí thấp, băng từ vẫn còn được dùng rộng rãi trong việc lưu trữ dữ liệu dự phòng.</para>
+      <para id="id7861030">Các băng từ có chiều rộng thay đổi từ 0,38cm đến 1,27 cm được đóng thành cuộn và được chứa trong một hộp bảo vệ. Dữ liệu ghi trên băng từ có cấu trúc gồm một số các rãnh song song theo chiều dọc của băng.</para>
+      <para id="id7861044">Có hai cách ghi dữ liệu lên băng từ:</para>
+      <para id="id7728548">Ghi nối tiếp: với kỹ thuật ghi xoắn ốc, dữ liệu ghi nối tiếp trên một rãnh của băng từ, khi kết thúc một rãnh, băng từ sẽ quay ngược lại, đầu từ sẽ ghi dữ liệu trên rãnh mới tiếp theo nhưng với hướng ngược lại. Quá trình ghi cứ tiếp diễn cho đến khi đầy băng từ. </para>
+      <para id="id7861048">Ghi song song: để tăng tốc độ đọc-ghi dữ liệu trên băng từ, đầu đọc - ghi có thể đọc-ghi một số rãnh kề nhau đồng thời. Dữ liệu vẫn được ghi theo chiều dọc băng từ nhưng các khối dữ liệu được xem như ghi trên các rãnh kề nhau. Số rãnh ghi đồng thời trên băng từ thông thường là 9 rãnh (8 rãnh dữ liệu - 1byte và một rãnh kiểm tra lỗi).</para>
+    </section>
+    <section id="id-375983652796">
+      <title>BUS NỐI NGOẠI VI VÀO BỘ XỬ LÝ VÀ BỘ NHỚ TRONG</title>
+      <para id="id7728592">Trong máy tính, bộ xử lý và bộ nhớ trong liên lạc với các ngoại vi bằng bus. Bus là một hệ thống các dây cáp nối (khoảng 50 đến 100 sợi cáp riêng biệt) trong đó một nhóm các cáp được định nghĩa chức năng khác nhau bao gồm: các đường dữ liệu, các đường địa chỉ, các dây điều khiển, cung cấp nguồn. Dùng bus có 2 ưu điểm là giá tiền thấp và dễ thay đổi ngoại vi. Người ta có thể gỡ bỏ một ngoại vi hoặc thêm vào ngoại vi mới cho các máy tính dùng cùng một hệ thống bus.</para>
+      <para id="id7728607">Giá tiền thiết kế và thực hiện một hệ thống bus là rẻ, vì nhiều ngã vào/ra cùng chia sẻ một số đường dây đơn giản. Tuy nhiên, điểm thất lợi chính của bus là tạo ra nghẽn cổ chai, điều này làm giới hạn lưu lượng vào/ra tối đa. Các hệ thống máy tính dùng cho quản lý phải dùng thường xuyên các ngoại vi, nên khó khăn chính là phải có một hệ thống bus đủ khả năng phục vụ bộ xử lý trong việc liên hệ với các ngoại vi.</para>
+      <para id="id7728621">Một trong những lý do khiến cho việc thiết kế một hệ thống bus khó khăn là tốc độ tối đa của bus bị giới hạn bởi các yếu tố vật lý như chiều dài của bus và số bộ phận được mắc vào bus.</para>
+      <para id="id7728634">Các bus thường có hai loại: bus hệ thống nối bộ xử lý với bộ nhớ (system bus, Front Side Bus-FSB) và bus nối ngoại vi (bus vào/ra – I/O bus) (hình V.4). Bus vào/ra có thể có chiều dài lớn và có khả năng nối kết với nhiều loại ngoại vi, các ngoại vi này có thể có lưu lượng thông tin khác nhau, định dạng dữ liệu khác nhau. Bus kết nối bộ xử lý với bộ nhớ thì ngắn và thường thì rất nhanh. Trong giai đoạn thiết kế bus kết nối bộ xử lý với bộ nhớ, nhà thiết kế biết trước các linh kiện và bộ phận mà ông ta cần kết nối lại, còn nhà thiết kế bus vào/ra phải thiết kế bus thoả mãn nhiều ngoại vi có mức trì hoãn và lưu lượng rất khác nhau (xem hình V.6). </para>
+      <para id="id7728638"><figure id="id7728651"><media id="id6921678" alt=""><image src=".png" mime-type="image/png" height="339" width="613"/></media></figure>Hình V.4: Hệ thống bus trong một máy tính Hình V.4: Hệ thống bus phân cấp</para>
+      <para id="id7158499">Hiện nay, trong một số hệ thống máy tính, bus nối ngoại vi được phân cấp thành hai hệ thống bus con. Trong đó, bus tốc độ cao (high-speed bus) hỗ trợ kết nối các thiết bị tốc độ cao như SCSI, LAN, Graphic, Video,…và hệ thống bus mở rộng (expansion bus) được thiết kế để kết nối với các ngoại vi yêu cầu tốc độ thấp như: modem, cổng nối tiếp, cổng song song,…Giữa hai hệ thống bus nối ngoại vi trong tổ chức hệ thống bus phân cấp là một giao diện đệm (hình V.5). </para>
+      <para id="id7158504"><figure id="id7158525"><media id="id7232951" alt=""><image src=".png" mime-type="image/png" height="400" width="638"/></media></figure>Hình V.6: Bảng biểu diễn tốc độ dữ liệu của các ngoại vi<figure id="id7158584"><media id="id7258928" alt=""><image src=".png" mime-type="image/png" height="374" width="625"/></media></figure>Hình V.5: Hệ thống bus phân cấp </para>
+      <para id="id6525747">Ta có thể có nhiều lựa chọn trong việc thiết kế một bus, như trong bảng V.3.</para>
+      <table id="id6525754" summary="">
+        <tgroup cols="3">
+          <colspec colnum="1" colname="c1"/>
+          <colspec colnum="2" colname="c2"/>
+          <colspec colnum="3" colname="c3"/>
+          <tbody>
+            <row>
+              <entry>Đặc tính của bus</entry>
+              <entry>Bus hệ thống</entry>
+              <entry>Bus nối ngoại vi</entry>
+            </row>
+            <row>
+              <entry>Độ rộng của bus</entry>
+              <entry>Đường dây địa chỉ và số liệu khác nhau</entry>
+              <entry>Đường địa chỉ và số liệu được đa hợp</entry>
+            </row>
+            <row>
+              <entry>Độ rộng bus số liệu</entry>
+              <entry>Càng rộng càng nhanh (ví dụ 64 bít)</entry>
+              <entry>Càng hẹp càng ít tốn kém (ví dụ 8 bít)</entry>
+            </row>
+            <row>
+              <entry>Số từ được chuyền</entry>
+              <entry>Chuyển nhiều từ </entry>
+              <entry>Chuyển đơn giản mỗi lần một từ</entry>
+            </row>
+            <row>
+              <entry>Chủ nhân của bus</entry>
+              <entry>Nhiều </entry>
+              <entry>Một </entry>
+            </row>
+            <row>
+              <entry>Chuyển từng gói </entry>
+              <entry>Có. Cần nhiều chủ nhân bus</entry>
+              <entry>Không. Kết nối một lần và chuyển hết thông tin</entry>
+            </row>
+            <row>
+              <entry>Xung nhịp</entry>
+              <entry>Đồng bộ</entry>
+              <entry>Bất đồng bộ</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <para id="id7488376">Bảng V.3: Các lựa chọn chính yếu cho một bus</para>
+      <para id="id7488390">Trong bảng V.3 có khái niệm sau đây liên quan đến các chủ nhân của bus - các bộ phận có thể khởi động một tác vụ đọc hoặc viết trên bus. Ví dụ bộ xử lý luôn là một chủ nhân của bus. Một bus có nhiều chủ nhân khi nó có nhiều bộ xử lý, hoặc khi các ngoại vi có thể khởi động một tác vụ có dùng bus. Nếu có nhiều chủ nhân của bus thì phải có một cơ chế trọng tài để quyết định chủ nhân nào được quyền chiếm lĩnh bus. Một bus có nhiều chủ, có thể cấp một dãi thông rộng (bandwidth) bằng cách sử dụng các gói tin thay vì dùng bus cho từng tác vụ riêng lẻ. Kỹ thuật sử dụng gói tin được gọi là phân chia nhỏ tác vụ (dùng bus chuyển gói). Một tác vụ đọc được phân tích thành một tác vụ yêu cầu đọc (tác vụ này chứa địa chỉ cần đọc), và một tác vụ trả lời của bộ nhớ (chứa thông tin cần đọc). Mỗi tác vụ đều có một nhãn cho biết loại của tác vụ. Trong kỹ thuật phân chia nhỏ tác vụ, trong khi bộ nhớ đọc các thông tin ở địa chỉ đã xác định thì bus được dành cho các chủ khác.</para>
+      <para id="id7488433">Bus hệ thống là một bus đồng bộ, nó gồm có một xung nhịp trong các đường dây điều khiển, và một nghi thức cho các địa chỉ và các số liệu đối với xung nhịp. Do có rất ít hoặc không có mạch logic nào dùng để quyết định hành động kế tiếp nào cần thực hiện, nên các bus đồng bộ vừa nhanh, vừa rẻ tiền. Trên bus này, tất cả đều phải vận hành với cùng một xung nhịp. </para>
+      <para id="id7488448">Ngược lại, các bus vào/ra thuộc loại bus bất đồng bộ, các bus này không có xung nhịp đồng bộ trong hệ thống bus. Thay vào đó có các nghi thức bắt tay với các quy định riêng về thời gian, được dùng giữa các bộ phận phát và bộ phận thu của bus. Bus bất đồng bộ rất dễ thích ứng với nhiều ngoại vi và cho phép nối dài bus mà không phải lo ngại gì đến vấn đề đồng bộ. Bus bất đồng bộ cũng dễ thích ứng với những thay đổi công nghệ. </para>
+    </section>
+    <section id="id-632217772732">
+      <title>CÁC CHUẨN VỀ BUS</title>
+      <para id="id6681740">Số lượng và chủng loại các bộ phận vào/ra không cần định trước trong các hệ thống xử lý thông tin. Điều này giúp cho người sử dụng máy tính dùng bộ phận vào/ra nào đáp ứng được các yêu cầu của họ. Vào/ra là giao diện trên đó các bộ phận (thiết bị) được kết nối vào hệ thống. Nó có thể xem như một bus nới rộng dùng để kết nối thêm ngoại vi vào máy tính. Các chuẩn làm cho việc nối kết các ngoại vi vào máy tính được dễ dàng; bởi vì, trong khi các nhà thiết kế-sản xuất máy tính và các nhà thiết kế-sản xuất ngoại vi có thể thuộc các công ty khác nhau. Sự tồn tại các chuẩn về bus là rất cần thiết. Như vậy, nếu nhà thiết kế máy tính và nhà thiết kế ngoại vi tôn trọng các chuẩn về bus này thì các ngoại vi có thể kết nối dễ dàng vào máy tính. Chuẩn của bus vào/ra là tài liệu quy định cách kết nối ngoại vi vào máy tính.</para>
+      <para id="id6681775">Các máy tính quá thông dụng thì các chuẩn về bus vào/ra của chúng có thể được xem là chuẩn cho các hãng khác (ví dụ: trước đây, UNIBUS của máy PDP 11, các chuẩn về bus của máy IBM PC, AT và hiện nay là các chuẩn của hãng Intel liên quan đến các máy vi tính). Các chuẩn về bus phải được các cơ quan về chuẩn như ISO, ANSI và IEEE công nhận.</para>
+    </section>
+    <section id="id-955616062639">
+      <title>GIAO DIỆN GIỮA BỘ XỬ LÝ VỚI CÁC BỘ PHẬN VÀO RA</title>
+      <para id="id6681799">Bộ xử lý dùng 2 cách để liên lạc với các bộ phận vào ra:</para>
+      <para id="id6681806">Cách thứ nhất, thường được dùng: là cách dùng một vùng địa chỉ của bộ nhớ làm vùng địa chỉ của các ngoại vi. Khi đọc hay viết vào vùng địa chỉ này của bộ nhớ là liên hệ đến các ngoại vi.</para>
+      <para id="id6681822">Cách thứ hai, dùng mã lệnh riêng biệt cho vào/ra (tức là có các lệnh vào/ra riêng, không trùng với lệnh đọc hay viết vào ô nhớ). Trong trường hợp này, bộ xử lý gởi một tín hiệu điều khiển cho biết địa chỉ đang dùng là của một ngoại vi. Vi mạch Intel 8086 và máy IBM 370 là các ví dụ về bộ xử lý dùng lệnh vào/ra riêng biệt.</para>
+      <para id="id6681841">Dù dùng cách nào để định vị vào/ra thì mỗi bộ phận vào/ra đều có các thanh ghi để cung cấp thông tin về trạng thái và về điều khiển. Bộ phận vào/ra dùng bit trạng thái “sẵn sàng” để báo cho bộ xử lý nó sẵn sàng nhận số liệu. Định kỳ bộ xử lý xem xét bít này để biết bộ phận vào ra có sẵn sàng hay không. Phương pháp này là phương pháp thăm dò (polling). Và nhược điểm của phương pháp này là làm mất thời gian của bộ xử lý vì định kỳ phải thăm dò tính sẵn sàng của các thiết bị ngoại vi. Điều này đã được nhận thấy từ lâu và đã dẫn đến phát minh ra ngắt quãng (interrupt) để báo cho bộ xử lý biết lúc có một bộ phận vào/ra cần được phục vụ.</para>
+      <para id="id6681858"><figure id="id6532572"><media id="id7325465" alt=""><image src=".png" mime-type="image/png" height="161" width="437"/></media></figure>Hình V.7. Sơ đồ hoạt động của hệ thống bus có vi mạch DMAViệc dùng ngắt quãng làm cho bộ xử lý không mất thời gian thăm dò xem các ngoại vi có yêu cầu phục vụ hay không, nhưng bộ xử lý phải mất thời gian chuyển dữ liệu. Thông thường việc trao đổi số liệu giữa ngoại vi và CPU là theo khối số liệu, nên vi mạch thâm nhập trực tiếp bộ nhớ trong (DMA: Direct Memory Access) được dùng trong nhiều máy tính để chuyển một khối nhiều từ mà không có sự can thiệp của CPU.</para>
+      <para id="id6532642">DMA là một vi mạch chức năng đặc biệt. Nó chuyển số liệu giữa ngoại vi và bộ nhớ trong, trong lúc đó CPU rãnh rỗi để làm công việc khác. Vậy DMA nằm ngoài CPU và tác động như là một chủ nhân của bus. Bộ xử lý khởi động các thanh ghi của DMA, các thanh ghi này chứa địa chỉ ô nhớ và số byte cần chuyển. DMA chủ động chuyển số liệu và khi chấm dứt thì trả quyền điều khiển cho bộ xử lý.</para>
+      <para id="id6532656">Vi mạch DMA càng thông minh thì công việc của CPU càng nhẹ đi. Nhiều vi mạch được gọi là bộ xử lý vào/ra (hay bộ điều khiển vào/ra) thực hiện công việc mình theo một chương trình cố định (chứa trong ROM), hay theo một chương trình mà hệ điều hành nạp vào bộ nhớ trong. Hệ điều hành thiết lập một hàng chờ đợi gồm các khối điều khiển các bộ phận vào/ ra. Các khối chứa các thông tin như là vị trí của số liệu (nguồn và đích) và số số liệu. Các bộ xử lý vào/ra lấy các thông tin này trong hàng chờ đợi, thực hiện các việc cần phải làm và gởi về CPU tín hiệu ngắt khi đã thực hiện xong công việc.</para>
+      <para id="id6532660">Một máy tính có bộ xử lý vào/ra được xem như một máy tính đa xử lý vì DMA giúp cho máy tính thực hiện cùng lúc nhiều quá trình. Tuy nhiên bộ xử lý vào/ra không tổng quát bằng các bộ xử lý vì chúng chỉ làm được một số việc nhất định. Hơn nữa bộ xử lý vào/ra không chế biến số liệu như các bộ xử lý thường làm. Nó chỉ di chuyển số liệu từ nơi này sang nơi khác.</para>
+    </section>
+    <section id="id-0814839967293">
+      <title>MỘT SỐ BIỆN PHÁP AN TOÀN DỮ LIỆU TRONG VIỆC LƯU TRỮ THÔNG TIN TRONG ĐĨA TỪ </title>
+      <para id="id7384569">Người ta thường chú trọng đến sự an toàn trong lưu giữ thông tin ở đĩa từ hơn là sự an toàn của thông tin trong bộ xử lý. Bộ xử lý có thể hư mà không làm tổn hại đến thông tin. Ổ đĩa của máy tính bị hư có thể gây ra các thiệt hại rất to lớn. </para>
+      <para id="id7384584">Một phương pháp giúp tăng cường độ an toàn của thông tin trên đĩa từ là dùng một mảng đĩa từ. Mảng đĩa từ này được gọi là Hệ thống đĩa dự phòng (RAID - Redundant Array of Independent Disks). Cách lưu trữ dư thông tin làm tăng giá tiền và sự an toàn (ngoại trừ RAID 0). Cơ chế RAID có các đặc tính sau:</para>
+      <list id="id7384610" list-type="enumerated">
+        <item>RAID là một tập hợp các ổ đĩa cứng (vật lý) được thiết lập theo một kỹ thuật mà hệ điều hành chỉ “nhìn thấy” chỉ là một ổ đĩa (logic) duy nhất.</item>
+        <item>Với cơ chế đọc/ghi thông tin diễn ra trên nhiều đĩa (ghi đan chéo hay soi gương).</item>
+        <item>Trong mảng đĩa có lưu các thông tin kiểm tra lỗi dữ liệu; do đó, dữ liệu có thể được phục hồi nếu có một đĩa trong mảng đĩa bị hư hỏng . </item>
+      </list>
+      <para id="id7384646">Tuỳ theo kỹ thuật thiết lập, RAID có thể có các mức sau:</para>
+      <para id="id7384652">i). RAID 0: Thực ra, kỹ thuật này không nằm trong số các kỹ thuật có cơ chế an toàn dữ liệu. Khi mảng được thiết lập theo RAID 0, ổ đĩa logic có được (mà hệ điều hành nhận biết) có dung dượng bằng tổng dung lượng của các ổ đĩa thành viên. Điều này giúp cho người dùng có thể có một ổ đĩa logic có dung lượng lớn hơn rất nhiều so với dung lượng thật của ổ đĩa vật lý cùng thời điểm. Dữ liệu được ghi phân tán trên tất cả các đĩa trong mảng. Đây chính là sự khác biệt so với việc ghi dữ liệu trên các đĩa riêng lẻ bình thường bởi vì thời gian đọc-ghi dữ liệu trên đĩa tỉ lệ nghịch với số đĩa có trong tập hợp (số đĩa trong tập hợp càng nhiều, thời gian đọc – ghi dữ liệu càng nhanh). Tính chất này của RAID 0 thật sự hữu ích trong các ứng dụng yêu cầu nhiều thâm nhập đĩa với dung lượng lớn, tốc độ cao (đa phương tiện, đồ hoạ,…). Tuy nhiên, như đã nói ở trên, kỹ thuật này không có cơ chế an toàn dữ liệu, nên khi có bất kỳ một hư hỏng nào trên một đĩa thành viên trong mảng cũng sẽ dẫn đến việc mất dữ liệu toàn bộ trong mảng đĩa. Xác suất Strip 12Strip 8Strip 4Strip 0Strip 13Strip 9Strip 5Strip 1Strip 14Strip 10Strip 6Strip 2Strip 15Strip 11Strip 7Strip 3Hình V.8: RAID 0hư hỏng đĩa tỉ lệ thuận với số lượng đĩa được thiết lập trong RAID 0. RIAD 0 có thể được thiết lập bằng phần cứng (RAID controller) hay phần mềm (Stripped Applications)</para>
+      <para id="id7935016">Strip 12Strip 8Strip 4Strip 0Strip 13Strip 9Strip 5Strip 1Strip 14Strip 10Strip 6Strip 2Strip 15Strip 11Strip 7Strip 3Strip 12Strip 8Strip 4Strip 0Strip 13Strip 9Strip 5Strip 1Strip 14Strip 10Strip 6Strip 2Strip 15Strip 11Strip 7Strip 3Hình V.9: RAID 1ii). RAID 1 (Mirror - Đĩa gương): Phương cách thông thường tránh mất thông tin khi ổ đĩa bị hư là dùng đĩa gương, tức là dùng 2 đĩa. Khi thông tin được viết vào một đĩa, thì nó cũng được viết vào đĩa gương và như vậy luôn có một bản sao của thông tin. Trong cơ chế này, nếu một trong hai đĩa bị hư thì đĩa còn lại được dùng bình thường. Việc thay thế một đĩa mới (cung thông số kỹ thuật với đĩa hư hỏng) và phục hồi dữ liệu trên đĩa đơn giản. Căn cứ vào dữ liệu trên đĩa còn lại, sau một khoảng thời gian, dữ liệu sẽ được tái tạo trên đĩa mới (rebuild). RAID 1 cũng có thể được thiết lập bằng phần cứng (RAID controller) hay phần mềm (Mirror Applications) với chi phí khá lớn, hiệu suất sử dụng đĩa không cao (50%). </para>
+      <para id="id7895333">iii) RAID 2: Dùng kỹ thuật truy cập đĩa song song, tất cả các đĩa thành viên trong RAID đều được đọc khi có một yêu cầu từ ngoại vi. Một mã sửa lỗi (ECC) được tính toán dựa vào các dữ liệu được ghi trên đĩa lưu dữ liệu, các bit được mã hoá được lưu trong các đĩa dùng làm đĩa kiểm tra. Khi có một yêu cầu dữ liệu, tất cả các đĩa được truy cập đồng thời. Khi phát hiện có lỗi, bộ điều khiển nhận dạng và sửa lỗi ngay mà không làm giảm thời gian truy cập đĩa. Với một thao tác ghi dữ liệu lên một đĩa, tất cả các đĩa dữ liệu và đĩa sửa lỗi đều được truy cập để tiến hành thao tác ghi. Thông thường, RAID 2 dùng mã Hamming để thiết lập cơ chế mã hoá, theo đó, để mã hoá dữ liệu được ghi, người ta dùng một bit sửa lỗi và hai bit phát hiện lỗi. RAID 2 thích hợp cho hệ thống yêu cầu giảm thiểu được khả năng xảy ra nhiều đĩa hư hỏng cùng lúc.</para>
+      <para id="id7895373">b0b1b2b3P(b)Hình V.11: RAID 3b0b1b2b3F0(b)F1(b)F2(b)Hình V.10: RAID 2iii). RAID 3: Dùng kỹ thuật ghi song song, trong kỹ thuật này, mảng được thiết lập với yêu cầu tối thiểu là 3 đĩa có các thông số kỹ thuật giống nhau, chỉ một đĩa trong mảng được dùng để lưu các thông tin kiểm tra lỗi (parity bit). Như vậy, khi thiết lập RAID 3, hệ điều hành nhận biết được một đĩa logic có dung lượng n-1/n (n: số đĩa trong mảng). Dữ liệu được chia nhỏ và ghi đồng thời trên n-1 đĩa và bit kiểm tra chẵn lẻ được ghi trên đĩa dùng làm đĩa chứa bit parity – chẵn lẻ đan chéo ở mức độ bít. Bít chẵn lẻ là một bít mà người ta thêm vào một tập hợp các bít làm cho số bít có trị số 1 (hoặc 0) là chẵn (hay lẻ). Thay vì có một bản sao hoàn chỉnh của thông tin gốc trên mỗi đĩa, người ta chỉ cần có đủ thông tin để phục hồi thông tin đã mất trong trường hợp có hỏng ổ đĩa. Khi một đĩa bất kỳ trong mảng bị hư, hệ thống vẫn hoạt động bình thường. Khi thay thế một đĩa mới vào mảng, căn cứ vào dữ liệu trên các đĩa còn lại, hệ thống tái tạo thông tin. Hiệu suất sử dụng đĩa cho cách thiết lập này là n-1/n. RAID 3 chỉ có thể được thiết lập bằng phần cứng (RAID controller).</para>
+      <para id="id7791878">B12B8B4Block 0B13B9B5Block1B14B10B6Block2B15B11B7Block3P(12-15)P(8-11)P(4-7)P(0-3)Hình V.12: RAID 4iv) RAID 4: từ RAID 4 đến RAID 6 dùng kỹ thuật truy cập các đĩa trong mảng độc lập. Trong một mảng truy cập độc lập, mỗi đĩa thành viên được truy xuất độc lập, do đó mảng có thể đáp ứng được các yêu cầu song song của ngoại vi. Kỹ thuật này thích hợp với các ứng dụng yêu cầu nhiều ngoại vi là các ứng dụng yêu cầu tốc độ truyền dữ liệu cao. Trong RAID 4, một đĩa dùng để chứa các bit kiểm tra được tính toán từ dữ liệu được lưu trên các đĩa dữ liệu. Khuyết điểm lớn nhất của RAID 4 là bị nghẽn cổ chai tại đĩa kiểm tra khi có nhiều yêu cầu đồng thời từ các ngoại vi.</para>
+      <para id="id7649759">v). RAID 5: yêu cầu thiết lập giống như RAID 4, dữ liệu được ghi từng khối trên các đĩa thành viên, các bit chẵn lẻ được tính toán mức độ khối được ghi trải đều lên trên tất cả các ổ đĩa trong mảng. Tương tự RAID 4, khi một đĩa bất kỳ trong mảng bị hư hỏng, hệ thống vẫn hoạt động bình thường. Khi thay thế một đĩa mới vào mảng, căn cứ vào dữ liệu trên các đĩa còn lại, hệ thống tái tạo thông tin. Hiệu suất sử dụng đĩa cho cách thiết lập này là n-1/n. RAID 5 chỉ có thể được thiết lập bằng phần cứng (RAID controller). Cơ chế này khắc phục được khuyết điểm đã nêu trong cơ chế RAID 4.</para>
+      <para id="id7649795">B19P(16-19)B17B13B15B16P(12-15)B18B12B8B4Block 0B9B5Block1B14B10P(8-11)P(4-7)Block3B6Block2B11B7P(0-3)Hình V.13: RAID 5vi). RAID 6: Trong kỹ thuật này, cần có n+2 đĩa trong mảng. Trong đó, n đĩa dữ liệu và 2 đĩa riêng biệt để lưu các khối kiểm tra. Một trong hai đĩa kiểm tra dùng cơ chế kiểm tra như trong RAID 4&amp;5, đĩa còn lại kiểm tra độc lập theo một giải thuật kiểm tra. Qua đó, nó có thể phục hồi được dữ liệu ngay cả khi có hai đĩa dữ liệu trong mảng bị hư hỏng.</para>
+      <para id="id6523646">B18P(16-19)B16Q(12-15)B14Q(16-19)P(12-15)B17B12B8B4Block 0B9B5Block1B13Q(8-11)P(8-11)P(4-7)Block3B6Block2B10Q(4-7)P(0-3)B19B15B11B7Q(0-3)Hình V.14: RAID 6Hiện nay, RAID 0,1,5 được dùng nhiều trong các hệ thống. Các giải pháp RAID trên đây (trừ RAID 6) chỉ đảm bảo an toàn dữ liệu khi có một đĩa trong mảng bị hư hỏng. Ngoài ra, các hư hỏng dữ liệu do phần mềm hay chủ quan của con người không được đề cập trong chương trình. Người dùng cần phải có kiến thức đầy đủ về hệ thống để các hệ thống thông tin hoạt động hiệu quả và an toàn.</para>
+      <para id="id7203170">CÂU HỎI ÔN TẬP VÀ BÀI TẬP CHƯƠNG V</para>
+      <para id="id7203176">*****</para>
+      <list id="id7203180" list-type="enumerated">
+        <item>Mô tả vận hành của ổ đĩa cứng. Cách lưu trữ thông tin trong ổ đĩa cứng</item>
+        <item>Mô tả các biện pháp an toàn trong việc lưu trữ thông tin trong đĩa cứng.</item>
+        <item>Nguyên tắc vận hành của đĩa quang. Ưu khuyết điểm của các loại đĩa quang.</item>
+        <item>Thông thường có bao nhiêu loại bus? Tại sao phải có các chuẩn cho các bus vào ra?</item>
+        <item>Thế nào là chủ nhân của bus? Khi bus có nhiều chủ nhân thì làm thế nào để giải quyết tranh chấp bus?</item>
+        <item>Giải thích việc nới rộng dãi thông bằng cách sử dụng các gói tin. </item>
+        <item>Sự khác biệt giữa bộ xử lý vào ra và bộ xử lý trung tâm của máy tính.</item>
+      </list>
+    </section>
+  </content>
+</document>

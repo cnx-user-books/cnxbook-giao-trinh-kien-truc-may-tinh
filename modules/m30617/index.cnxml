@@ -1,0 +1,900 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Kiến trúc phần mềm Bộ xử lý</title>
+  <metadata>
+  <md:content-id>m30617</md:content-id><md:title>Kiến trúc phần mềm Bộ xử lý</md:title>
+  <md:abstract/>
+  <md:uuid>52e2f4ce-8d47-46df-8e00-bf7126510c98</md:uuid>
+</metadata>
+
+<content>
+    <section id="id-572136037428">
+      <title>KIẾN TRÚC PHẦN MỀM BỘ XỬ LÝ</title>
+      <para id="id7337376">Mục đích: </para>
+      <para id="id7337385">Giới thiệu các thành phần cơ bản của một hệ thống máy tính, khái niệm về kiến trúc máy tính, tập lệnh. Giới thiệu các kiểu kiến trúc máy tính, các kiểu định vị được dùng trong kiến trúc, loại và chiều dài của toán hạng, tác vụ mà máy tính có thể thực hiện. Kiến trúc RISC (Reduced Instruction Set Computer): mô tả kiến trúc, các kiểu định vị. Giới thiệu tổng quát tập lệnh của các kiến trúc máy tính.</para>
+      <para id="id7337399">Yêu cầu :</para>
+      <para id="id7337407">Sinh viên có kiến thức về các thành phần cơ bản của một hệ thống máy tính, khái niệm về kiến trúc máy tính, tập lệnh. Nắm vững các kiến thức về các kiểu kiến trúc máy tính, các kiểu định vị được dùng trong kiến trúc, loại và chiều dài của toán hạng, tác vụ mà máy tính có thể thực hiện. Phân biệt được hai loại kiến trúc: CISC (Complex Instruction Set Computer), RISC (Reduced Instruction Set Computer). Các kiến thức cơ bản về kiến trúc RISC, tổng quát tập lệnh của các kiến trúc máy tính.</para>
+    </section>
+    <section id="id-576759445638">
+      <title>THÀNH PHẦN CƠ BẢN CỦA MỘT MÁY TÍNH</title>
+      <para id="id7337435">Thành phần cơ bản của một bộ máy tính gồm: bộ xử lý trung tâm (CPU: Central Processing Unit), bộ nhớ trong, các bộ phận nhập-xuất thông tin. Các bộ phận trên được kết nối với nhau thông qua các hệ thống bus. Hệ thống bus bao gồm: bus địa chỉ, bus dữ liệu và bus điều khiển. Bus địa chỉ và bus dữ liệu dùng trong việc chuyển dữ liệu giữa các bộ phận trong máy tính. Bus điều khiển làm cho sự trao đổi thông tin giữa các bộ phận được đồng bộ. Thông thường người ta phân biệt một bus hệ thống dùng trao đổi thông tin giữa CPU và bộ nhớ trong (thông qua cache), và một bus vào-ra dùng trao đổi thông tin giữa các bộ phận vào-ra và bộ nhớ trong.</para>
+      <para id="id7337442">Bộ điều khiển(CU)Bộ làm tính và luận lý (ALU)Các thanh ghi(Registers)Bus địa chỉBus dữ liệuBus điều khiểnBộ nhớ trongNgoại viBộ xử lý trung tâm (CPU)Hình II.1: Cấu trúc của một hệ máy tính đơn giảnMột chương trình sẽ được sao chép từ đĩa cứng vào bộ nhớ trong cùng với các thông tin cần thiết cho chương trình hoạt động, các thông tin này được nạp vào bộ nhớ trong từ các bộ phận cung cấp thông tin (ví dụ như một bàn phím hay một đĩa từ). Bộ xử lý trung tâm sẽ đọc các lệnh và dữ liệu từ bộ nhớ, thực hiện các lệnh và lưu các kết quả trở lại bộ nhớ trong hay cho xuất kết quả ra bộ phận xuất thông tin (màn hình hay máy in).</para>
+      <para id="id7629390">Thành phần cơ bản của một máy tính bao gồm :</para>
+      <list id="id7629396" list-type="bulleted">
+        <item>Bộ nhớ trong: Đây là một tập hợp các ô nhớ, mỗi ô nhớ có một số bit nhất định và chức một thông tin được mã hoá thành số nhị phân mà không quan tâm đến kiểu của dữ liệu mà nó đang chứa. Các thông tin này là các lệnh hay số liệu. Mỗi ô nhớ của bộ nhớ trong đều có một địa chỉ. Thời gian thâm nhập vào một ô nhớ bất kỳ trong bộ nhớ là như nhau. Vì vậy, bộ nhớ trong còn được gọi là bộ nhớ truy cập ngẫu nhiên (RAM: Random Access Memory). Độ dài của một từ máy tính (Computer Word) là 32 bit (hay 4 byte), tuy nhiên dung lượng một ô nhớ thông thường là 8 bit (1 Byte).</item>
+        <item>Bộ xử lý trung tâm (CPU): đây là bộ phận thi hành lệnh. CPU lấy lệnh từ bộ nhớ trong và lấy các số liệu mà lệnh đó xử lý. Bộ xử lý trung tâm gồm có hai phần: phần thi hành lệnh và phần điều khiển. Phần thi hành lệnh bao gồm bộ làm toán và luận lý (ALU: Arithmetic And Logic Unit) và các thanh ghi. Nó có nhiệm vụ làm các phép toán trên số liệu. Phần điều khiển có nhiệm vụ đảm bảo thi hành các lệnh một cách tuần tự và tác động các mạch chức năng để thi hành các lệnh.</item>
+        <item>Bộ phận vào - ra: đây là bộ phận xuất nhập thông tin, bộ phận này thực hiện sự giao tiếp giữa máy tính và người dùng hay giữa các máy tính trong hệ thống mạng (đối với các máy tính được kết nối thành một hệ thống mạng). Các bộ phận xuất nhập thường gặp là: bộ lưu trữ ngoài, màn hình, máy in, bàn phím, chuột, máy quét ảnh, các giao diện mạng cục bộ hay mạng diện rộng...Bộ tạo thích ứng là một vi mạch tổng hợp (chipset) kết nối giữa các hệ thống bus có các tốc độ dữ liệu khác nhau.</item>
+      </list>
+      <table id="id7440415" summary="">
+        <tgroup cols="15">
+          <colspec colnum="1" colname="c1"/>
+          <colspec colnum="2" colname="c2"/>
+          <colspec colnum="3" colname="c3"/>
+          <colspec colnum="4" colname="c4"/>
+          <colspec colnum="5" colname="c5"/>
+          <colspec colnum="6" colname="c6"/>
+          <colspec colnum="7" colname="c7"/>
+          <colspec colnum="8" colname="c8"/>
+          <colspec colnum="9" colname="c9"/>
+          <colspec colnum="10" colname="c10"/>
+          <colspec colnum="11" colname="c11"/>
+          <colspec colnum="12" colname="c12"/>
+          <colspec colnum="13" colname="c13"/>
+          <colspec colnum="14" colname="c14"/>
+          <colspec colnum="15" colname="c15"/>
+          <tbody>
+            <row>
+              <entry namest="c1" nameend="c14">Bus hệ thống ( Bus nối CPU - Bộ nhớ trong )</entry>
+              <entry/>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry namest="c4" nameend="c5"/>
+              <entry namest="c6" nameend="c7"/>
+              <entry namest="c8" nameend="c9"/>
+              <entry namest="c10" nameend="c12"/>
+              <entry namest="c13" nameend="c14"/>
+              <entry/>
+            </row>
+            <row>
+              <entry namest="c1" nameend="c2">Cache</entry>
+              <entry/>
+              <entry namest="c4" nameend="c7">Bộ tạo thích ứng</entry>
+              <entry namest="c8" nameend="c9"/>
+              <entry namest="c10" nameend="c14">Bộ nhớ trong</entry>
+              <entry/>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry namest="c4" nameend="c5"/>
+              <entry namest="c6" nameend="c12"/>
+              <entry namest="c13" nameend="c14"/>
+              <entry/>
+            </row>
+            <row>
+              <entry namest="c1" nameend="c2">CPU</entry>
+              <entry/>
+              <entry namest="c4" nameend="c14">Bus vào - ra</entry>
+              <entry/>
+            </row>
+            <row>
+              <entry/>
+              <entry namest="c2" nameend="c4"/>
+              <entry/>
+              <entry namest="c6" nameend="c8"/>
+              <entry namest="c9" nameend="c13"/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>Đĩa từ  Màn hình đồ thị  MạngHình II.2: Sơ đồ mô tả hoạt động điển hình của một máy tính</entry>
+              <entry namest="c2" nameend="c5">Điều khiển vào -ra</entry>
+              <entry/>
+              <entry namest="c7" nameend="c10">Điều khiển vào -ra</entry>
+              <entry/>
+              <entry namest="c12" nameend="c15">Điều khiển vào -ra</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <para id="id7439658"/>
+    </section>
+    <section id="id-403609255809">
+      <title>ĐỊNH NGHĨA KIẾN TRÚC MÁY TÍNH</title>
+      <para id="id7951185">Kiến trúc máy tính bao gồm ba phần: Kiến trúc phần mềm, tổ chức của máy tính và lắp đặt phần cứng.</para>
+      <para id="id7951209">Kiến trúc phần mềm của máy tính chủ yếu là kiến trúc phần mềm của bộ xử lý, bao gồm: tập lệnh, dạng các lệnh và các kiểu định vị. </para>
+      <list id="id7951222" list-type="bulleted">
+        <item>Trong đó, tập lệnh là tập hợp các lệnh mã máy (mã nhị phân) hoàn chỉnh có thể hiểu và được xử lý bới bộ xử lý trung tâm, thông thường các lệnh trong tập lệnh được trình bày dưới dạng hợp ngữ. Mỗi lệnh chứa thông tin yêu cầu bộ xử lý thực hiện, bao gồm: mã tác vụ, địa chỉ toán hạng nguồn, địa chỉ toán hạng kết quả, lệnh kế tiếp (thông thường thì thông tin này ẩn).</item>
+        <item>Kiểu định vị chỉ ra cách thức thâm nhập toán hạng. </item>
+      </list>
+      <para id="id7951253">Kiến trúc phần mềm là phần mà các lập trình viên hệ thống phải nắm vững để việc lập trình hiểu quả, ít sai sót. </para>
+      <list id="id7951267" list-type="bulleted">
+        <item>Phần tổ chức của máy tính liên quan đến cấu trúc bên trong của bộ xử lý, cấu trúc các bus, các cấp bộ nhớ và các mặt kỹ thuật khác của máy tính. Phần này sẽ được nói đến ở các chương sau.</item>
+        <item>Lắp đặt phần cứng của máy tính ám chỉ việc lắp ráp một máy tính dùng các linh kiện điện tử và các bộ phận phần cứng cần thiết. Chúng ta không nói đến phần này trong giáo trình.</item>
+      </list>
+      <para id="id7534823">Ta nên lưu ý rằng một vài máy tính có cùng kiến trúc phần mềm nhưng phần tổ chức là khác nhau (VAX- 11/780 và VAX 8600). Các máy VAX- 11/780 và VAX- 11/785 có cùng kiến trúc phần mềm và phần tổ chức gần giống nhau. Tuy nhiên việc lắp đặt phần cứng các máy này là khác nhau. Máy VAX- 11/785 đã dùng các mạch kết hiện đại để cải tiến tần số xung nhịp và đã thay đổi một ít tổ chức của bộ nhớ trong.</para>
+    </section>
+    <section id="id-0396443716019">
+      <title>CÁC KIỂU THI HÀNH MỘT LỆNH</title>
+      <para id="id7534845">Như đã mô tả, một lệnh mã máy bao gồm một mã tác vụ và các toán hạng.</para>
+      <para id="id7534856">Ví dụ: lệnh mã máy 01101001010101010000001101100101</para>
+      <para id="id7534862">Việc chọn số toán hạng cho một lệnh mã máy là một vấn đề then chốt vì phải có một sự cân đối giữa tốc độ tính toán và số các mạch tính toán phải dùng. Tuỳ theo tần số sử dụng các phép như trên mà các nhà thiết kế máy tính quyết định số lượng các mạch chức năng cần thiết cho việc tính toán. Thông thường số toán hạng thay đổi từ 0 tới 3.</para>
+      <para id="id7534880">Ví dụ: lệnh Y := A + B + C + D có thể được hiện bằng một lệnh mã máy nếu ta có 3 mạch cộng, hoặc được thực hiện bằng 3 lệnh mã máy nếu chúng ta chỉ có một mạch cộng, nếu việc tính toán trên xảy ra ít, người ta chỉ cần thiết kế một mạch cộng thay vì phải tốn chi phí lắp đặt 3 mạch cộng. Tuy nhiên, với một mạch cộng thì thời gian tính toán của hệ thống sẽ chậm hơn với hệ thống có ba mạch cộng.</para>
+      <para id="id7534900">Vị trí của toán hạng cũng được xem xét. Bảng II.1 chọn một vài nhà sản xuất máy tính và 3 kiểu cơ bản của vị trí các toán hạng đối với những lệnh tính toán trong ALU là: ở ngăn xếp, trên thanh ghi tích luỹ, và trên các thanh ghi đa dụng. Những kiến trúc phần mềm này được gọi là kiến trúc ngăn xếp, kiến trúc thanh ghi tích luỹ và kiến trúc thanh ghi đa dụng.</para>
+      <table id="id7899787" summary="">
+        <tgroup cols="5">
+          <colspec colnum="1" colname="c1"/>
+          <colspec colnum="2" colname="c2"/>
+          <colspec colnum="3" colname="c3"/>
+          <colspec colnum="4" colname="c4"/>
+          <colspec colnum="5" colname="c5"/>
+          <tbody>
+            <row>
+              <entry>Vị trí các toán hạng</entry>
+              <entry>Thí dụ</entry>
+              <entry>Toán hạng cho lệnh tính toán trong ALU</entry>
+              <entry>Vị trí đặt kết quả</entry>
+              <entry>Cách thức thâm nhập vào toán hạng</entry>
+            </row>
+            <row>
+              <entry>Ngăn xếp</entry>
+              <entry>B 5500 HP 3000/70</entry>
+              <entry>0</entry>
+              <entry>Ngăn xếp</entry>
+              <entry>Lệnh Push, Pop</entry>
+            </row>
+            <row>
+              <entry>Thanh ghi tích luỹ</entry>
+              <entry>PDP 8 Motorola 6809</entry>
+              <entry>1</entry>
+              <entry>Thanh ghi tích luỹ</entry>
+              <entry>Lệnh nạp vào hoặc lấy ra từ thanh ghi tích luỹ (load, store)</entry>
+            </row>
+            <row>
+              <entry>Thanh ghi đa dụng</entry>
+              <entry>IBM 360 DEC, VAX</entry>
+              <entry>2 hoặc 3</entry>
+              <entry>Thanh ghi hoặc bộ nhớ</entry>
+              <entry>Lệnh nạp vào hoặc lấy ra từ thanh ghi hoặc bộ nhớ</entry>
+            </row>
+            <row>
+              <entry namest="c1" nameend="c5">Bảng II.1 : Ví dụ về cách chọn lựa vị trí các toán hạng</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <para id="id7916559">Một vài nhà sản xuất máy tính tuân thủ chặt chẽ các kiểu chọn vị trí toán hạng nêu trên, nhưng phần nhiều các bộ xử lý dùng kiểu hỗn tạp. Ví dụ, mạch xử lý 8086 của Intel dùng cùng một lúc kiểu "thanh ghi đa dụng" và kiểu "thanh ghi tích luỹ".</para>
+      <para id="id7916573">Ví dụ minh hoạ chuỗi lệnh phải dùng để thực hiện phép tính C := A + B trong 3 kiểu kiến trúc phần mềm.</para>
+      <table id="id7916585" summary="">
+        <tgroup cols="3">
+          <colspec colnum="1" colname="c1"/>
+          <colspec colnum="2" colname="c2"/>
+          <colspec colnum="3" colname="c3"/>
+          <tbody>
+            <row>
+              <entry>Kiến trúc ngăn xếp</entry>
+              <entry>Kiến trúc thanh ghi tích luỹ</entry>
+              <entry>Kiến trúc thanh ghi đa dụng</entry>
+            </row>
+            <row>
+              <entry>Push APush BADDPop C</entry>
+              <entry>Load AADD BStore C</entry>
+              <entry>Load R1, AADD R1, BStore R1, C</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <para id="id7151514">Bảng II.2: Chuỗi lệnh dùng thực hiện phép tính C := A + B</para>
+      <para id="id7151530">(giả sử A, B, C đều nằm trong bộ nhớ trong)</para>
+      <para id="id7151539">Hiện tại các nhà sản xuất máy tính có khuynh hướng dùng kiến trúc phần mềm thanh ghi đa dụng vì việc thâm nhập các thanh ghi đa dụng nhanh hơn thâm nhập bộ nhớ trong, và vì các chương trình dịch dùng các thanh ghi đa dụng có hiệu quả hơn.</para>
+      <table id="id7151556" summary="">
+        <tgroup cols="3">
+          <colspec colnum="1" colname="c1"/>
+          <colspec colnum="2" colname="c2"/>
+          <colspec colnum="3" colname="c3"/>
+          <tbody>
+            <row>
+              <entry>Loại kiến trúc</entry>
+              <entry>Lợi điểm</entry>
+              <entry>Bất lợi</entry>
+            </row>
+            <row>
+              <entry>Ngăn xếp(Stack)</entry>
+              <entry>- Lệnh ngắn
+          FIXME: A LIST CAN NOT BE A TABLE ENTRY.
+          Ít mã máyLàm tối thiểu trạng thái bên trong của máy tínhDễ dàng tạo ra một bộ biên dịch đơn giản cho kiến trúc ngăn xếp</entry>
+              <entry>
+          FIXME: A LIST CAN NOT BE A TABLE ENTRY.
+          Thâm nhập ngăn xếp không ngẫu nhiên.Mã không hiệu quảKhó dùng trong xử lý song song và ống dẫnKhó tạo ra một bộ biên dịch tối ưu</entry>
+            </row>
+            <row>
+              <entry>Thanh ghi tích luỹ(Accumulator Register)</entry>
+              <entry>
+          FIXME: A LIST CAN NOT BE A TABLE ENTRY.
+          Lệnh ngắnLàm tối thiểu trạng thái bên trong của máy tính (yêu cầu ít mạch chức năng).Thiết kế dễ dàng</entry>
+              <entry>
+          FIXME: A LIST CAN NOT BE A TABLE ENTRY.
+          Lưu giữ ở thanh ghi tích luỹ là tạm thời.Nghẽn ở thanh ghi tích luỹKhó dùng trong xử lý song song và ống dẫnTrao đổi nhiều với bộ nhớ.</entry>
+            </row>
+            <row>
+              <entry>Thanh ghiđa dụng(General Register)</entry>
+              <entry>
+          FIXME: A LIST CAN NOT BE A TABLE ENTRY.
+          Tốc độ xử lý nhanh, định vị đơn giản.Ít thâm nhập bộ nhớ.Kiểu rất tổng quát để tạo các mã hữu hiệu</entry>
+              <entry>
+          FIXME: A LIST CAN NOT BE A TABLE ENTRY.
+          Lệnh dàiSố lượng thanh ghi bị giới hạn</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <para id="id7295524">Bảng II.3: Điểm lợi và bất lợi của 3 kiểu kiến trúc phần mềm</para>
+    </section>
+    <section id="id-888473540062">
+      <title>KIỂU KIẾN TRÚC THANH GHI ĐA DỤNG</title>
+      <para id="id7295552">Do hiện nay kiểu kiến trúc thanh ghi đa dụng chiếm vị trí hàng đầu nên trong các phần sau, ta chỉ đề cập đến kiểu kiến trúc này.</para>
+      <para id="id7295565">Đối với một lệnh tính toán hoặc logic điển hình (lệnh ALU), có 2 điểm cần nêu lên. </para>
+      <para id="id7295574">Trước tiên, một lệnh ALU phải có 2 hoặc 3 toán hạng. Nếu trong lệnh có 3 toán hạng thì một trong các toán hạng chứa kết quả phép tính trên hai toán hạng kia (Ví dụ: add A, B, C). </para>
+      <para id="id7417732">Nếu trong lệnh có 2 toán hạng thì một trong hai toán hạng phải vừa là toán hạng nguồn, vừa là toán hạng đích (Ví dụ: add A, B).</para>
+      <para id="id7417753">Thứ hai, số lượng toán hạng bộ nhớ có trong lệnh. Số toán hạng bộ nhớ có thể thay đổi từ 0 tới 3. </para>
+      <para id="id7417769">Trong nhiều cách tổ hợp có thể có các loại toán hạng của một lệnh ALU, các máy tính hiện nay chọn một trong 3 kiểu sau : thanh ghi-thanh ghi (kiểu này còn được gọi nạp - lưu trữ), thanh ghi - bộ nhớ và bộ nhớ - bộ nhớ.</para>
+      <para id="id7417794">Kiểu thanh ghi - thanh ghi được nhiều nhà chế tạo máy tính lưu ý với các lý do: việc tạo các mã máy đơn giản, chiều dài mã máy cố định và số chu kỳ xung nhịp cần thiết cho việc thực hiện lệnh là cố định, ít thâm nhập bộ nhớ. Tuy nhiên, kiểu kiến trúc này cũng có một vài hạn chế của nó như: số lượng thanh ghi bị giới hạn, việc các thanh ghi có cùng độ dài dẫn đến không hiệu quả trong các lệnh xử lý chuối cũng như các lệnh có cấu trúc. Việc lưu và phục hồi các trạng thái khi có các lời gọi thủ tục hay chuyển đổi ngữ cảnh.</para>
+    </section>
+    <section id="id-676957541948">
+      <title>TẬP LỆNH</title>
+      <para id="id7401940">Mục tiêu của phần này là dùng các ví dụ trích từ các kiến trúc phần mềm được dùng nhiều nhất, để cho thấy các kỹ thuật ở mức ngôn ngữ máy dùng để thi hành các cấu trúc trong các ngôn ngữ cấp cao.</para>
+      <para id="id7401957">Để minh hoạ bằng thí dụ, ta dùng cú pháp lệnh trong hợp ngữ sau đây :</para>
+      <para id="id7401982">Từ gợi nhớ mã lệnh, thanh ghi đích, thanh ghi nguồn 1, thanh ghi nguồn 2.</para>
+      <para id="id7401989">Từ gợi nhớ mã lệnh mô tả ngắn gọn tác vụ phải thi hành trên các thanh ghi nguồn, kết quả được lưu giữ trong thanh ghi đích.</para>
+      <para id="id7401999">Mỗi lệnh của ngôn ngữ cấp cao được xây dựng bằng một lệnh mã máy hoặc một chuỗi nhiều lệnh mã máy. Lệnh nhảy (GOTO) được thực hiện bằng các lệnh hợp ngữ về nhảy (JUMP) hoặc lệnh hợp ngữ về vòng. Chúng ta phân biệt lệnh nhảy làm cho bộ đếm chương trình được nạp vào địa chỉ tuyệt đối nơi phải nhảy đến (PC  địa chỉ tuyệt đối nơi phải nhảy tới), với lệnh vòng theo đó ta chỉ cần cộng thêm một độ dời vào bộ đếm chương trình (PC  PC + độ dời). Ta lưu ý là trong trường hợp sau, PC chứa địa chỉ tương đối so với địa chỉ của lệnh sau lệnh vòng.</para>
+      <section id="id-723895068005">
+        <title>Gán trị</title>
+        <para id="id7402053">Việc gán trị, gồm cả gán trị cho biểu thức số học và logic, được thực hiện nhờ một số lệnh mã máy. Cho các kiến trúc RISC, ta có thể nêu lên các lệnh sau :</para>
+        <para id="id7451910">- Lệnh bộ nhớ</para>
+        <para id="id7402061">LOAD Ri, M (địa chỉ) M[địa chỉ]  Ri</para>
+        <para id="id7451927">STORE Ri, M(địa chỉ) ; Ri  M[địa chỉ]</para>
+        <para id="id7451951">Địa chỉ được tính tuỳ theo kiểu định vị được dùng.</para>
+        <para id="id7451974">- Lệnh tính toán số học: tính toán số nguyên trên nội dung của hai thanh ghi Ri, Rj và xếp kết quả vào trong Rk:</para>
+        <para id="id7451995">ADD (cộng)</para>
+        <para id="id7452000">ADDD (cộng số có dấu chấm động, chính xác kép)</para>
+        <para id="id7452009">SUB (trừ)</para>
+        <para id="id7452014">SUBD (trừ số có dấu chấm động, chính xác kép)</para>
+        <para id="id7452023">MUL (nhân)</para>
+        <para id="id7452028">DIV (chia)</para>
+        <para id="id7269811">- Lệnh logic: thực hiện phép tính logic cho từng bit một.</para>
+        <para id="id7269830">AND (lệnh VÀ)</para>
+        <para id="id7269835">OR (lệnh HOẶC)</para>
+        <para id="id7269840">XOR (lệnh HOẶC LOẠI)</para>
+        <para id="id7269845"><figure id="id7269862"><media id="id8289844" alt=""><image src=".png" mime-type="image/png" height="502" width="518"/></media></figure>Dịch phải logicDịch trái logicDịch trái số họcDịch phải số họcQuay tráiQuay phảiHình II.7: Minh hoạ lệnh dịch chuyển và quay vòng010NEG (lệnh lấy số bù 1 )</para>
+        <para id="id7620210">- Các lệnh dịch chuyển số học hoặc logic (SHIFT ), quay vòng (ROTATE) có hoặc không có số giữ ở ngã vào, sang phải hoặc sang trái. Các lệnh này được thực hiện trên một thanh ghi và kết quả lưu giữ trong thanh ghi khác. Số lần dịch chuyển (mỗi lần dịch sang phải hoặc sang trái một bit) thường được xác định trong thanh ghi thứ ba. Hình II.7 minh hoạ cho các lệnh này</para>
+        <para id="id7620227">Cho các kiến trúc kiểu RISC, ta có :</para>
+        <para id="id7620233">SLL (shift left logical : dịch trái logic)</para>
+        <para id="id7620239">SRL (shift right logical : dịch phải logic)</para>
+        <para id="id7620244">SRA (shift right arithemtic : dịch phải số học)</para>
+      </section>
+      <section id="id-916056737428">
+        <title>Lệnh có điều kiện</title>
+        <para id="id7620259">Lệnh có điều kiện có dạng :</para>
+        <para id="id7620268">Nếu &lt;điều kiện&gt; thì &lt;chuỗi lệnh 1&gt; nếu không &lt;chuỗi lệnh 2&gt;</para>
+        <para id="id6966199">(IF &lt;condition&gt; THEN &lt;instructions1&gt; ELSE &lt;instructions2&gt;)</para>
+        <para id="id6966208">Lệnh này buộc phải ghi nhớ điều kiện và nhảy vòng nếu điều kiện được thoả.</para>
+        <section id="id-582501098567">
+          <title>a) Ghi nhớ điều kiện .</title>
+          <para id="id6966242">Bộ làm tính ALU cung cấp kết quả ở ngã ra tuỳ theo các ngã vào và phép tính cần làm. Nó cũng cho một số thông tin khác về kết quả dưới dạng các bit trạng thái. Các bit này là những đại lượng logic ĐÚNG hoặc SAI (hình II.8).</para>
+          <para id="id6966276">Bit SBit ZBit OVFBit CALUSố giữToán hạng nguồn 1Toán hạng nguồn 2Kết quảTrong các bit trạng thái ta có bit dấu S (Sign - Đúng nếu kết quả âm), bit trắc nghiệm zero Z (Zero - Đúng nếu kết quả bằng không), bit tràn OVF (Overflow) ĐÚNG nếu phép tính số học làm thanh ghi không đủ khả năng lưu trữ kết quả, bit số giữ C (carry) ĐÚNG nếu số giữ ở ngã ra là 1 .... Các bit trên thường được gọi là bit mã điều kiện.</para>
+          <para id="id7442898">Hình II.8 : Bit trạng thái mà ALU tạo ra</para>
+          <para id="id7442911">Có hai kỹ thuật cơ bản để ghi nhớ các bit trạng thái</para>
+          <para id="id7442921">Cách thứ nhất, ghi các trạng thái trong một thanh ghi đa dụng. </para>
+          <para id="id7442935">Ví dụ lệnh CMP Rk, Ri, Rj</para>
+          <para id="id7442948">Lệnh trên sẽ làm phép tính trừ Ri - Rj mà không ghi kết quả phép trừ, mà lại ghi các bit trạng thái vào thanh ghi Rk. Thanh ghi này được dùng cho một lệnh nhảy có điều kiện. Điểm lợi của kỹ thuật này là giúp lưu trữ nhiều trạng thái sau nhiều phép tính để dùng về sau. Điểm bất lợi là phải dùng một thanh ghi đa dụng để ghi lại trạng thái sau mỗi phép tính mà số thanh ghi này lại bị giới hạn ở 32 trong các bộ xử lý hiện đại.</para>
+          <para id="id7442997">Cách thứ hai, là để các bit trạng thái vào một thanh ghi đặc biệt gọi là thanh ghi trạng thái. Vấn đề lưu giữ nội dung thanh ghi này được giải quyết bằng nhiều cách. Trong kiến trúc SPARC, chỉ có một số giới hạn lệnh được phép thay đổi thanh ghi trạng thái ví dụ như lệnh ADDCC, SUBCC (các lệnh này thực hiện các phép tính cộng ADD và phép tính trừ SUB và còn làm thay đổi thanh ghi trạng thái). Trong kiến trúc PowerPC, thanh ghi trạng thái được phân thành 8 trường, mỗi trường 4 bit, vậy là thanh ghi đã phân thành 8 thanh ghi trạng thái con.</para>
+        </section>
+        <section id="id-169457891292">
+          <title>b) Nhảy vòng </title>
+          <para id="id6995243">Các lệnh nhảy hoặc nhảy vòng có điều kiện, chỉ thực hiện lệnh nhảy khi điều kiện được thoả. Trong trường hợp ngược lại, việc thực hiện chương trình được tiếp tục với lệnh sau đó. Lệnh nhảy xem xét thanh ghi trạng thái và chỉ nhảy nếu điều kiện nêu lên trong lệnh là đúng.</para>
+          <para id="id6995278">Chúng ta xem một ví dụ thực hiện lệnh nhảy có điều kiện.</para>
+          <para id="id6995288">Giả sử trạng thái sau khi bộ xử lý thi hành một tác vụ, được lưu trữ trong thanh ghi, và bộ xử lý thi hành các lệnh sau :</para>
+          <para id="id6995316">1.CMP R4, R1, R2: So sánh R1 và R2 bằng cách trừ R1 cho R2 và </para>
+          <para id="id7255720">lưu giữ trạng thái trong R4</para>
+          <para id="id7255752">2.BGT R4, +2: Nhảy bỏ 2 lệnh nếu R1 &gt; R2</para>
+          <para id="id7255769">3.ADD R3, R0, R2: R0 có giá trị 0. Chuyển nội dung của R2 vào R3</para>
+          <para id="id7255786">4.BRA +1: nhảy bỏ 1 lệnh</para>
+          <para id="id7255803">5.ADD R3, R0, R1: chuyển nội dung R1 vào R3</para>
+          <para id="id7255819">6. Lệnh kế</para>
+          <para id="id7255824">Nếu R1 &gt; R2 thì chuỗi lệnh được thi hành là 1, 2, 5, 6 được thi hành, </para>
+          <para id="id7255837">nếu không thì chuỗi lệnh 1, 2, 3, 4, 6 được thi hành.</para>
+          <para id="id7255847">Chuỗi các lệnh trên , trong đó có 2 lệnh nhảy, thực hiện công việc sau đây :</para>
+          <para id="id7803585">Nếu R1 &gt; R2 thì R3 = R1 nếu không R3 = R2</para>
+          <para id="id7803591">Các lệnh nhảy làm tốc độ thi hành lệnh chậm lại, trong các CPU hiện đại dùng kỹ thuật ống dẫn. Trong một vài bộ xử lý người ta dùng lệnh di chuyển có điều kiện để tránh dùng lệnh nhảy trong một vài trường hợp. Thí dụ trên đây có thể được viết lại :</para>
+          <para id="id7803609">1. CMP R4, R1, R2 : So sánh R1 và R2 và để các bit trạng thái trong R4.</para>
+          <para id="id7803626">2.ADD R3, R0, R2: Di chuyển R2 vào R3</para>
+          <para id="id7803642">3.MGT R4, R3, R1: (MGT : Move if greater than). Nếu R1 &gt; R2 thì </para>
+          <para id="id7803664">di chuyển R1 vào R3</para>
+        </section>
+      </section>
+      <section id="id-374733170325">
+        <title>Vòng lặp </title>
+        <para id="id7803691">Các lệnh vòng lặp có thể được thực hiện nhờ lệnh nhảy có điều kiện mà ta đã nói ở trên. Trong trường hợp này, ta quản lý số lần lặp lại bằng một bộ đếm vòng lặp, và người ta kiểm tra bộ đếm này sau mỗi vòng lặp để xem đã đủ số vòng cần thực hiện hay chưa.</para>
+        <para id="id7803708">Bộ xử lý PowerPC có một lệnh quản lý vòng lặp</para>
+        <para id="id7486647">BNCT Ri, độ dời</para>
+        <para id="id7486660">Với thanh ghi Ri chứa số lần lặp lại.</para>
+        <para id="id7486665">Lệnh này làm các công việc sau:</para>
+        <para id="id7486671">Ri := Ri -1</para>
+        <para id="id7486679">Nếu Ri &lt;&gt; 0, PC := PC + độ dời. Nếu không thì tiếp tục thi hành lệnh kế.</para>
+      </section>
+      <section id="id-77771779668">
+        <title>Thâm nhập bộ nhớ ngăn xếp</title>
+        <para id="id7486701">Ngăn xếp là một tổ chức bộ nhớ sao cho ta chỉ có thể đọc một từ ở đỉnh ngăn xếp hoặc viết một từ vào đỉnh ngăn xếp. Địa chỉ của đỉnh ngăn xếp được chứa trong một thanh ghi đặc biệt gọi là con trỏ ngăn xếp SP (Stack Pointer).</para>
+        <para id="id7486715">Ứng với cấu trúc ngăn xếp, người ta có lệnh viết vào ngăn xếp PUSH và lệnh lấy ra khỏi ngăn xếp POP. Các lệnh này vận hành như sau:</para>
+        <para id="id7486725">- Cho lệnh PUSH</para>
+        <para id="id7486730">SP := SP +1</para>
+        <para id="id7486736">M (SP) := Ri (Ri là thanh ghi cần viết vào ngăn xếp)</para>
+        <para id="id7486750">- Cho lệnh POP</para>
+        <para id="id7486755">Ri := M(SP) (Ri là thanh ghi, nhận từ lấy ra khỏi ngăn xếp)</para>
+        <para id="id7486771">SP := SP -1</para>
+        <para id="id7486777">Trong các bộ xử lý RISC, việc viết vào hoặc lấp ra khỏi ngăn xếp dùng các lệnh bình thường. Ví dụ thanh ghi R30 là con trỏ ngăn xếp thì việc viết vào ngăn xếp được thực hiện bằng các lệnh:</para>
+        <para id="id6995651">ADDI R30, R30, 4 ; tăng con trỏ ngăn xếp lên 4 vì từ dài 32 bit</para>
+        <para id="id6995669">STORE Ri, (R30) ; Viết Ri vào đỉnh ngăn xếp</para>
+        <para id="id6995686">Việc lấy ra khỏi ngăn xếp được thực hiện bằng các lệnh :</para>
+        <para id="id6995696">LOAD Ri, (R30) ; lấy số liệu ở đỉnh ngăn xếp và nạp vào Ri</para>
+        <para id="id6995714">SUBI R30, R30,4 ; giảm con trỏ ngăn xếp bớt 4</para>
+      </section>
+      <section id="id-941196680513">
+        <title>Các thủ tục</title>
+        <para id="id6995742">Các thủ tục được gọi từ bất cứ nơi nào của chương trình nhờ lệnh gọi thủ tục CALL. Để khi chấm dứt việc thi hành thủ tục thì chương trình gọi được tiếp tục bình thường, ta cần lưu giữ địa chỉ trở về tức địa chỉ của lệnh sau lệnh gọi thủ tục CALL. Khi chấm dứt thi hành thủ tục, lệnh trở về RETURN nạp địa chỉ trở về vào PC.</para>
+        <para id="id6995759">Trong các kiến trúc CISC (VAX 11, 80x86, 680x0), địa chỉ trở về được giữ ở ngăn xếp. Trong các kiến trúc RISC, một thanh ghi đặc biệt (thường là thanh ghi R31) được dùng để lưu giữ địa chỉ trở về.</para>
+        <para id="id6995767">Lệnh gọi thủ tục là một lệnh loại JMPL Ri, lệnh này làm các tác vụ :</para>
+        <para id="id7867762">R31 := PC; để địa chỉ trở về trong R31</para>
+        <para id="id6995771">PC := Ri; nhảy tới địa chỉ của thủ tục nằm trong thanh ghi Ri</para>
+        <para id="id7867786">Lệnh trở về khi chấm dứt thủ tục là JMP R31, vì thanh ghi R31 chứa địa chỉ trở về.</para>
+        <para id="id7867796">Việc dùng một thanh ghi đặc biệt để lưu trữ địa chỉ trở về là một giải pháp chỉ áp dụng cho các thủ tục cuối cùng, nghĩa là cho thủ tục không gọi thủ tục nào cả. Để có thể cho các thủ tục có thể gọi một thủ tục khác, ta có hai giải pháp: </para>
+        <para id="id7867814">Giải pháp 1: có nhiều thanh ghi để lưu trữ địa chỉ trở về</para>
+        <para id="id7867843">Giải pháp 2: lưu giữ địa chỉ trở về ở ngăn xếp.</para>
+        <para id="id7867857">Việc gọi thủ tục có thể được thực hiện bằng chuỗi lệnh sau đây :</para>
+        <para id="id7867868">ADDI R30, R30,4 ; R30 là con trỏ ngăn xếp</para>
+        <para id="id7885164">STORE R31, (R30) ; lưu giữ địa chỉ trở về</para>
+        <para id="id7885180">JMPL Ri ; gọi thủ tục</para>
+        <para id="id7885198">Người ta dùng chuỗi lệnh sau đây để trở về chương trình gọi :</para>
+        <para id="id7885208">LOAD R31, (R30) ; phục hồi địa chỉ trở về</para>
+        <para id="id7885229"><figure id="id7885246"><media id="id1169427478676" alt=""><image src=".png" mime-type="image/png" height="457" width="584"/></media></figure><figure id="id7885270"><media id="id1169427767491" alt=""><image src=".png" mime-type="image/png" height="166" width="561"/></media></figure>Chương trình chínhBộ nhớ trongĐịa chỉa) Gọi thủ tục và trở vềb) Diễn tiến thi hànha) Khởi tạo ngăn xếpb) Sau lời gọi thủ tục 1c) Sau lời gọi thủ tục 2d) Trở về sau lời gọi thủ tục 2e) Sau lời gọi thủ tục 2 lần 2f) Trở về sau lời gọi thủ tục 2g) Trở về sau lời gọi thủ tục 1Hình II.9: Gọi thủ tục và trở về khi thực hiện xong thủ tụcThủ tục Proc1Thủ tục Proc2SUBI R30, R30,4 ; cập nhật con trỏ ngăn xếp</para>
+        <para id="id7534189">JMP R31 ; trở về chương trình gọi</para>
+        <para id="id7534208">Việc truyền tham số từ thủ tục gọi đến thủ tục bị gọi có thể thực hiện bằng cách dùng các thanh ghi của bộ xử lý hoặc dùng ngăn xếp. Nếu số tham số cần truyền ít, ta dùng các thanh ghi.</para>
+      </section>
+    </section>
+    <section id="id-597767761677">
+      <title>CÁC KIỂU ĐỊNH VỊ</title>
+      <para id="id7537054">Kiểu định vị định nghĩa cách thức thâm nhập các toán hạng. Một vài kiểu xác định cách thâm nhập toán hạng bộ nhớ, nghĩa là cách tính địa chỉ của toán hạng, các kiểu khác xác định các toán hạng nằm trong các thanh ghi. </para>
+      <para id="id7537071"><figure id="id7537082"><media id="id1111470" alt=""><image src=".png" mime-type="image/png" height="160" width="613"/></media></figure>Địa chỉ từ là x cho cả hai minh hoạHình II.3: Minh hoạ hai cách sắp xếp địa chỉ trong bộ nhớChú ý rằng, trong các kiểu định vị, ta cần lưu ý khi chuyển đổi dữ liệu nhị phân giữa hai kiểu định địa chỉ liên quan đến ô nhớ, vì mỗi từ máy tính gồm bốn byte, mỗi ô nhớ chứa một byte. Như vậy, một từ máy tính được lưu trong bốn ô nhớ liên tiếp trong bộ nhớ trong, có nhiều cách xác một từ máy tính, trong đó, hai cách tiêu biểu nhất là:</para>
+      <list id="id7577526" list-type="bulleted">
+        <item>Định vị kiểu Big-Endian: byte thấp nhất được đặt trong ô nhớ có địa chỉ cao nhất (IBM, Motorolla, Sun, HP</item>
+      </list>
+      <para id="id7577545">).</para>
+      <list id="id7577549" list-type="bulleted">
+        <item>Định vị kiểu Little-Endian: byte thấp nhất được đặt trong ô nhớ có địa chỉ thấp nhất (Intel, DEC</item>
+        <item>)</item>
+      </list>
+      <table id="id7577577" summary="">
+        <tgroup cols="3">
+          <colspec colnum="1" colname="c1"/>
+          <colspec colnum="2" colname="c2"/>
+          <colspec colnum="3" colname="c3"/>
+          <tbody>
+            <row>
+              <entry>Kiểu định vị</entry>
+              <entry>Ví dụ về lệnh</entry>
+              <entry>Giải thích</entry>
+            </row>
+            <row>
+              <entry>Thanh ghi</entry>
+              <entry>Add R3, R4</entry>
+              <entry>R3  R3 + R4</entry>
+            </row>
+            <row>
+              <entry>Tức thì</entry>
+              <entry>Add R4, #3</entry>
+              <entry>R4  R4 + 3</entry>
+            </row>
+            <row>
+              <entry>Trực tiếp</entry>
+              <entry>Add R1, (1001)</entry>
+              <entry>R1  R1 + M [1001]</entry>
+            </row>
+            <row>
+              <entry>Gián tiếp (thanh ghi)</entry>
+              <entry>ADD R4, (R1)</entry>
+              <entry>R4  R4 + M [R1]</entry>
+            </row>
+            <row>
+              <entry>Gián tiếp (bộ nhớ)</entry>
+              <entry>Add R1, @ (R3)</entry>
+              <entry>R1  R1 + M[ M [R3]]</entry>
+            </row>
+            <row>
+              <entry>Gián tiếp (thanh ghi + Độ dời)</entry>
+              <entry>Add R4, 100(R1)</entry>
+              <entry>R4  R4 + M[R1 + 100]</entry>
+            </row>
+            <row>
+              <entry>Gián tiếp (thanh ghi + thanh ghi)</entry>
+              <entry>Add R3, (R1 + R2)</entry>
+              <entry>R3  R3 + M[R1 + R2]</entry>
+            </row>
+            <row>
+              <entry>Gián tiếp ( t/g nền + t/g chỉ số + độ dời )</entry>
+              <entry>Add R1, 100(R2)[R3]</entry>
+              <entry>R1R1+M[100+R2+ d * R3]</entry>
+            </row>
+            <row>
+              <entry>Tự tăng</entry>
+              <entry>Add R1, (R2)+</entry>
+              <entry>R1  R1 + M[R2]R2  R2 +d</entry>
+            </row>
+            <row>
+              <entry>Tự giảm</entry>
+              <entry>Add R1, -(R2)</entry>
+              <entry>R2  R2 - dR1  R1 + M[R2]</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <para id="id7367728">Bảng II.4 :Kiểu định vị của một bộ xử lý có kiến trúc phần mềm kiểu thanh ghi đa dụng.</para>
+      <para id="id7367744">R1, R2, R3, R4 : các thanh ghi </para>
+      <para id="id7367749">R4  R3 + R4 : Cộng các thanh ghi R3 và R4 rồi để kết quả và R4</para>
+      <para id="id7367771">M[R1] : R1 chứa địa chỉ bộ nhớ mà toán hạng được lưu trữ</para>
+      <para id="id7367782">M[1001] : toán hạng được lưu trữ ở địa chỉ 1001</para>
+      <para id="id7367791">d : số byte số liệu cần thâm nhập (d = 4 cho từ máy tính, d = 8 cho từ đôi máy tính ).</para>
+      <para id="id7863844">Trong kiểu định vị thanh ghi, các toán hạng đều được chứa trong các thanh ghi.</para>
+      <para id="id7863852">Trong kiểu định vị tức thì, toán hạng được chứa trong lệnh.</para>
+      <para id="id7863862">Trong kiểu định vị trực tiếp, địa chỉ của toán hạng được chứa trong lệnh.</para>
+      <para id="id7863872">Trong kiểu định vị gián tiếp (thanh ghi), địa chỉ toán hạng được chứa trong thanh ghi.</para>
+      <para id="id7863884">Trong kiểu định vị gián tiếp (bộ nhớ), thanh ghi R3 chứa địa chỉ của địa chỉ của toán hạng như trong hình II.4</para>
+      <table id="id7863896" summary="">
+        <tgroup cols="2">
+          <colspec colnum="1" colname="c1"/>
+          <colspec colnum="2" colname="c2"/>
+          <tbody>
+            <row>
+              <entry/>
+              <entry>Bộ nhớ</entry>
+            </row>
+            <row>
+              <entry> R3(R3 chỉ tới địa chỉ này)</entry>
+              <entry>Ô nhớ này chứađịa chỉ toán hạng</entry>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry/>
+              <entry>Toán hạng</entry>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <para id="id7951645">Hình II.4: Minh hoạ kiểu định vị gián tiếp (bộ nhớ)</para>
+    </section>
+    <section id="id-403093932433">
+      <title>KIỂU CỦA TOÁN HẠNG VÀ CHIỀU DÀI CỦA TOÁN HẠNG</title>
+      <para id="id7951669">Kiểu của toán hạng thường được đưa vào trong mã tác vụ của lệnh. Có bốn kiểu toán hạng được dùng trong các hệ thống:</para>
+      <list id="id7951678" list-type="bulleted">
+        <item>Kiểu địa chỉ.</item>
+        <item>Kiểu dạng số: số nguyên, dấu chấm động,...</item>
+        <item>Kiểu dạng chuỗi ký tự: ASCII, EBIDEC,...</item>
+        <item>Kiểu dữ liệu logic: các bit, cờ,...</item>
+      </list>
+      <para id="id7951709">Tuy nhiên một số ít máy tính dùng các nhãn để xác định kiểu toán hạng. </para>
+      <para id="id7951716">Thông thường loại của toán hạng xác định luôn chiều dài của nó. Toán hạng thường có chiều dài là byte (8 bit), nữa từ máy tính (16 bit), từ máy tính (32 bit), từ đôi máy tính (64 bit). Đặc biệt, kiến trúc PA của hãng HP (Hewlet Packard) có khả năng tính toán với các số thập phân BCD. Một vài bộ xử lý có thể xử lý các chuỗi ký tự.</para>
+    </section>
+    <section id="id-123320541891">
+      <title>TÁC VỤ MÀ LỆNH THỰC HIỆN</title>
+      <para id="id7951740">Bảng II.5 cho các loại tác vụ mà một máy tính có thể thực hiện. Trên tất cả máy tính ta đều thấy 3 loại đầu tiên (tính toán số học và luận lý, di chuyển số liệu, chuyển điều khiển). Tuỳ theo kiến trúc của mỗi máy tính, người ta có thể thấy 0 hoặc vài loại tác vụ trong số 5 tác vụ còn lại (hệ thống, tính toán với số có dấu chấm động, tính toán với số thập phân, tính toán trên chuỗi ký tự).</para>
+      <table id="id7951757" summary="">
+        <tgroup cols="2">
+          <colspec colnum="1" colname="c1"/>
+          <colspec colnum="2" colname="c2"/>
+          <tbody>
+            <row>
+              <entry>Loại tác vụ</entry>
+              <entry>Thí dụ</entry>
+            </row>
+            <row>
+              <entry>Tính toán số học và luận lý</entry>
+              <entry>Phép tính số nguyên và phép tính luận lý: cộng, trừ, AND, OR</entry>
+            </row>
+            <row>
+              <entry>Di chuyển số liệu</entry>
+              <entry>Nạp số liệu, lưu giữ số liệu</entry>
+            </row>
+            <row>
+              <entry>Chuyển điều khiển</entry>
+              <entry>Lệnh nhảy, lệnh vòng lặp, gọi chương trình con và trở về, ngắt quãng</entry>
+            </row>
+            <row>
+              <entry>Hệ thống</entry>
+              <entry>Gọi hệ điều hành, quản lý bộ nhớ ảo</entry>
+            </row>
+            <row>
+              <entry>Tính số có dấu chấm động</entry>
+              <entry>Các phép tính trên số có dấu chấm động: cộng, nhân</entry>
+            </row>
+            <row>
+              <entry>Tính số thập phân</entry>
+              <entry>Các phép tính trên số thập phân: cộng, nhân, đổi từ thập phân sang ký tự</entry>
+            </row>
+            <row>
+              <entry>Tính toán trên chuỗi ký tự</entry>
+              <entry>Chuyển, so sánh, tìm kiếm chuỗi ký tự</entry>
+            </row>
+            <row>
+              <entry>Đồ hoạ và đa phương tiện</entry>
+              <entry>Nén và giải nén dữ liệu hình ảnh đồ hoạ (3D) và dữ liệu đa phương tiện (hình ảnh động và âm thanh)</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <para id="id6996859">Bảng II.5: Các tác vụ mà lệnh có thể thực hiện</para>
+    </section>
+    <section id="id-348948026547">
+      <title>KIẾN TRÚC RISC ( Reduced Instruction Set Computer)</title>
+      <para id="id7059562">Các kiến trúc với tập lệnh phức tạp CISC (Complex Instruction Set Computer) được nghĩ ra từ những năm 1960. Vào thời kỳ này, người ta nhận thấy các chương trình dịch khó dùng các thanh ghi, rằng các vi lệnh được thực hiện nhanh hơn các lệnh và cần thiết phải làm giảm độ dài các chương trình. Các đặc tính nầy khiến người ta ưu tiên chọn các kiểu ô nhớ - ô nhớ và ô nhớ - thanh ghi, với những lệnh phức tạp và dùng nhiều kiểu định vị. Điều này dẫn tới việc các lệnh có chiều dài thay đổi và như thế thì dùng bộ điều khiển vi chương trình là hiệu quả nhất.</para>
+      <para id="id7059605">Bảng II.6 cho các đặc tính của vài máy CISC tiêu biểu. Ta nhận thấy cả ba máy đều có điểm chung là có nhiều lệnh, các lệnh có chiều dài thay đổi. Nhiều cách thực hiện lệnh và nhiều vi chương trình được dùng.</para>
+      <para id="id7059622">Tiến bộ trong lãnh vực mạch kết (IC) và kỹ thuật dịch chương trình làm cho các nhận định trước đây phải được xem xét lại, nhất là khi đã có một khảo sát định lượng về việc dùng tập lệnh các máy CISC. </para>
+      <table id="id7059638" summary="">
+        <tgroup cols="4">
+          <colspec colnum="1" colname="c1"/>
+          <colspec colnum="2" colname="c2"/>
+          <colspec colnum="3" colname="c3"/>
+          <colspec colnum="4" colname="c4"/>
+          <tbody>
+            <row>
+              <entry>Bộ xử lý</entry>
+              <entry>IBM 370/168</entry>
+              <entry>DEC 11/780</entry>
+              <entry>iAPX 432</entry>
+            </row>
+            <row>
+              <entry>Năm sản xuất</entry>
+              <entry>1973</entry>
+              <entry>1978</entry>
+              <entry>1982</entry>
+            </row>
+            <row>
+              <entry>Số lệnh</entry>
+              <entry>208</entry>
+              <entry>303</entry>
+              <entry>222</entry>
+            </row>
+            <row>
+              <entry>Bộ nhớ vi chương trình</entry>
+              <entry>420 KB</entry>
+              <entry>480 KB</entry>
+              <entry>64 KB</entry>
+            </row>
+            <row>
+              <entry>Chiều dài lệnh (tính bằng bit)</entry>
+              <entry>16 - 48</entry>
+              <entry>16 - 456</entry>
+              <entry>6 - 321</entry>
+            </row>
+            <row>
+              <entry>Kỹ thuật chế tạo</entry>
+              <entry>ECL - MSI</entry>
+              <entry>TTl - MSI</entry>
+              <entry>NMOS VLSI</entry>
+            </row>
+            <row>
+              <entry>Cách thực hiện lệnh</entry>
+              <entry>Thanh ghi- thanh ghiThanh ghi - bộ nhớBộ nhớ - bộ nhớ</entry>
+              <entry>Thanh ghi - thanh ghiThanh ghi - bộ nhớBộ nhớ - bộ nhớ</entry>
+              <entry>Ngăn xếpBộ nhớ- bộ nhớ</entry>
+            </row>
+            <row>
+              <entry>Dung lượng cache</entry>
+              <entry>64 KB</entry>
+              <entry>64 KB</entry>
+              <entry>0</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <para id="id7221683">Bảng II.6: Đặc tính của một vài máy CISC</para>
+      <para id="id7221696">Ví dụ, chương trình dịch đã biết sử dụng các thanh ghi và không có sự khác biệt đáng kể nào khi sử dụng ô nhớ cho các vi chương trình hay ô nhớ cho các chương trình. Điều này dẫn tới việc đưa vào khái niệm về một máy tính với tập lệnh rút gọn RISC vào đầu những năm 1980. Các máy RISC dựa chủ yếu trên một tập lệnh cho phép thực hiện kỹ thuật ống dẫn một cách thích hợp nhất bằng cách thiết kế các lệnh có chiều dài cố định, có dạng đơn giản, dễ giải mã. Máy RISC dùng kiểu thực hiện lệnh thanh ghi - thanh ghi. Chỉ có các lệnh ghi hoặc đọc ô nhớ mới cho phép thâm nhập vào ô nhớ. Bảng II.7 diễn tả ba mẫu máy RISC đầu tiên: mẫu máy của IBM (IBM 801) của Berkeley (RISC1 của Patterson) và của Stanford (MIPS của Hennessy). Ta nhận thấy cả ba máy đó đều có bộ điều khiển bằng mạch điện (không có ô nhớ vi chương trình), có chiều dài các lệnh cố định (32 bits), có một kiểu thi hành lệnh (kiểu thanh ghi - thanh ghi) và chỉ có một số ít lệnh.</para>
+      <table id="id7221734" summary="">
+        <tgroup cols="4">
+          <colspec colnum="1" colname="c1"/>
+          <colspec colnum="2" colname="c2"/>
+          <colspec colnum="3" colname="c3"/>
+          <colspec colnum="4" colname="c4"/>
+          <tbody>
+            <row>
+              <entry>Bộ xử lý</entry>
+              <entry>IBM 801</entry>
+              <entry>RISC1</entry>
+              <entry>MIPS</entry>
+            </row>
+            <row>
+              <entry>Năm sản xuất</entry>
+              <entry>1980</entry>
+              <entry>1982</entry>
+              <entry>1983</entry>
+            </row>
+            <row>
+              <entry>Số lệnh</entry>
+              <entry>120</entry>
+              <entry>39</entry>
+              <entry>55</entry>
+            </row>
+            <row>
+              <entry>Dung lượng bộ nhớ vi chương trình</entry>
+              <entry>0</entry>
+              <entry>0</entry>
+              <entry>0</entry>
+            </row>
+            <row>
+              <entry>Độ dài lệnh (tính bằng bit)</entry>
+              <entry>32</entry>
+              <entry>32</entry>
+              <entry>32</entry>
+            </row>
+            <row>
+              <entry>Kỹ thuật chế tạo</entry>
+              <entry>ECL MSI</entry>
+              <entry>NMOS VLSI</entry>
+              <entry>NMOS VLSI</entry>
+            </row>
+            <row>
+              <entry>Cách thực hiện lệnh</entry>
+              <entry>Thanh ghi-thanh ghi</entry>
+              <entry>Thanh ghi-thanh ghi</entry>
+              <entry>Thanh ghi-thanh ghi</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <para id="id7400225">Bảng II.7 : Đặc tính của ba mẫu đầu tiên máy RISC</para>
+      <para id="id7400239">Tóm lại, ta có thể định nghĩa mạch xử lý RISC bởi các tính chất sau:</para>
+      <para id="id7400250">- Có một số ít lệnh (thông thường dưới 100 lệnh ).</para>
+      <para id="id7400259">- Có một số ít các kiểu định vị (thông thường hai kiểu: định vị tức thì và định vị gián tiếp thông qua một thanh ghi).</para>
+      <para id="id7400287">- Có một số ít dạng lệnh (một hoặc hai)</para>
+      <para id="id7400293">- Các lệnh đều có cùng chiều dài.</para>
+      <para id="id7400302">- Chỉ có các lệnh ghi hoặc đọc ô nhớ mới thâm nhập vào bộ nhớ.</para>
+      <para id="id7400312">- Dùng bộ tạo tín hiệu điều khiển bằng mạch điện để tránh chu kỳ giải mã các vi lệnh làm cho thời gian thực hiện lệnh kéo dài.</para>
+      <para id="id7400325">- Bộ xử lý RISC có nhiều thanh ghi để giảm bớt việc thâm nhập vào bộ nhớ trong.</para>
+      <para id="id7400336">Ngoài ra các bộ xử lý RISC đầu tiên thực hiện tất cả các lệnh trong một chu kỳ máy.</para>
+      <para id="id7962710">Bộ xử lý RISC có các lợi điểm sau :</para>
+      <para id="id7962719">- Diện tích của bộ xử lý dùng cho bộ điều khiển giảm từ 60% (cho các bộ xử lý CISC) xuống còn 10% (cho các bộ xử lý RISC). Như vậy có thể tích hợp thêm vào bên trong bộ xử lý các thanh ghi, các cổng vào ra và bộ nhớ cache .....</para>
+      <para id="id7962736">- Tốc độ tính toán cao nhờ vào việc giải mã lệnh đơn giản, nhờ có nhiều thanh ghi (ít thâm nhập bộ nhớ), và nhờ thực hiện kỹ thuật ống dẫn liên tục và có hiệu quả (các lệnh đều có thời gian thực hiện giống nhau và có cùng dạng).</para>
+      <para id="id7962753">- Thời gian cần thiết để thiết kế bộ điều khiển là ít. Điều này góp phần làm giảm chi phí thiết kế.</para>
+      <para id="id7962765">- Bộ điều khiển trở nên đơn giản và gọn làm cho ít rủi ro mắc phải sai sót mà ta gặp thường trong bộ điều khiển.</para>
+      <para id="id7962778">Trước những điều lợi không chối cãi được, kiến trúc RISC có một số bất lợi:</para>
+      <list id="id7962793" list-type="bulleted">
+        <item>Các chương trình dài ra so với chương trình viết cho bộ xử lý CISC. Điều này do các nguyên nhân sau :</item>
+      </list>
+      <list id="id7962809" list-type="bulleted">
+        <item>Cấm thâm nhập bộ nhớ đối với tất cả các lệnh ngoại trừ các lệnh đọc và ghi vào bộ nhớ. Do đó ta buộc phải dùng nhiều lệnh để làm một công việc nhất định.</item>
+        <item>Cần thiết phải tính các địa chỉ hiệu dụng vì không có nhiều cách định vị.</item>
+        <item>Tập lệnh có ít lệnh nên các lệnh không có sẵn phải được thay thế bằng một chuỗi lệnh của bộ xử lý RISC.</item>
+      </list>
+      <list id="id6362951" list-type="bulleted">
+        <item>Các chương trình dịch gặp nhiều khó khăn vì có ít lệnh làm cho có ít lựa chọn để diễn dịch các cấu trúc của chương trình gốc. Sự cứng nhắc của kỹ thuật ống dẫn cũng gây khó khăn.</item>
+        <item>Có ít lệnh trợ giúp cho ngôn ngữ cấp cao.</item>
+      </list>
+      <para id="id6362979"> Các bộ xử lý CISC trợ giúp mạnh hơn các ngôn ngữ cao cấp nhờ có tập lệnh phức tạp. Hãng Honeywell đã chế tạo một máy có một lệnh cho mỗi động từ của ngôn ngữ COBOL.</para>
+      <para id="id6362996">Các tiến bộ gần đây cho phép xếp đặt trong một vi mạch, một bộ xử lý RISC nền và nhiều toán tử chuyên dùng.</para>
+      <para id="id6363009">Thí dụ, bộ xử lý 860 của Intel bao gồm một bộ xử lý RISC, bộ làm tính với các số lẻ và một bộ tạo tín hiệu đồ hoạ.</para>
+    </section>
+    <section id="id-148973875654">
+      <title>KIỂU ĐỊNH VỊ TRONG CÁC BỘ XỬ LÝ RISC</title>
+      <para id="id6363046">Trong bộ xử lý RISC, các lệnh số học và logic chỉ được thực hiện theo kiểu thanh ghi và tức thì, còn những lệnh đọc và ghi vào bộ nhớ là những lệnh có toán hạng bộ nhớ thì được thực hiện với những kiểu định vị khác.</para>
+      <section id="id-283227677083">
+        <title>Kiểu định vị thanh ghi</title>
+        <para id="id6363070">Đây là kiểu định vị thường dùng cho các bộ xử lý RISC, các toán hạng nguồn và kết quả đều nằm trong thanh ghi mà số thứ tự được nêu ra trong lệnh. Hình II.5 cho vài ví dụ về kiểu thanh ghi và dạng các lệnh tương ứng trong một vài kiến trúc RISC.</para>
+        <table id="id6363078" summary="">
+          <tgroup cols="16">
+            <colspec colnum="1" colname="c1"/>
+            <colspec colnum="2" colname="c2"/>
+            <colspec colnum="3" colname="c3"/>
+            <colspec colnum="4" colname="c4"/>
+            <colspec colnum="5" colname="c5"/>
+            <colspec colnum="6" colname="c6"/>
+            <colspec colnum="7" colname="c7"/>
+            <colspec colnum="8" colname="c8"/>
+            <colspec colnum="9" colname="c9"/>
+            <colspec colnum="10" colname="c10"/>
+            <colspec colnum="11" colname="c11"/>
+            <colspec colnum="12" colname="c12"/>
+            <colspec colnum="13" colname="c13"/>
+            <colspec colnum="14" colname="c14"/>
+            <colspec colnum="15" colname="c15"/>
+            <colspec colnum="16" colname="c16"/>
+            <tbody>
+              <row>
+                <entry>MIPS</entry>
+                <entry namest="c2" nameend="c3">Op code6</entry>
+                <entry namest="c4" nameend="c5">Nguồn 15</entry>
+                <entry namest="c6" nameend="c7">Nguồn 25</entry>
+                <entry namest="c8" nameend="c11">Đích5</entry>
+                <entry>Dịch chuyển5</entry>
+                <entry namest="c13" nameend="c16">Hàm6</entry>
+              </row>
+              <row>
+                <entry>SPARC</entry>
+                <entry>Op code2</entry>
+                <entry namest="c3" nameend="c4">Đích5</entry>
+                <entry namest="c5" nameend="c6">Op code6</entry>
+                <entry namest="c7" nameend="c8">Nguồn 15</entry>
+                <entry namest="c9" nameend="c10">01</entry>
+                <entry namest="c11" nameend="c13">Khoảng trống khác8</entry>
+                <entry namest="c14" nameend="c16">Nguồn 25</entry>
+              </row>
+              <row>
+                <entry>PowerPC</entry>
+                <entry namest="c2" nameend="c3">Op code6</entry>
+                <entry namest="c4" nameend="c5">Đích5</entry>
+                <entry namest="c6" nameend="c7">Nguồn 15</entry>
+                <entry namest="c8" nameend="c11">Nguồn 25</entry>
+                <entry namest="c12" nameend="c15">Op code mở rộng10</entry>
+                <entry>01</entry>
+              </row>
+              <row>
+                <entry>ALPHA</entry>
+                <entry namest="c2" nameend="c3">Op code6</entry>
+                <entry namest="c4" nameend="c5">Nguồn 15</entry>
+                <entry namest="c6" nameend="c7">Nguồn 25</entry>
+                <entry namest="c8" nameend="c9">3</entry>
+                <entry namest="c10" nameend="c11">01</entry>
+                <entry namest="c12" nameend="c14">Op code mở rộng7</entry>
+                <entry namest="c15" nameend="c16">Đích5</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+        <para id="id7691205">Hình II.5 : Dạng lệnh trong kiểu định vị thanh ghi - thanh ghi cho vài CPU RISC</para>
+      </section>
+      <section id="id-591909979913">
+        <title>Kiểu định vị tức thì</title>
+        <para id="id7691231">Trong kiểu này, toán hạng là một số có dấu, được chứa ngay trong lệnh. Hình II.6 cho ta vài ví dụ về dạng lệnh kiểu tức thì.</para>
+        <table id="id7691244" summary="">
+          <tgroup cols="12">
+            <colspec colnum="1" colname="c1"/>
+            <colspec colnum="2" colname="c2"/>
+            <colspec colnum="3" colname="c3"/>
+            <colspec colnum="4" colname="c4"/>
+            <colspec colnum="5" colname="c5"/>
+            <colspec colnum="6" colname="c6"/>
+            <colspec colnum="7" colname="c7"/>
+            <colspec colnum="8" colname="c8"/>
+            <colspec colnum="9" colname="c9"/>
+            <colspec colnum="10" colname="c10"/>
+            <colspec colnum="11" colname="c11"/>
+            <colspec colnum="12" colname="c12"/>
+            <tbody>
+              <row>
+                <entry>MIPS</entry>
+                <entry namest="c2" nameend="c3">Op code6</entry>
+                <entry namest="c4" nameend="c5">Thanh ghinguồn5</entry>
+                <entry namest="c6" nameend="c7">Thanh ghiđích5</entry>
+                <entry namest="c8" nameend="c12">Số có dấu ( toán hạng tức thì )16</entry>
+              </row>
+              <row>
+                <entry>SPARC</entry>
+                <entry>Op code2</entry>
+                <entry namest="c3" nameend="c4">Thanh ghiđích5</entry>
+                <entry namest="c5" nameend="c6">Op code6</entry>
+                <entry namest="c7" nameend="c8">Thanh ghinguồn5</entry>
+                <entry namest="c9" nameend="c10">11</entry>
+                <entry namest="c11" nameend="c12">Toán hạng tức thì có dấu13</entry>
+              </row>
+              <row>
+                <entry>ALPHA</entry>
+                <entry namest="c2" nameend="c3">Op code6</entry>
+                <entry namest="c4" nameend="c5">Thanh ghinguồn5</entry>
+                <entry namest="c6" nameend="c7">Toán hạng tức thì &gt; 08</entry>
+                <entry namest="c8" nameend="c9">11</entry>
+                <entry namest="c10" nameend="c11">Op codemở rộng7</entry>
+                <entry>Thanh ghiđích5</entry>
+              </row>
+              <row>
+                <entry>PowerPC</entry>
+                <entry namest="c2" nameend="c3">Op code6</entry>
+                <entry namest="c4" nameend="c5">Thanh ghiđích5</entry>
+                <entry namest="c6" nameend="c7">Thanh ghinguồn5</entry>
+                <entry namest="c8" nameend="c12">Toán hạng tức thì có dấu16</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+        <para id="id7943137">Hình II.6 : Dạng lệnh trong kiểu định vị thanh ghi - tức thì cho vài CPU RISC</para>
+      </section>
+      <section id="id-248672524681">
+        <title>Kiểu định vị trực tiếp</title>
+        <para id="id7943161">Trong kiểu này địa chỉ toán hạng nằm ngay trong lệnh (hình II.6). Ví dụ, kiểu định vị trực tiếp được dùng cho các biến của hệ điều hành, người sử dụng không có quyền thâm nhập các biến này.</para>
+        <table id="id7943177" summary="">
+          <tgroup cols="10">
+            <colspec colnum="1" colname="c1"/>
+            <colspec colnum="2" colname="c2"/>
+            <colspec colnum="3" colname="c3"/>
+            <colspec colnum="4" colname="c4"/>
+            <colspec colnum="5" colname="c5"/>
+            <colspec colnum="6" colname="c6"/>
+            <colspec colnum="7" colname="c7"/>
+            <colspec colnum="8" colname="c8"/>
+            <colspec colnum="9" colname="c9"/>
+            <colspec colnum="10" colname="c10"/>
+            <tbody>
+              <row>
+                <entry>MIPS</entry>
+                <entry namest="c2" nameend="c3">Op code6</entry>
+                <entry namest="c4" nameend="c5">Thanh ghiđịa chỉ5</entry>
+                <entry namest="c6" nameend="c7">Thanh ghisố liệu5</entry>
+                <entry namest="c8" nameend="c10">Độ dời có dấu 16</entry>
+              </row>
+              <row>
+                <entry>SPARC</entry>
+                <entry>Op code2</entry>
+                <entry namest="c3" nameend="c4">Thanh ghisố liệu5</entry>
+                <entry namest="c5" nameend="c6">Op code6</entry>
+                <entry namest="c7" nameend="c8">Thanh ghiđịa chỉ5</entry>
+                <entry>11</entry>
+                <entry>Độ dời có dấu 13</entry>
+              </row>
+              <row>
+                <entry>ALPHA</entry>
+                <entry namest="c2" nameend="c3">Op code6</entry>
+                <entry namest="c4" nameend="c5">Thanh ghisố liệu5</entry>
+                <entry namest="c6" nameend="c7">Thanh ghiđịa chỉ5</entry>
+                <entry namest="c8" nameend="c10">Độ dời có dấu 16</entry>
+              </row>
+              <row>
+                <entry>PowerPC</entry>
+                <entry namest="c2" nameend="c3">Op code6</entry>
+                <entry namest="c4" nameend="c5">Thanh ghisố liệu5</entry>
+                <entry namest="c6" nameend="c7">Thanh ghiđịa chỉ5</entry>
+                <entry namest="c8" nameend="c10">Độ dời có dấu 16</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+        <para id="id6990687">Hình II.7 : Dạng lệnh thâm nhập bộ nhớ trong của vài kiến trúc RISC</para>
+      </section>
+      <section id="id-36706669356">
+        <title>Kiểu định vị gián tiếp bằng thanh ghi + độ dời</title>
+        <para id="id6990711">Đây là kiểu đặc thù cho các kiến trúc RISC. Địa chỉ toán hạng được tính như sau :</para>
+        <para id="id6990720">Địa chỉ toán hạng = Thanh ghi (địa chỉ ) + độ dời. Ta để ý rằng kiểu định vị trực tiếp chỉ là một trường hợp đặc biệt của kiểu này khi thanh ghi (địa chỉ) = 0. Trong các bộ xử lý RISC, một thanh ghi (R0 hoặc R31) được mắc vào điện thế thấp (tức là 0) và ta có định vị trực tiếp khi dùng thanh ghi đó như là thanh ghi địa chỉ.</para>
+      </section>
+      <section id="id-49387724628">
+        <title>Kiểu định vị tự tăng</title>
+        <para id="id6990752">Một vài bộ xử lý RISC, ví dụ bộ xử lý PowerPC, dùng kiểu định vị này.</para>
+      </section>
+    </section>
+    <section id="id-445021095779">
+      <title>NGÔN NGỮ CẤP CAO VÀ NGÔN NGỮ MÁY</title>
+      <para id="id6990773">Trong chi phí cho một hệ thống tin học, bao gồm giá tiền của máy tính, giá tiền các phần mềm hệ thống và các phần mềm ứng dụng, thì chi phí cho triển khai phần mềm luôn lớn hơn chi phí mua phần cứng. Vì thế các nhà tin học đã triển khai từ lâu các ngôn ngữ gọi là ngôn ngữ cấp cao. Ngôn ngữ cấp cao dùng các lệnh có cấu trúc gần với ngôn ngữ thông thường hơn ngôn ngữ máy. Các ngôn ngữ cấp cao nổi tiếng là: FORTRAN cho tính toán khoa học, COBOL cho quản lý, LISP và PROLOG dùng trong trí tuệ nhân tạo, PASCAL, C, ADA ... Điểm chính của các ngôn ngữ này là sự cô động và sự độc lập đối với mọi bộ xử lý. Sự độc lập đối với mọi máy tính có nghĩa là có thể được thi hành trên mọi kiến trúc phần mềm của bộ xử lý, với điều kiện là phải có chương trình dịch để dịch chương trình viết bằng ngôn ngữ cấp cao thành chương trình mã máy của máy tính đang sử dụng.</para>
+      <para id="id6990811">Ở đây, chúng ta không quan tâm đến các đặc tính của ngôn ngữ cấp cao mà chỉ quan tâm đến quan hệ của nó đối với ngôn ngữ máy. Thậy vậy, muốn cho một chương trình ngôn ngữ máy được thực hiện một cách hữu hiệu thì chương trình dịch phải dịch hữu hiệu các lệnh của ngôn ngữ cấp cao thành lệnh mã máy. Muốn thế thì kiến trúc phần mềm của bộ xử lý rất quan trọng đối với chương trình dịch.</para>
+      <para id="id6990819">temp = v[k];v[k] = v[k+1];v[k+1] = temp;0000 1001 1100 0110 1010 1111 0101 10001010 1111 0101 1000 0000 1001 1100 0110 1100 0110 1010 1111 0101 1000 0000 1001 0101 1000 0000 1001 1100 0110 1010 1111 Chương trình bằng ngôn ngữ cấp caoTrình biên dịch(Compiler)Bộ dịch hợp ngữ(Assembler)Chương trình bằng hợp ngữChương trình bằng ngôn ngữ máylw$15, 0($2)lw$16, 4($2)sw$16, 0($2)sw $15, 4($2)Quá trình chuyển đổi từ ngôn ngữ cấp cao sang ngôn ngữ máy: một bộ biên dịch (Compiler) chuyển đổi ngôn ngữ cấp cao (độc lập với kiến trúc phần mềm) sang dạng hợp ngữ (phụ thuộc kiến trúc phần mềm). Một chương trình dịch hợp ngữ (Assembler) chuyển đổi một chương trình viết bằng hợp ngữ (Assembly Language) sang ngôn ngữ máy để máy tính có thể thực hiện được chương trình đó .</para>
+      <para id="id7934159">Hình II.10: Mô tả quá trình chuyển đổi từ ngôn ngữ cấp cao sang ngôn ngữ máy</para>
+      <para id="id7934174">Trước đây, kỹ thuật chế tạo các bộ xử lý còn kém, việc quyết định một kiến trúc phần mềm nào đó cho một bộ xử lý nhằm giúp ích cho lập trình bằng hợp ngữ. Người ta đã cố gắng tách kiến trúc phần mềm của bộ xử lý ra khỏi việc thực hiện các chương trình dịch hữu hiệu. Nhưng dần dần, với sự tiến bộ trong công nghệ chế tạo máy tính, người ta bắt đầu nghĩ tới thiết kế các kiến trúc phần mềm làm giảm nhẹ các công việc của chương trình dịch của những ngôn ngữ cấp cao. Trong những năm 1970, người ta đã cố gắng giảm bớt chi phí phát triển phần mềm bằng cách thiết kế các kiến trúc bộ xử lý có những chức năng mà những bộ xử lý trước đó phải dùng một phần mềm để thực hiện. Do vậy các kiến trúc phần mềm mạnh như kiến trúc phần mềm của máy VAX, đã được thực hiện. Máy VAX có nhiều kiểu định vị và một tập lệnh phong phú có thể sử dụng nhiều kiểu dữ liệu. Tuy nhiên, vào đầu những năm 1980, với sự tiến bộ của công nghệ viết các chương trình dịch, người ta đã xem xét lại các kiến trúc phần mềm phức tạp và có chuyển hướng chế tạo các kiến trúc phần mềm đơn giản và hữu hiệu. Chính vì vậy mà các máy tính dùng bộ xử lý kiểu RISC (Reduced Instruction Set Computer) đã ra đời. Với những tiến bộ không ngừng của công nghệ chế tạo máy tính, của công nghệ viết chương trình dịch và của công nghệ lập trình, người ta đang tiến tới chế tạo các kiến trúc phần mềm hấp dẫn hơn trong tương lai.</para>
+      <para id="id7589732">*****</para>
+    </section>
+    <section id="id-445318164903">
+      <title>CÂU HỎI ÔN TẬP VÀ BÀI TẬP CHƯƠNG II</title>
+      <para id="id7589745">*****</para>
+      <list id="id7589750" list-type="enumerated">
+        <item>Các thành phần của một hệ máy tính đơn giản</item>
+        <item>Nhiệm vụ của mỗi bus trong hệ thống bus của một hệ máy tính đơn giản? Tại sao trong thực tế cần có một hệ thống bus vào ra?</item>
+        <item>Mô tả các kiểu thi hành lệnh của một máy tính. Tại sao kiểu thi hành lệnh thanh ghi – thanh ghi được dùng nhiều hiện tại?</item>
+        <item>Mô tả mỗi kiểu định vị trong các kiểu định vị mà một CPU có thể có. Cho CPU RISC, các kiểu định vị nào thường được dùng nhất?</item>
+        <item>Sự khác biệt giữa CPU RISC và CPU CISC?</item>
+        <item>Trong CPU Power PC, giả sử mã tác vụ của lệnh ADD là 011010. Viết lệnh mã máy tương ứng với ADD R1, R19, #-15673</item>
+      </list>
+    </section>
+  </content>
+</document>

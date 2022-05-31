@@ -1,0 +1,109 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Giới thiệu tổng quan về Giáo trình Kiến trúc máy tính</title>
+  <metadata>
+  <md:content-id>m30362</md:content-id><md:title>Giới thiệu tổng quan về Giáo trình Kiến trúc máy tính</md:title>
+  <md:abstract/>
+  <md:uuid>367f8b0f-fa5d-4a2d-b0de-f7b1557d10b4</md:uuid>
+</metadata>
+
+<content>
+    <para id="id7623259">MỤC ĐÍCH</para>
+    <para id="id7623263">Giáo trình này nhằm trang bị cho người đọc các nội dung chủ yếu sau:</para>
+    <list id="id7623270" list-type="bulleted">
+      <item>Lịch sử phát triển của máy tính, các thế hệ máy tính và cách phân loại máy tính. Cách biến đổi cơ bản của hệ thống số, các bảng mã thông dụng được dùng để biểu diễn các ký tự.</item>
+      <item>Giới thiệu các thành phần cơ bản của một hệ thống máy tính, khái niệm về kiến trúc máy tính, tập lệnh. Các kiểu kiến trúc máy tính: mô tả kiến trúc, các kiểu định vị. </item>
+      <item>Giới thiệu cấu trúc của bộ xử lý trung tâm: tổ chức, chức năng và nguyên lý hoạt động của các bộ phận bên trong bộ xử lý. Mô tả diễn tiến thi hành một lệnh mã máy và một số kỹ thuật xử lý thông tin: ống dẫn, siêu ống dẫn, siêu vô hướng, máy tính có lệnh thật dài, máy tính véc-tơ, xử lý song song và kiến trúc IA-64.</item>
+      <item>Giới thiệu chức năng và nguyên lý hoạt động của các cấp bộ nhớ máy tính.</item>
+      <item>Giới thiệu một số thiết bị lưu trữ ngoài như: đĩa từ, đĩa quang, thẻ nhớ, băng từ. Hệ thống kết nối cơ bản các bộ phận bên trong máy tính. Cách giao tiếp giữa các ngoại vi và bộ xử lý. </item>
+      <item>Phương pháp an toàn dữ liệu trên thiết bị lưu trữ ngoài.</item>
+    </list>
+    <section id="id-136000394805">
+      <title>YÊU CẦU</title>
+      <para id="id7797726">Sau khi học xong môn học này, người học được trang bị các kiến thức về:</para>
+      <list id="id7797734" list-type="bulleted">
+        <item>Sinh viên được trang bị kiến thức về lịch sử phát triển của máy tính, các thế hệ máy tính và cách phân loại máy tính. Nắm vững các khái niệm cơ bản liên quan đến các hệ thống số được dùng trong máy tính. Thành thạo các thao tác biến đổi số giữa các hệ thống số.</item>
+        <item>Sinh viên có kiến thức về các thành phần cơ bản của một hệ thống máy tính, khái niệm về kiến trúc máy tính, tập lệnh. Nắm vững các kiến thức về các kiểu kiến trúc máy tính, các kiểu định vị được dùng trong kiến trúc, loại và chiều dài của toán hạng, tác vụ mà máy tính có thể thực hiện. Phân biệt được hai loại kiến trúc: CISC (Complex Instruction Set Computer), RISC (Reduced Instruction Set Computer). Các kiến thức cơ bản về kiến trúc RISC, tổng quát tập lệnh của các kiến trúc máy tính.</item>
+        <item>Sinh viên phải nắm vững cấu trúc của bộ xử lý trung tâm và diễn tiến thi hành một lệnh mã máy, vì đây là cơ sở để hiểu được các hoạt động xử lý lệnh trong các kỹ thuật xử lý thông tin trong máy tính.</item>
+        <item>Sinh viên phải hiểu được các cấp bộ nhớ và cách thức vận hành của các loại bộ nhớ được giới thiệu để có thể đánh giá được hiệu năng hoạt động của các loại bộ nhớ.</item>
+        <item>Sinh viên phải nắm vững các kiến thức về hệ thống kết nối cơ bản các bộ phận bên trong máy tính, cách giao tiếp giữa các ngoại vi và bộ xử lý. Biết được cấu tạo và các vận hành của các loại thiết bị lưu trữ ngoài và phương pháp an toàn dữ liệu trên đĩa cứng.</item>
+      </list>
+    </section>
+    <section id="id-118966348419">
+      <title>NỘI DUNG</title>
+      <list id="id7756623" list-type="bulleted">
+        <item>Chương I: ĐẠI CƯƠNG</item>
+      </list>
+      <para id="id7756640">Lịch sử phát triển của máy tính, thông tin và sự mã hoá thông tin.</para>
+      <list id="id7756647" list-type="bulleted">
+        <item>Chương II: KIẾN TRÚC PHẦN MỀM BỘ XỬ LÝ</item>
+      </list>
+      <para id="id7756664">Giới thiệu các thành phần cơ bản của một hệ thống máy tính, kiến trúc máy tính, tập lệnh và các kiểu định vị cơ bản. Khái niệm về kiến trúc RISC và CISC, ngôn ngữ cấp cao và ngôn ngữ máy.</para>
+      <list id="id7770138" list-type="bulleted">
+        <item>Chương III: TỔ CHỨC BỘ XỬ LÝ</item>
+      </list>
+      <para id="id7770155">Giới thiệu cấu trúc của bộ xử lý trung tâm: tổ chức, chức năng và nguyên lý hoạt động của các bộ phận bên trong bộ xử lý. Một số kỹ thuật xử lý thông tin.</para>
+      <list id="id7770167" list-type="bulleted">
+        <item>Chương IV: CÁC CẤP BỘ NHỚ</item>
+      </list>
+      <para id="id7202167">Giới thiệu chức năng và nguyên lý hoạt động của các cấp bộ nhớ máy tính.</para>
+      <list id="id7202174" list-type="bulleted">
+        <item>Chương V: NHẬP - XUẤT</item>
+      </list>
+      <para id="id7202191">Thiết bị ngoại vi: các thành phần và hệ thống liên kết. Phương pháp an toàn dữ liệu trên thiết bị lưu trữ ngoài</para>
+    </section>
+    <section id="id-526562609332">
+      <title>KIẾN THỨC TIÊN QUYẾT</title>
+      <list id="id7202209" list-type="bulleted">
+        <item>KỸ THUẬT SỐ (TH 313)</item>
+      </list>
+    </section>
+    <section id="id-89325058058">
+      <title>TÀI LIỆU THAM KHẢO</title>
+      <list id="id7577775" list-type="enumerated">
+        <item>Kiến trúc máy tính – Võ Văn Chín, Đại học Cần Thơ, 1997.</item>
+        <item>Computer Architecture: A Quantitative Approach, A. Patterson and J. Hennesy, Morgan Kaufmann Publishers, 2nd Edition, 1996.</item>
+        <item>Computer Otganization and Architecture: Designing for Performance, Sixth Edtion, William Stallings, Prentice Hall.</item>
+        <item>Principles of Computer Architecture, Miles Murdocca and Vincent Heuring (internet- http://iiusaedu.com).</item>
+        <item>Computer Organization and Design: The Hardware/Software Interface, Patterson and Hennessy, Second Edition (internet-http://engronline.ee.memphis.edu).</item>
+      </list>
+    </section>
+    <section id="id-098049972688">
+      <title>PHƯƠNG PHÁP HỌC TẬP</title>
+      <para id="id6265256">Do giáo trình chỉ mang tính chất giới thiệu tổng quát nên người đọc cần đọc thêm các tài liệu giới thiệu về kiến trúc cụ thể của các bộ xử lý. Người đọc cần tìm hiểu thêm các hình ảnh và ví dụ minh hoạ trong các tài liệu liên quan để thấy được sâu hơn vấn đề được đặt ra. </para>
+    </section>
+    <section id="id-451438450773">
+      <title>TỪ KHOÁ</title>
+      <para id="id6265277">CPU (Central Processing Unit): Bộ xử lý trung tâm</para>
+      <para id="id6265288">ALU (Arithmetic And Logic Unit): Bộ tính toán số học và luận lý</para>
+      <para id="id6265295">CU (Control Unit): Bộ điều khiển</para>
+      <para id="id6265300">RAM (Random Access Memory): Bộ nhớ truy cập ngẫu nhiên</para>
+      <para id="id6966698">SRAM (Static RAM): RAM tĩnh </para>
+      <para id="id6966703">DRAM (Dynamic RAM): RAM động </para>
+      <para id="id6966709">ROM (Read Only Memory): Bộ nhớ chỉ đọc</para>
+      <para id="id6966715">I/O (Input/Output): Nhập / Xuất</para>
+      <para id="id6966721">Opcode (Operation Code): Mã tác vụ</para>
+      <para id="id6966727">General Register: thanh ghi tổng quát</para>
+      <para id="id6966732">Stack: Ngăn xếp</para>
+      <para id="id6966737">Accumulator Register: thanh ghi tích luỹ</para>
+      <para id="id6966743">Interrupt: ngắt quãng</para>
+      <para id="id6966748">CISC (Complex Instruction Set Computer): Máy tính có tập lệnh phức tạp</para>
+      <para id="id7690650">RISC ( Reduced Instruction Set Computer): Máy tính có tập lệnh rút gọn</para>
+      <para id="id7690657">Compiler: Trình biên dịch</para>
+      <para id="id7690662">Assembler: Bộ dịch hợp ngữ</para>
+      <para id="id7690668">Pipeline: Ống dẫn</para>
+      <para id="id7690673">SuperScalar: Siêu vô hướng</para>
+      <para id="id7690679">VLIW (Very Long Instruction Word): Máy tính có lệnh thật dài</para>
+      <para id="id7690685">SISD (Single Instructions Stream, Single Data Stream): Máy tính một dòng lệnh, một dòng số liệu.</para>
+      <para id="id7690693">SIMD (Single Instructions Stream, Multiple Data Stream): Máy tính một dòng lệnh, nhiều dòng số liệu.</para>
+      <para id="id7522082">MISD (Multiple Instructions Stream, Single Data Stream):Máy tính nhiều dòng lệnh, một dòng số liệu.</para>
+      <para id="id7522090">MIMD (Multiple Instruction Stream, Multiple Data Stream): Máy tính nhiều dòng lệnh, nhiều dòng số liệu.</para>
+      <para id="id7522100">Cluster: các máy tính độc lập được kết nối với nhau thông qua một hệ thống kết nối tốc độ cao, hoạt động như một máy tính thống nhất.</para>
+      <para id="id7522110">EPIC (Expicitly Parallel Intruction Computing): kỹ thuật xử lý lệnh mức độ song song </para>
+      <para id="id7522118">Virtual Memory: Bộ nhớ ảo</para>
+      <para id="id7522123">System bus: bus hệ thống</para>
+      <para id="id7522129">FSB (Front Side Bus): Bus mặt trước, bus hệ thống</para>
+      <para id="id7502257">DMA (Direct Memory Access): Truy cập bộ nhớ trực tiếp</para>
+      <para id="id7502264">RAID (Redundant Array of Independent Disks): Mảng các đĩa độc lập và dư thừa.</para>
+    </section>
+  </content>
+</document>

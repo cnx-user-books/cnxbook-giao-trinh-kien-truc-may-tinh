@@ -1,0 +1,1069 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Tổ chức bộ vi xử lý</title>
+  <metadata>
+  <md:content-id>m30565</md:content-id><md:title>Tổ chức bộ vi xử lý</md:title>
+  <md:abstract/>
+  <md:uuid>3aa18ace-fa89-44e4-aa0e-6af8109db7f7</md:uuid>
+</metadata>
+
+<content>
+    <para id="id7602219">Mục đích:</para>
+    <para id="id7602224">Giới thiệu cấu trúc của bộ xử lý trung tâm: tổ chức, chức năng và nguyên lý hoạt động của các bộ phận bên trong bộ xử lý: đường đi của dữ liệu, bộ điều khiển tạo ra sự vận chuyển tín hiệu bên trong bộ xử lý nhằm thực hiện tập lệnh tương ứng với kiến trúc phần mềm đã đề ra. Mô tả diễn tiến thi hành một lệnh mã máy, đây là cơ sở để hiểu được các hoạt động xử lý lệnh trong các kỹ thuật ống dẫn, siêu ống dẫn, siêu vô hướng,...Một số kỹ thuật xử lý thông tin: ống dẫn, siêu ống dẫn, siêu vô hướng, máy tính có lệnh thật dài, máy tính véc-tơ, xử lý song song và kiến trúc IA-64</para>
+    <section id="id-742841161515">
+      <title>Yêu cầu: </title>
+      <para id="id7602270">Sinh viên phải nắm vững cấu trúc của bộ xử lý trung tâm và diễn tiến thi hành một lệnh mã máy, vì đây là cơ sở để hiểu được các hoạt động xử lý lệnh trong các kỹ thuật xử lý thông tin trong máy tính.</para>
+      <para id="id7602283">Bộ xử lý được chia chủ yếu thành hai bộ phận: Phần điều khiển và phần đường đi của dữ liệu (data path) như được vẽ trong hình III.1.</para>
+    </section>
+    <section id="id-184789176102">
+      <title>ĐƯỜNG ĐI CỦA DỮ LIỆU</title>
+      <para id="id7602304">Phần đường đi dữ liệu gồm có bộ phận làm tính và luận lý (ALU: Arithmetic and Logic Unit), các mạch dịch, các thanh ghi và các đường nối kết các bộ phận trên. Phần này chứa hầu hết các trạng thái của bộ xử lý. Ngoài các thanh ghi tổng quát, phần đường đi dữ liệu còn chứa thanh ghi đếm chương trình (PC: Program Counter), thanh ghi trạng thái (SR: Status Register), thanh ghi đệm TEMP (Temporary), các thanh ghi địa chỉ bộ nhớ (MAR: Memory Address Register), thanh ghi số liệu bộ nhớ (MBR: Memory Buffer Register), bộ đa hợp (MUX: Multiplexor), đây là điểm cuối của các kênh dữ liệu - CPU và bộ nhớ, với nhiệm vụ lập thời biểu truy cập bộ nhớ từ CPU và các kênh dữ liệu, hệ thống bus nguồn (S1, S2) và bus kết quả (Dest).</para>
+      <para id="id7602343">Nhiệm vụ chính của phần đường đi dữ liệu là đọc các toán hạng từ các thanh ghi tổng quát, thực hiện các phép tính trên toán hạng này trong bộ làm tính và luận lý ALU và lưu trữ kết quả trong các thanh ghi tổng quát. Ở ngã vào và ngã ra các thanh ghi tổng quát có các mạch chốt A, B, C. Thông thường, số lượng các thanh ghi tổng quát là 32.</para>
+      <para id="id7602350">Phần đường đi của dữ liệu chiếm phân nửa diện tích của bộ xử lý nhưng là phần dễ thiết kế và cài đặt trong bộ xử lý.</para>
+      <figure id="id7320138">
+        <media id="id2807737" alt=""><image src="../../media/graphics1-db69.png" mime-type="image/png" height="950" width="692"/></media>
+      </figure>
+    </section>
+    <section id="id-283368651509">
+      <title>BỘ ĐIỀU KHIỂN </title>
+      <para id="id7320170">Bộ điều khiển tạo các tín hiệu điều khiển di chuyển số liệu (tín hiệu di chuyển số liệu từ các thanh ghi đến bus hoặc tín hiệu viết vào các thanh ghi), điều khiển các tác vụ mà các bộ phận chức năng phải làm (điều khiển ALU, điều khiển đọc và viết vào bộ nhớ trong...). Bộ điều khiển cũng tạo các tín hiệu giúp các lệnh được thực hiện một cách tuần tự.</para>
+      <para id="id7320187">Việc cài đặt bộ điều khiển có thể dùng một trong hai cách sau: dùng mạch điện tử hoặc dùng vi chương trình (microprogram).</para>
+      <section id="id-540208109302">
+        <title>Bộ điều khiển mạch điện tử</title>
+        <para id="id7320210">XungnhịpTrạng tháiBộ điều khiển dùng mạch điệnAutomatetrạng thái hữu hạnNgã vàoIRNgã raTrạng Tháitương laiĐường đi dữ liệuDây điều khiểnHình III.2: Nguyên tắc vận hành của bộ điều khiển dùng mạch điệnĐể hiểu được vận hành của bộ điều khiển mạch điện tử, chúng ta xét đến mô tả về Automate trạng thái hữu hạn: có nhiều hệ thống hay nhiều thành phần mà ở mỗi thời điểm xem xét đều có một trạng thái (state). Mục đích của trạng thái là ghi nhớ những gì có liên quan trong quá trình hoạt động của hệ thống. Vì chỉ có một số trạng thái nhất định nên nói chung không thể ghi nhớ hết toàn bộ lịch sử của hệ thống, do vậy nó phải được thiết kế cẩn thận để ghi nhớ những gì quan trọng. Ưu điểm của hệ thống (chỉ có một số hữu hạn các trạng thái) đó là có thể cài đặt hệ thống với một lượng tài nguyên cố định. Chẳng hạn, chúng ta có thể cài đặt Automate trạng thái hữu hạn trong phần cứng máy tính ở dạng mạch điện hay một dạng chương trình đơn giản, trong đó, nó có khả năng quyết định khi chỉ biết một lượng giới hạn dữ liệu hoặc bằng cách dùng vị trí trong đoạn mã lệnh để đưa ra quyết định.</para>
+        <para id="id7440667">Hình III.2 cho thấy nguyên tắc của một bộ điều khiển bằng mạch điện. Các đường điều khiển của phần đường đi số liệu là các ngã ra của một hoặc nhiều Automate trạng thái hữu hạn. Các ngã vào của Automate gồm có thanh ghi lệnh, thanh ghi này chứa lệnh phải thi hành và những thông tin từ bộ đường đi số liệu. Ứng với cấu hình các đường vào và trạng thái hiện tại, Automate sẽ cho trạng thái tương lai và các đường ra tương ứng với trạng thái hiện tại. Automate được cài đặt dưới dạng là một hay nhiều mạch mảng logic lập trình được (PLA: Programmable Logic Array) hoặc các mạch logic ngẫu nhiên.</para>
+        <para id="id7440700">Kỹ thuật điều khiển này đơn giản và hữu hiệu khi các lệnh có chiều dài cố định, có dạng thức đơn giản. Nó được dùng nhiều trong các bộ xử lý RISC.</para>
+      </section>
+      <section id="id-814848504018">
+        <title>Bộ điều khiển vi chương trình:</title>
+        <para id="id7440724">Bộ điều khiển vi chương trìnhBộ nhớ vi chương trìnhIRNgã raphần vi địa chỉ tiếp theoĐường đi dữ liệuDây diều khiểnxung nhịpPC của vi CTXác định địa chỉ của vi lệnh tiêp theo+ 1Hình III.3: Nguyên tắc vận hành của bộ điều khiển vi chương trìnhSơ đồ nguyên tắc của bộ điều khiển dùng vi chương trình được trình bày ở hình III.3. Trong kỹ thuật này, các đường dây điều khiển của bộ đường đi dữ liệu ứng với các ngã ra của một vi lệnh nằm trong bộ nhớ vi chương trình. Việc điều khiển các tác vụ của một lệnh mã máy được thực hiện bằng một chuỗi các vi lệnh. Một vi máy tính nằm bên trong bộ điều khiển thực hiện từng lệnh của vi chương trình này. Chính vi máy tính này điều khiển việc thực hiện một cách tuần tự các vi lệnh để hoàn thành tác vụ mà lệnh mã máy phải thực hiện. Các tác vụ của lệnh mã máy cũng tuỳ thuộc vào trạng thái của phần đường đi dữ liệu.</para>
+        <para id="id7320747">Bộ điều khiển bằng vi chương trình được dùng rộng rãi trong các bộ xử lý CISC. Bộ xử lý này có tập lệnh phức tạp với các lệnh có chiều dài khác nhau và có dạng thức phức tạp. Trong các bộ xử lý CISC, người ta cài đặt một lệnh mã máy bằng cách viết một vi chương trình. Như vậy công việc khá đơn giản và rất hữu hiệu. Các sai sót trong thiết kế automat điều khiển cũng dễ sửa đổi.</para>
+      </section>
+    </section>
+    <section id="id-723850028191">
+      <title>Diễn tiến thi hành lệnh mã máy</title>
+      <para id="id7320774">Việc thi hành một lệnh mã máy có thể chia thành 5 giai đoạn: </para>
+      <list id="id7320784" list-type="bulleted">
+        <item>Đọc lệnh (IF: Instruction Fetch)</item>
+        <item>Giải mã lệnh (ID: Instruction Decode)</item>
+        <item>Thi hành lệnh (EX: Execute)</item>
+        <item>Thâm nhập bộ nhớ trong hoặc nhảy (MEM: Memory access)</item>
+        <item>Lưu trữ kết quả (RS: Result Storing).</item>
+      </list>
+      <para id="id7320856">Mỗi giai đoạn được thi hành trong một hoặc nhiều chu kỳ xung nhịp.</para>
+      <section id="id-456632031195">
+        <title>1. Đọc lệnh:</title>
+        <para id="id7320874">MAR  PC</para>
+        <para id="id7320893">IR  M[MAR]</para>
+        <para id="id7320912">Bộ đếm chương trình PC được đưa vào MAR . Lệnh được đọc từ bộ nhớ trong, tại các ô nhớ có địa chỉ nằm trong MAR và được đưa vào thanh ghi lệnh IR.</para>
+        <para id="id7669673">2. Giải mã lệnh và đọc các thanh ghi nguồn:</para>
+        <para id="id7669682">A  Rs1</para>
+        <para id="id7669701">B  Rs2</para>
+        <para id="id7669720">PC  PC + 4</para>
+        <para id="id7669737">Lệnh được giải mã. Kế đó các thanh ghi Rs1 và Rs2 được đưa vào A và B. Thanh ghi PC được tăng lên để chỉ tới lệnh kế đó. </para>
+        <para id="id7669750">Để hiểu rõ giai đoạn này, ta lấy dạng thức của một lệnh làm tính tiêu biểu sau đây:</para>
+        <table id="id7669759" summary="">
+          <tgroup cols="5">
+            <colspec colnum="1" colname="c1"/>
+            <colspec colnum="2" colname="c2"/>
+            <colspec colnum="3" colname="c3"/>
+            <colspec colnum="4" colname="c4"/>
+            <colspec colnum="5" colname="c5"/>
+            <tbody>
+              <row>
+                <entry>Mã lệnh</entry>
+                <entry>Thanh ghi Rs1</entry>
+                <entry>Thanh ghi Rs2</entry>
+                <entry>Thanh ghi Rd</entry>
+                <entry>Tác vụ</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+        <para id="id7669836">bit 6 5 5 5 11</para>
+        <para id="id7669861">Các thanh ghi nguồn Rs1 và Rs2 được sử dụng tuỳ theo tác vụ, kết quả được đặt trong thanh ghi đích Rd.</para>
+        <para id="id7669874">Ta thấy việc giải mã được thực hiện cùng lúc với việc đọc các thanh ghi Rs1 và Rs2 vì các thanh ghi này luôn nằm tại cùng vị trí ở trong lệnh.</para>
+        <para id="id7669888">3. Thi hành lệnh:</para>
+        <para id="id7669893">Tuỳ theo loại lệnh mà một trong ba nhiệm vụ sau đây được thực hiện:</para>
+        <para id="id7669903">- Liên hệ tới bộ nhớ</para>
+        <para id="id7669908">MAR  Địa chỉ do ALU tính tuỳ theo kiểu định vị (Rs2).</para>
+        <para id="id7669928">MBR  Rs1</para>
+        <para id="id7669944">Địa chỉ hiệu dụng do ALU tính được đưa vào MAR và thanh ghi nguồn Rs1 được đưa vào MBR để được lưu vào bộ nhớ trong.</para>
+        <para id="id7669955">- Một lệnh của ALU</para>
+        <para id="id7669960">Ngã ra ALU  Kết quả của phép tính</para>
+        <para id="id7669978">ALU thực hiện phép tính xác định trong mã lệnh, đưa kết quả ra ngã ra.</para>
+        <para id="id7669989">- Một phép nhảy</para>
+        <para id="id7669994">Ngã ra ALU  Địa chỉ lệnh tiếp theo do ALU tính.</para>
+        <para id="id7670013">ALU cộng địa chỉ của PC với độ dời để làm thành địa chỉ đích và đưa địa chỉ này ra ngã ra. Nếu là một phép nhảy có điều kiện thì thanh ghi trạng thái được đọc quyết định có cộng độ dời vào PC hay không.</para>
+        <para id="id7670030">4. Thâm nhập bộ nhớ trong hoặc nhảy lần cuối </para>
+        <para id="id7670036">Giai đoạn này thường chỉ được dùng cho các lệnh nạp dữ liệu, lưu giữ dữ liệu và lệnh nhảy.</para>
+        <para id="id7670050">- Tham khảo đến bộ nhớ:</para>
+        <para id="id7670058">MBR  M[MAR] hoặc M[MAR]  MBR </para>
+        <para id="id7917128">Số liệu được nạp vào MBR hoặc lưu vào địa chỉ mà MAR trỏ đến.</para>
+        <para id="id7917141">- Nhảy:</para>
+        <para id="id7917145">If (điều kiện), PC  ngả ra ALU</para>
+        <para id="id7917164">Nếu điều kiện đúng, ngã ra ALU được nạp vào PC. Đối với lệnh nhảy không điều kiện, ngả ra ALU luôn được nạp vào thanh ghi PC.</para>
+        <para id="id7917177">5. Lưu trữ kết quả</para>
+        <para id="id7917186">Rd  Ngã ra ALU hoặc Rd  MBR </para>
+        <para id="id7917211">Lưu trữ kết quả trong thanh ghi đích.</para>
+      </section>
+    </section>
+    <section id="id-148406731845">
+      <title>NGẮT QUÃNG (INTERRUPT)</title>
+      <para id="id7917230">Ngắt quãng là một sự kiện xảy ra một cách ngẫu nhiên trong máy tính và làm ngưng tính tuần tự của chương trình (nghĩa là tạo ra một lệnh nhảy). Phần lớn các nhà sản xuất máy tính (ví dụ như IBM, INTEL) dùng từ ngắt quãng để ám chỉ sự kiện này, tuy nhiên một số nhà sản xuất khác dùng từ “ngoại lệ”, “lỗi”, “bẩy” để chỉ định hiện tượng này.</para>
+      <para id="id7917244">Bộ điều khiển của CPU là bộ phận khó thực hiện nhất và ngắt quãng là phần khó thực hiện nhất trong bộ điều khiển. Để nhận biết được một ngắt quãng lúc đang thi hành một lệnh, ta phải biết điều chỉnh chu kỳ xung nhịp và điều này có thể ảnh hưởng đến hiệu quả của máy tính.</para>
+      <para id="id7917258">Người ta đã nghỉ ra “ngắt quãng” là để nhận biết các sai sót trong tính toán số học, và để ứng dụng cho những hiện tượng thời gian thực. Bây giờ, ngắt quãng được dùng cho các công việc sau đây:</para>
+      <list id="id7917271" list-type="bulleted">
+        <item>Ngoại vi đòi hỏi nhập hoặc xuất số liệu.</item>
+        <item>Người lập trình muốn dùng dịch vụ của hệ điều hành.</item>
+        <item>Cho một chương trình chạy từng lệnh.</item>
+      </list>
+      <list id="id7917296" list-type="bulleted">
+        <item>Làm điểm dừng của một chương trình.</item>
+        <item>Báo tràn số liệu trong tính toán số học.</item>
+        <item>Trang bộ nhớ thực sự không có trong bộ nhớ.</item>
+        <item>Báo vi phạm vùng cấm của bộ nhớ.</item>
+        <item>Báo dùng một lệnh không có trong tập lệnh.</item>
+        <item>Báo phần cứng máy tính bị hư.</item>
+        <item>Báo điện bị cắt.</item>
+      </list>
+      <para id="id7917348">Dù rằng ngắt quãng không xảy ra thường xuyên nhưng bộ xử lý phải được thiết kế sao cho có thể lưu giữ trạng thái của nó trước khi nhảy đi phục vụ ngắt quãng. Sau khi thực hiện xong chương trình phục vụ ngắt, bộ xử lý phải khôi phục trạng thái của nó để có thể tiếp tục công việc.</para>
+      <para id="id7917362">Để đơn giản việc thiết kế, một vài bộ xử lý chỉ chấp nhận ngắt sau khi thực hiện xong lệnh đang chạy. Khi một ngắt xảy ra, bộ xử lý thi hành các bước sau đây:</para>
+      <list id="id7917370" list-type="enumerated">
+        <item>Thực hiện xong lệnh đang làm.</item>
+        <item>Lưu trữ trạng thái hiện tại.</item>
+        <item>Nhảy đến chương trình phục vụ ngắt</item>
+        <item>Khi chương trình phục vụ chấm dứt, bộ xử lý khôi phục lại trạng thái cũ của nó và tiếp tục thực hiện chương trình mà nó đang thực hiện khi bị ngắt.</item>
+      </list>
+    </section>
+    <section id="id-391260831598">
+      <title>KỸ THUẬT ỐNG DẪN (PIPELINE)</title>
+      <para id="id7917432">Đây là một kỹ thuật làm cho các giai đoạn khác nhau của nhiều lệnh được thi hành cùng một lúc.</para>
+      <para id="id7917438">Ví dụ: Chúng ta có những lệnh đều đặn, mỗi lệnh được thực hiện trong cùng một khoản thời gian. Giả sử, mỗi lệnh được thực hiện trong 5 giai đoạn và mỗi giai đoạn được thực hiện trong 1 chu kỳ xung nhịp. Các giai đoạn thực hiện một lệnh là: lấy lệnh (IF: Instruction Fetch), giải mã (ID: Instruction Decode), thi hành (EX: Execute), thâm nhập bộ nhớ (MEM: Memory Access), lưu trữ kết quả (RS: Result Storing).</para>
+      <para id="id7917453">Hình III.4 cho thấy chỉ trong một chu kỳ xung nhịp, bộ xử lý có thể thực hiện một lệnh (bình thường lệnh này được thực hiện trong 5 chu kỳ).</para>
+      <table id="id7917463" summary="">
+        <tgroup cols="10">
+          <colspec colnum="1" colname="c1"/>
+          <colspec colnum="2" colname="c2"/>
+          <colspec colnum="3" colname="c3"/>
+          <colspec colnum="4" colname="c4"/>
+          <colspec colnum="5" colname="c5"/>
+          <colspec colnum="6" colname="c6"/>
+          <colspec colnum="7" colname="c7"/>
+          <colspec colnum="8" colname="c8"/>
+          <colspec colnum="9" colname="c9"/>
+          <colspec colnum="10" colname="c10"/>
+          <tbody>
+            <row>
+              <entry>Chuỗi lệnh</entry>
+              <entry namest="c2" nameend="c10">Chu kỳ xung nhịp</entry>
+            </row>
+            <row>
+              <entry/>
+              <entry>1</entry>
+              <entry>2</entry>
+              <entry>3</entry>
+              <entry>4</entry>
+              <entry>5</entry>
+              <entry>6</entry>
+              <entry>7</entry>
+              <entry>8</entry>
+              <entry>9</entry>
+            </row>
+            <row>
+              <entry>Lệnh thứ i</entry>
+              <entry>IF</entry>
+              <entry>ID</entry>
+              <entry>EX</entry>
+              <entry>MEM</entry>
+              <entry>RS</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>Lệnh thứ i+1</entry>
+              <entry/>
+              <entry>IF</entry>
+              <entry>ID</entry>
+              <entry>EX</entry>
+              <entry>MEM</entry>
+              <entry>RS</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>Lệnh thứ i+2</entry>
+              <entry/>
+              <entry/>
+              <entry>IF</entry>
+              <entry>ID</entry>
+              <entry>EX</entry>
+              <entry>MEM</entry>
+              <entry>RS</entry>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>Lệnh thứ i+3</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry>IF</entry>
+              <entry>ID</entry>
+              <entry>EX</entry>
+              <entry>MEM</entry>
+              <entry>RS</entry>
+              <entry/>
+            </row>
+            <row>
+              <entry>Lệnh thứ i+4</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry>IF</entry>
+              <entry>ID</entry>
+              <entry>EX</entry>
+              <entry>MEM</entry>
+              <entry>RS</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <para id="id7904258">Hình III.4: Các giai đoạn khác nhau của nhiều lệnh được thi hành cùng một lúc</para>
+      <para id="id7904281">So sánh với kiểu xử lý tuần tự thông thường, 5 lệnh được thực hiện trong 25 chu kỳ xung nhịp, thì xử lý lệnh theo kỹ thuật ống dẫn thực hiện 5 lậnh chỉ trong 9 chu kỳ xung nhịp.</para>
+      <para id="id7904293">Như vậy kỹ thuật ống dẫn làm tăng tốc độ thực hiện các lệnh. Tuy nhiên kỹ thuật ống dẫn có một số ràng buộc:</para>
+      <list id="id7904302" list-type="bulleted">
+        <item>Cần phải có một mạch điện để thi hành mỗi giai đoạn của lệnh vì tất cả các giai đoạn của lệnh được thi hành cùng lúc. Trong một bộ xử lý không dùng kỹ thuật ống dẫn, ta có thể dùng bộ làm toán ALU để cập nhật thanh ghi PC, cập nhật địa chỉ của toán hạng bộ nhớ, địa chỉ ô nhớ mà chương trình cần nhảy tới, làm các phép tính trên các toán hạng vì các phép tính này có thể xảy ra ở nhiều giai đoạn khác nhau.</item>
+        <item>Phải có nhiều thanh ghi khác nhau dùng cho các tác vụ đọc và viết. Trên hình III.4, tại một chu kỳ xung nhịp, ta thấy cùng một lúc có 2 tác vụ đọc (ID, MEM) và 1 tác vụ viết (RS).</item>
+        <item>Trong một máy có kỹ thuật ống dẫn, có khi kết quả của một tác vụ trước đó, là toán hạng nguồn của một tác vụ khác. Như vậy sẽ có thêm những khó khăn mà ta sẽ đề cập ở mục tới. </item>
+        <item>Cần phải giải mã các lệnh một cách đơn giản để có thể giải mã và đọc các toán hạng trong một chu kỳ duy nhất của xung nhịp.</item>
+        <item>Cần phải có các bộ làm tính ALU hữu hiệu để có thể thi hành lệnh số học dài nhất, có số giữ, trong một khoảng thời gian ít hơn một chu kỳ của xung nhịp.</item>
+        <item>Cần phải có nhiều thanh ghi lệnh để lưu giữ lệnh mà chúng ta phải xem xét cho mỗi giai đoạn thi hành lệnh.</item>
+        <item>Cuối cùng phải có nhiều thanh ghi bộ đếm chương trình PC để có thể tái tục các lệnh trong trường hợp có ngắt quãng.</item>
+      </list>
+    </section>
+    <section id="id-775084707359">
+      <title>KHÓ KHĂN TRONG KỸ THUẬT ỐNG DẪN</title>
+      <para id="id7904402">Khi thi hành lệnh trong một máy tính dùng kỹ thuật ống dẫn, có nhiều trường hợp làm cho việc thực hiện kỹ thuật ống dẫn không thực hiện được như là: thiếu các mạch chức năng, một lệnh dùng kết quả của lệnh trước, một lệnh nhảy.</para>
+      <para id="id7904419">Ta có thể phân biệt 3 loại khó khăn: khó khăn do cấu trúc, khó khăn do số liệu và khó khăn do điều khiển.</para>
+      <para id="id7904439">a. Khó khăn do cấu trúc: </para>
+      <para id="id7904447">Đây là khó khăn do thiếu bộ phận chức năng, ví dụ trong một máy tính dùng kỹ thuật ống dẫn phải có nhiều ALU, nhiều PC, nhiều thanh ghi lệnh IR ... Các khó khăn này được giải quyết bằng cách thêm các bộ phận chức năng cần thiết và hữu hiệu.</para>
+      <para id="id7904462">b. Khó khăn do số liệu:</para>
+      <para id="id7904470">Lấy ví dụ trường hợp các lệnh liên tiếp sau:</para>
+      <para id="id7904477">Lệnh 1: ADD R1, R2, R3</para>
+      <para id="id7904490">Lệnh 2: SUB R4, R1, R5</para>
+      <para id="id7904504">Lệnh 3: AND R6, R1, R7</para>
+      <para id="id6991383">Lệnh 4: OR R8, R1, R9</para>
+      <para id="id6991396">Hình III.5 cho thấy R1, kết quả của lệnh 1 chỉ có thể được dùng cho lệnh 2 sau giai đoạn MEM của lệnh 1, nhưng R1 được dùng cho lệnh 2 vào giai đoạn EX của lệnh 1. Chúng ta cũng thấy R1 được dùng cho các lệnh 3 và 4.</para>
+      <table id="id6991410" summary="">
+        <tgroup cols="9">
+          <colspec colnum="1" colname="c1"/>
+          <colspec colnum="2" colname="c2"/>
+          <colspec colnum="3" colname="c3"/>
+          <colspec colnum="4" colname="c4"/>
+          <colspec colnum="5" colname="c5"/>
+          <colspec colnum="6" colname="c6"/>
+          <colspec colnum="7" colname="c7"/>
+          <colspec colnum="8" colname="c8"/>
+          <colspec colnum="9" colname="c9"/>
+          <tbody>
+            <row>
+              <entry>1- ADD R1, R2, R3</entry>
+              <entry>IF</entry>
+              <entry>ID</entry>
+              <entry>EX</entry>
+              <entry>MEM</entry>
+              <entry>RS</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>2- SUB R4, R1, R5</entry>
+              <entry/>
+              <entry>IF</entry>
+              <entry>ID</entry>
+              <entry>EX</entry>
+              <entry>MEM</entry>
+              <entry>RS</entry>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>3- AND R6, R1, R4</entry>
+              <entry/>
+              <entry/>
+              <entry>IF</entry>
+              <entry>ID</entry>
+              <entry>EX</entry>
+              <entry>MEM</entry>
+              <entry>RS</entry>
+              <entry/>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>4- OR R8, R1, R9</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry>IF</entry>
+              <entry>ID</entry>
+              <entry>EX</entry>
+              <entry>MEM</entry>
+              <entry>RS</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <para id="id7708275">Hình III.5: Chuỗi lệnh minh hoạ khó khăn do số liệu.</para>
+      <para id="id7708289">Để khắc phục khó khăn này, một bộ phận phần cứng được dùng để đưa kết quả từ ngã ra ALU trực tiếp vô một trong các thanh ghi ngã vào như trong hình III.6.</para>
+      <table id="id7708296" summary="">
+        <tgroup cols="7">
+          <colspec colnum="1" colname="c1"/>
+          <colspec colnum="2" colname="c2"/>
+          <colspec colnum="3" colname="c3"/>
+          <colspec colnum="4" colname="c4"/>
+          <colspec colnum="5" colname="c5"/>
+          <colspec colnum="6" colname="c6"/>
+          <colspec colnum="7" colname="c7"/>
+          <tbody>
+            <row>
+              <entry/>
+              <entry/>
+              <entry namest="c3" nameend="c5">CÁC THANH GHI</entry>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry/>
+              <entry namest="c2" nameend="c3"/>
+              <entry/>
+              <entry namest="c5" nameend="c6"/>
+              <entry/>
+            </row>
+            <row>
+              <entry/>
+              <entry namest="c2" nameend="c3">Đa hợp</entry>
+              <entry/>
+              <entry namest="c5" nameend="c6">Đa hợp</entry>
+              <entry/>
+            </row>
+            <row>
+              <entry>Thanh ghi đệm chứa kết quả</entry>
+              <entry namest="c2" nameend="c3"/>
+              <entry/>
+              <entry namest="c5" nameend="c6"/>
+              <entry/>
+            </row>
+            <row>
+              <entry/>
+              <entry namest="c2" nameend="c3"/>
+              <entry>ALU</entry>
+              <entry namest="c5" nameend="c6"/>
+              <entry/>
+            </row>
+            <row>
+              <entry/>
+              <entry namest="c2" nameend="c3"/>
+              <entry/>
+              <entry namest="c5" nameend="c6"/>
+              <entry/>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry namest="c3" nameend="c5">R4</entry>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry namest="c3" nameend="c5">R1</entry>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry/>
+              <entry namest="c2" nameend="c3"/>
+              <entry/>
+              <entry namest="c5" nameend="c6"/>
+              <entry/>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <para id="id7553984">Hình III.6: ALU với bộ phận phần cứng đưa kết quả tính toán trở lại ngã vào</para>
+      <para id="id7553999">Khi bộ phận phần cứng nêu trên phát hiện có dùng kết quả của ALU làm toán hạng cho liệt kê, nó tác động vào mạch đa hợp để đưa ngã ra của ALU vào ngã vào của ALU hoặc vào ngã vào của một đơn vị chức năng khác nếu cần.</para>
+      <para id="id7554013">c. Khó khăn do điều khiển:</para>
+      <para id="id7554022">Các lệnh làm thay đổi tính thi hành các lệnh một cách tuần tự (nghĩa là PC tăng đều đặn sau mỗi lệnh), gây khó khăn về điều khiển. Các lệnh này là lệnh nhảy đến một địa chỉ tuyệt đối chứa trong một thanh ghi, hay lệnh nhảy đến một địa chỉ xác định một cách tương đối so với địa chỉ hiện tại của bộ đếm chương trình PC. Các lệnh nhảy trên có thể có hoặc không điều kiện.</para>
+      <para id="id7554026">Trong trường hợp đơn giản nhất, tác vụ nhảy không thể biết trước giai đoạn giải mã (xem hình III.4). Như vậy, nếu lệnh nhảy bắt đầu ở chu kỳ C thì lệnh mà chương trình nhảy tới chỉ được bắt đầu ở chu kỳ C+2. Ngoài ra, phải biết địa chỉ cần nhảy đến mà ta có ở cuối giai đoạn giải mã ID. Trong lệnh nhảy tương đối, ta phải cộng độ dời chứa trong thanh ghi lệnh IR vào thanh ghi PC. Việc tính địa chỉ này chỉ được thực hiện vào giai đoạn ID với điều kiện phải có một mạch công việc riêng biệt.</para>
+      <para id="id7774392">Vậy trong trường hợp lệnh nhảy không điều kiện, lệnh mà chương trình nhảy đến bắt đầu thực hiện ở chu kỳ C+2 nếu lệnh nhảy bắt đầu ở chu kỳ C.</para>
+      <para id="id7774406">Cho các lệnh nhảy có điều kiện thì phải tính toán điều kiện. Thông thường các kiến trúc RISC đặt kết quả việc so sánh vào trong thanh ghi trạng thái, hoặc vào trong thanh ghi tổng quát. Trong cả 2 trường hợp, đọc điều kiện tương đương với đọc thanh ghi. Đọc thanh ghi có thể được thực hiện trong phân nửa chu kỳ cuối giai đoạn ID.</para>
+      <para id="id7774421">Một trường hợp khó hơn có thể xảy ra trong những lệnh nhảy có điều kiện. Đó là điều kiện được có khi so sánh 2 thanh ghi và chỉ thực hiện lệnh nhảy khi kết quả so sánh là đúng. Việc tính toán trên các đại lượng logic không thể thực hiện được trong phân nửa chu kỳ và như thế phải kéo dài thời gian thực hiện lệnh nhảy có điều kiện. Người ta thường tránh các trường hợp này để không làm giảm mức hữu hiệu của máy tính.</para>
+      <para id="id7774438">Vậy trường hợp đơn giản, người ta có thể được địa chỉ cần nhảy đến và điều kiện nhảy cuối giai đoạn ID. Vậy có chậm đi một chu kỳ mà người ta có thể giải quyết bằng nhiều cách.</para>
+      <para id="id7774450">Cách thứ nhất là đóng băng kỹ thuật ống dẫn trong một chu kỳ, nghĩa là ngưng thi hành lệnh thứ i+1 đang làm nếu lệnh thư i là lệnh nhảy. Ta mất trắng một chu kỳ cho mỗi lệnh nhảy.</para>
+      <para id="id7774463">Cách thứ hai là thi hành lệnh sau lệnh nhảy nhưng lưu ý rằng hiệu quả của một lệnh nhảy bị chậm mất một lệnh. Vậy lệnh theo sau lệnh nhảy được thực hiện trước khi lệnh mà chương trình phải nhảy tới được thực hiện. Chương trình dịch hay người lập trình có nhiệm vụ xen vào một lệnh hữu ích sau lệnh nhảy.</para>
+      <para id="id7774479">Trong trường hợp nhảy có điều kiện, việc nhảy có thể được thực hiện hay không thực hiện. Lệnh hữu ích đặt sau lệnh nhảy không làm sai lệch chương trình dù điều kiện nhảy đúng hay sai.</para>
+      <para id="id7774491">Bộ xử lý RISC SPARC có những lệnh nhảy với huỷ bỏ. Các lệnh này cho phép thi hành lệnh sau lệnh nhảy nếu điều kiện nhảy đúng và huỷ bỏ thực hiện lệnh đó nếu điều kiện nhảy sai.</para>
+    </section>
+    <section id="id-992899233446">
+      <title>SIÊU ỐNG DẪN</title>
+      <para id="id7774511">Máy tính có kỹ thuật siêu ống dẫn bậc n bằng cách chia các giai đoạn của kỹ thuật ống dẫn đơn giản, mỗi giai đoạn được thực hiện trong khoản thời gian Tc, thành n giai đoạn con thực hiện trong khoản thời gian Tc/n. Độ hữu hiệu của kỹ thuật này tương đương với việc thi hành n lệnh trong mỗi chu kỳ Tc. Hình III.7 trình bày thí dụ về siêu ống dẫn bậc 2, có so sánh với siêu ống dẫn đơn giản. Ta thấy trong một chu kỳ Tc, máy dùng kỹ thuật siêu ống dẫn làm 2 lệnh thay vì làm1 lệnh trong máy dùng kỹ thuật ống dẫn bình thường. Trong máy tính siêu ống dẫn, tốc độ thực hiện lệnh tương đương với việc thực hiện một lệnh trong khoảng thời gian Tc/n. Các bất lợi của siêu ống dẫn là thời gian thực hiện một giai đoạn con ngắn Tc/n và việc trì hoãn trong thi hành lệnh nhảy lớn. Trong ví dụ ở hình III.7, nếu lệnh thứ i là một lệnh nhảy tương đối thì lệnh này được giải mã trong giai đoạn ID, địa chỉ nhảy đến được tính vào giai đoạn EX, lệnh phải được nhảy tới là lệnh thứ i+4, vậy có trì trệ 3 lệnh thay vì 1 lệnh trong kỹ thuật ống dẫn bình thường. </para>
+      <table id="id7774552" summary="">
+        <tgroup cols="22">
+          <colspec colnum="1" colname="c1"/>
+          <colspec colnum="2" colname="c2"/>
+          <colspec colnum="3" colname="c3"/>
+          <colspec colnum="4" colname="c4"/>
+          <colspec colnum="5" colname="c5"/>
+          <colspec colnum="6" colname="c6"/>
+          <colspec colnum="7" colname="c7"/>
+          <colspec colnum="8" colname="c8"/>
+          <colspec colnum="9" colname="c9"/>
+          <colspec colnum="10" colname="c10"/>
+          <colspec colnum="11" colname="c11"/>
+          <colspec colnum="12" colname="c12"/>
+          <colspec colnum="13" colname="c13"/>
+          <colspec colnum="14" colname="c14"/>
+          <colspec colnum="15" colname="c15"/>
+          <colspec colnum="16" colname="c16"/>
+          <colspec colnum="17" colname="c17"/>
+          <colspec colnum="18" colname="c18"/>
+          <colspec colnum="19" colname="c19"/>
+          <colspec colnum="20" colname="c20"/>
+          <colspec colnum="21" colname="c21"/>
+          <colspec colnum="22" colname="c22"/>
+          <tbody>
+            <row>
+              <entry>i</entry>
+              <entry>IF1</entry>
+              <entry>IF2</entry>
+              <entry>ID1</entry>
+              <entry namest="c5" nameend="c6">ID2</entry>
+              <entry>EX1</entry>
+              <entry namest="c8" nameend="c9">EX2</entry>
+              <entry>MEM1</entry>
+              <entry>MEM2</entry>
+              <entry>RS1</entry>
+              <entry namest="c13" nameend="c14">RS2</entry>
+              <entry/>
+              <entry namest="c16" nameend="c17"/>
+              <entry/>
+              <entry namest="c19" nameend="c20"/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry namest="c5" nameend="c6"/>
+              <entry/>
+              <entry namest="c8" nameend="c9"/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry namest="c13" nameend="c14"/>
+              <entry/>
+              <entry namest="c16" nameend="c17"/>
+              <entry/>
+              <entry namest="c19" nameend="c20"/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>i+1</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry namest="c5" nameend="c6"/>
+              <entry/>
+              <entry namest="c8" nameend="c9"/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry namest="c13" nameend="c14"/>
+              <entry/>
+              <entry namest="c16" nameend="c17"/>
+              <entry/>
+              <entry namest="c19" nameend="c20"/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry namest="c5" nameend="c6"/>
+              <entry/>
+              <entry namest="c8" nameend="c9"/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry namest="c13" nameend="c14"/>
+              <entry/>
+              <entry namest="c16" nameend="c17"/>
+              <entry/>
+              <entry namest="c19" nameend="c20"/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>i+2</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry namest="c5" nameend="c6"/>
+              <entry/>
+              <entry namest="c8" nameend="c9"/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry namest="c13" nameend="c14"/>
+              <entry/>
+              <entry namest="c16" nameend="c17"/>
+              <entry/>
+              <entry namest="c19" nameend="c20"/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry namest="c5" nameend="c6"/>
+              <entry/>
+              <entry namest="c8" nameend="c9"/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry namest="c13" nameend="c14"/>
+              <entry/>
+              <entry namest="c16" nameend="c17"/>
+              <entry/>
+              <entry namest="c19" nameend="c20"/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>i+3</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry namest="c5" nameend="c6"/>
+              <entry/>
+              <entry namest="c8" nameend="c9"/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry namest="c13" nameend="c14"/>
+              <entry/>
+              <entry namest="c16" nameend="c17"/>
+              <entry/>
+              <entry namest="c19" nameend="c20"/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry namest="c5" nameend="c6"/>
+              <entry/>
+              <entry namest="c8" nameend="c9"/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry namest="c13" nameend="c14"/>
+              <entry/>
+              <entry namest="c16" nameend="c17"/>
+              <entry/>
+              <entry namest="c19" nameend="c20"/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>i+4</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry namest="c5" nameend="c6"/>
+              <entry/>
+              <entry namest="c8" nameend="c9"/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry namest="c13" nameend="c14"/>
+              <entry/>
+              <entry namest="c16" nameend="c17"/>
+              <entry/>
+              <entry namest="c19" nameend="c20"/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry namest="c5" nameend="c6"/>
+              <entry/>
+              <entry namest="c8" nameend="c9"/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry namest="c13" nameend="c14"/>
+              <entry/>
+              <entry namest="c16" nameend="c17"/>
+              <entry/>
+              <entry namest="c19" nameend="c20"/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry>i+5</entry>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry namest="c5" nameend="c6"/>
+              <entry/>
+              <entry namest="c8" nameend="c9"/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry namest="c13" nameend="c14"/>
+              <entry/>
+              <entry namest="c16" nameend="c17"/>
+              <entry/>
+              <entry namest="c19" nameend="c20"/>
+              <entry/>
+              <entry/>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry namest="c5" nameend="c6"/>
+              <entry/>
+              <entry namest="c8" nameend="c9"/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry namest="c13" nameend="c14"/>
+              <entry/>
+              <entry namest="c16" nameend="c17"/>
+              <entry namest="c18" nameend="c19"/>
+              <entry/>
+              <entry namest="c21" nameend="c22"/>
+            </row>
+            <row>
+              <entry>i</entry>
+              <entry namest="c2" nameend="c3">IF</entry>
+              <entry namest="c4" nameend="c6">ID</entry>
+              <entry namest="c7" nameend="c9">EX</entry>
+              <entry namest="c10" nameend="c11">MEM</entry>
+              <entry namest="c12" nameend="c14">RS</entry>
+              <entry/>
+              <entry namest="c16" nameend="c17"/>
+              <entry namest="c18" nameend="c19"/>
+              <entry/>
+              <entry namest="c21" nameend="c22"/>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry namest="c4" nameend="c5"/>
+              <entry/>
+              <entry namest="c7" nameend="c8"/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry namest="c12" nameend="c13"/>
+              <entry/>
+              <entry/>
+              <entry namest="c16" nameend="c17"/>
+              <entry namest="c18" nameend="c19"/>
+              <entry/>
+              <entry namest="c21" nameend="c22"/>
+            </row>
+            <row>
+              <entry>i+1</entry>
+              <entry/>
+              <entry/>
+              <entry namest="c4" nameend="c6">IF</entry>
+              <entry namest="c7" nameend="c9">ID</entry>
+              <entry namest="c10" nameend="c11">EX</entry>
+              <entry namest="c12" nameend="c14">MEM</entry>
+              <entry namest="c15" nameend="c17">RS</entry>
+              <entry namest="c18" nameend="c19"/>
+              <entry/>
+              <entry namest="c21" nameend="c22"/>
+            </row>
+            <row>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry namest="c4" nameend="c5"/>
+              <entry/>
+              <entry namest="c7" nameend="c8"/>
+              <entry/>
+              <entry/>
+              <entry/>
+              <entry namest="c12" nameend="c13"/>
+              <entry/>
+              <entry namest="c15" nameend="c16"/>
+              <entry/>
+              <entry namest="c18" nameend="c19"/>
+              <entry/>
+              <entry namest="c21" nameend="c22"/>
+            </row>
+            <row>
+              <entry>i+2</entry>
+              <entry/>
+              <entry/>
+              <entry namest="c4" nameend="c5"/>
+              <entry/>
+              <entry namest="c7" nameend="c9">IF</entry>
+              <entry namest="c10" nameend="c11">ID</entry>
+              <entry namest="c12" nameend="c14">EX</entry>
+              <entry namest="c15" nameend="c17">MEM</entry>
+              <entry namest="c18" nameend="c20">RS</entry>
+              <entry namest="c21" nameend="c22"/>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <para id="id7797485">Hình III.7: Siêu ống dẫn bậc 2 so với siêu ống dẫn đơn giản. </para>
+      <para id="id7797499">Trong khoảng thời gian Tc, máy có siêu ống dẫn làm 2 lệnh </para>
+      <para id="id7797506">thay vì 1 lệnh như trong máy có kỹ thuật ống dẫn đơn giản.</para>
+    </section>
+    <section id="id-566709953116">
+      <title>SIÊU VÔ HƯỚNG (SUPERSCALAR)</title>
+      <para id="id7797524">Máy tính siêu vô hướng bậc n có thể thực hiện đồng thời n lệnh trong một chu kỳ xung nhịp Tc. Hình III.8 trình bày một ví dụ về sự vận hành của một máy tính siêu vô hướng bậc 2 so với một máy tính dùng kỹ thuật ống dẫn.</para>
+      <figure id="id7797541">
+        <media id="id1170193192992" alt=""><image src="../../media/graphics2-e00f.png" mime-type="image/png" height="334" width="563"/></media>
+      </figure>
+      <para id="id7797565">Trong một máy tính siêu vô hướng phần cứng phải quản lý việc đọc và thi hành đồng thời nhiều lệnh. Vậy nó phải có khả năng quản lý các quan hệ giữa số liệu với nhau. Cũng cần phải chọn các lệnh có khả năng được thi hành cùng một lúc. Những bộ xử lý đầu tiên đưa ra thị trường dùng kỹ thuật này là các bộ xử lý Intel i860 và IBM RS/6000. Các bộ xử lý này có khả năng thực hiện song song nhiều tác vụ trên số nguyên và trên số lẻ.</para>
+      <para id="id7797579">Năm 1992, người ta thấy xuất hiện các bộ xử lý có nhiều bộ thực hiện tác vụ độc lập với nhau (nhiều ALU, bộ tính toán số lẻ, nạp dữ liệu, lưu dữ liệu, nhảy), có thể thực hiện song song nhiều lệnh (lệnh tính số nguyên, số lẻ, lệnh bộ nhớ, lệnh nhảy...). Số lệnh có thể được thi hành song song càng nhiều thì phần cứng thực hiện việc này càng phức tạp.</para>
+    </section>
+    <section id="id-38584000679">
+      <title>MÁY TÍNH CÓ LỆNH THẬT DÀI VLIW (VERY LONG INSTRUCTION WORD)</title>
+      <para id="id7797607">Máy tính siêu vô hướng có thể thực hiện 2 hoặc 3 lệnh trong mỗi chu kỳ xung nhịp. Do kỹ thuật ống dẫn đòi hỏi các lệnh phải phụ thuộc vào nhau nên rất khó thực hiện nhiều lệnh trong một chu kỳ. Như vậy, thay vì cố thực hiện nhiều lệnh trong một chu kỳ, người ta tìm cách đưa vào nhiều lệnh trong một từ lệnh dài. Một lệnh VLIW có thể chứa hai tác vụ tính toán số nguyên, hai tác vụ tính toán số lẻ, hai tác vụ thâm nhập bộ nhớ và một lệnh nhảy. Một lệnh như vậy được chia thành nhiều trường, mỗi trường có thể có từ 16 đến 24 bít và chiều dài của lệnh VLIW là từ 112 đến 168 bít. Có nhiều kỹ thuật tạo ra một lệnh VLIW trong đó tất cả các trường đều được dùng. Giá thành và độ phức tạp của một máy tính có lệnh thật dài tăng lên rất nhiều nếu người ta tăng số trường trong một lệnh VLIW.</para>
+    </section>
+    <section id="id-21721511023">
+      <title>MÁY TÍNH VECTƠ</title>
+      <para id="id7797652">Một máy tính vectơ bao gồm một bộ tính toán vô hướng bình thường dùng kỹ thuật ống dẫn và một bộ làm tính vectơ. Bộ tính toán vô hướng, giống như bộ xử lý dùng kỹ thuật ống dẫn, thực hiện các phép tính vô hướng, còn bộ làm tính vectơ thực hiện các phép tính vectơ. Đa số các máy tính vectơ cho phép làm các phép tính trên vectơ số nguyên, vectơ số lẻ và vectơ số logic (số Boolean).</para>
+      <para id="id7797670">Có 2 kiểu kiến trúc máy tính vectơ: kiểu vectơ ô nhớ - ô nhớ và kiểu thanh ghi vectơ. Trong máy tính loại vectơ bộ nhớ - bộ nhớ, các phép tính vectơ được thực hiện trong bộ nhớ. Kiến trúc kiểu thanh ghi vectơ được thực hiện trong các siêu máy tính CRAY - 1, CRAY - 2, X - MP, Y - MP, trong các siêu máy tính của Nhật NEC SX/2, Fujitsu VP200 và Hitachi S820. Các máy này có một bộ nhiều thanh ghi vectơ và những tác vụ vectơ được thực hiện trên các thanh ghi này ngoại trừ các tác vụ nạp dữ liệu và lưu dữ liệu. Máy CRAY-2 (1995) có 8 thanh ghi vectơ, mỗi thanh ghi có thể chứa 64 vectơ, mỗi vectơ có chiều dài 64 bít.</para>
+    </section>
+    <section id="id-687920364412">
+      <title>MÁY TÍNH SONG SONG</title>
+      <para id="id7463556">Trong các máy tính siêu ống dẫn, siêu vô hướng, máy tính vectơ, máy tính VLIW, người ta đã dùng tính thực hiện song song các lệnh ở các mức độ khác nhau để làm tăng hiệu quả của chúng. Giới hạn về khả năng tính toán của loại máy trên cùng với sự phát triển của công nghệ máy tính khiến người ta nghĩ tới giải pháp song song theo đó người ta tăng cường hiệu quả của máy tính bằng cách tăng số lượng bộ xử lý.</para>
+      <para id="id7463573">Các máy tính có thể sắp xếp vào 4 loại sau:</para>
+      <para id="id7463580">1- SISD (Single Instructions Stream, Single Data Stream): Máy tính một dòng lệnh, một dòng số liệu.</para>
+      <para id="id7463599">2- SIMD (Single Instructions Stream, Multiple Data Stream): Máy tính một dòng lệnh, nhiều dòng số liệu.</para>
+      <para id="id7463618">3- MISD (Multiple Instructions Stream, Single Data Stream):Máy tính nhiều dòng lệnh, một dòng số liệu.</para>
+      <para id="id7463638">4- MIMD (Multiple Instruction Stream, Multiple Data Stream): Máy tính nhiều dòng lệnh, nhiều dòng số liệu.</para>
+      <para id="id7463659">Kiểu phân loại này đơn giản, dễ hiểu, vẫn còn hiệu lực đến hôm nay, mặc dù có những máy tính dùng kiến trúc hỗn tạp.</para>
+      <para id="id7463672">Các máy tính SISD tương ứng với các máy một bộ xử lý mà chúng ta đã nghiên cứu.</para>
+      <para id="id7463683">Các máy MISD kiểu máy tính này không sản xuất thương mại.</para>
+      <para id="id7463689">Các máy SIMD có một số lớn các bộ xử lý giống nhau, cùng thực hiện một lệnh giống nhau để xử lý nhiều dòng dữ liệu khác nhau. Mỗi bộ xử lý có bộ nhớ dữ liệu riêng, nhưng chỉ có một bộ nhớ lệnh và một bộ xử lý điều khiển, bộ này đọc và thi hành các lệnh. Máy CONNECTION MACHINE 2 (65536 bộ xử lý 1 bít) của công ty Thinking Machine Inc, là một ví dụ điển hình của SIMD. Tính song song dùng trong các máy SIMD là tính song song của các dữ liệu. Nó chỉ có hiệu quả nếu cấu trúc các dữ liệu dễ dàng thích ứng với cấu trúc vật lý của các bộ xử lý thành viên. Các bộ xử lý véc-tơ và mảng thuộc loại máy tính này</para>
+      <para id="id7463723">Các máy MIMD có kiến trúc song song, những năm gần đây, các máy MIMD nổi lên và được xem như một kiến trúc đương nhiên phải chọn cho các máy nhiều bộ xử lý dùng trong các ứng dụng thông thường, một tập hợp các bộ xử lý thực hiện một chuối các lệnh khác nhau trên các tập hợp dữ liệu khác nhau. Các máy MIMD hiện tại có thể được xếp vào ba loại hệ thống sẽ được giới thiệu trong phần tiếp theo của chương trình là: SMP (Symmetric Multiprocesors), Cluster và NUMA (Nonunifrom Memory Access)</para>
+      <para id="id7463753">a). Một hệ thống SMP bao gồm nhiều bộ xử lý giống nhau được lắp đặt bên trong một máy tính, các bộ xử lý này kết nối với nhau bởi một hệ thống bus bên trong hay một vài sự sắp xếp chuyển mạch thích hợp. Vấn đề lớn nhất trong hệ thống SMP là sự kết hợp các hệ thống cache riêng lẻ. Vì mỗi bộ xử lý trong SMP có một cache riêng của nó, do đó, một khối dữ liệu trong bộ nhớ trong có thể tồn tại trong một hay nhiều cache khác nhau. Nếu một khối dữ liệu trong một cache của một bộ xử lý nào đó bị thay đổi sẽ dẫn đến dữ liệu trong cache của các bộ xử lý còn lại và trong bộ nhớ trong không đồng nhất. Các giao thức cache kết hợp được thiết kế để giải quyết vấn đề này.</para>
+      <para id="id7463790">b). Trong hệ thống cluster, các máy tính độc lập được kết nối với nhau thông qua một hệ thống kết nối tốc độ cao (mạng tốc độ cao Fast Ethernet hay Gigabit) và hoạt động như một máy tính thống nhất. Mỗi máy trong hệ thống được xem như là một phần của cluster, được gọi là một nút (node). Hệ thống cluster có các ưu điểm:</para>
+      <list id="id7463808" list-type="bulleted">
+        <item>Tốc độ cao: Có thể tạo ra một hệ thống cluster có khả năng xử lý mạnh hơn bất cứ một máy tính đơn lẻ nào. Mỗi cluster có thể bao gồm hàng tá máy tính, mỗi máy có nhiều bộ xử lý.</item>
+        <item>Khả năng mở rộng cao: có thể nâng cấp, mở rộng một cluster đã được cấu hình và hoạt động ổn định.</item>
+        <item>Độ tin cậy cao: Hệ thống vẫn hoạt động ổn định khi có một nút (node) trong hệ thống bị hư hỏng. Trong nhiều hệ thống, khả năng chịu lỗi (fault tolerance) được xử lý tự động bằng phần mềm.</item>
+        <item>Chi phí đầu tư thấp: hệ thống cluster có khả năng mạnh hơn một máy tính đơn lẻ mạnh nhất với chi phí thấp hơn.</item>
+      </list>
+      <para id="id7463854">c). Một hệ thống NUMA (Nonunifrom Memory Access) là hệ thống đa xử lý được giới thiệu trong thời gian gần đây, đây là hệ thống với bộ nhớ chia sẻ, thời gian truy cập các vùng nhớ dành riêng cho các bộ xử lý thì khác nhau. Điều này khác với kiểu quản lý bộ nhớ trong hệ thống SMP (bộ nhớ dùng chung, thời gian truy cập các vùng nhớ khác nhau trong hệ thống cho các bộ xử lý là như nhau). Hệ thống này có những thuận lợi và bất lợi như sau:</para>
+      <para id="id7463878">Thuận lợi:</para>
+      <list id="id7463883" list-type="bulleted">
+        <item>Thực hiện hiệu quả hơn so với hệ thống SMP trong các xử lý song song.</item>
+        <item>Không thay đổi phần mềm chính.</item>
+        <item>Bộ nhớ có khả năng bị nghẽn nếu có nhiều truy cập đồng thời, nhưng điều này có thể được khắc phục bằng cách:</item>
+      </list>
+      <para id="id7463916">+ Cache L1&amp;L2 được thiết kế để giảm tối thiểu tất cả các thâm nhập bộ nhớ.</para>
+      <para id="id7463924">+ Cần các phần mềm cục bộ được quản lý tốt để việc các ứng dụng hoạt động hiệu quả.</para>
+      <para id="id7463932">+ Quản trị bộ nhớ ảo sẽ chuyển các trang tới các nút cần dùng.</para>
+      <para id="id7463939">Bất lợi: </para>
+      <list id="id7463944" list-type="bulleted">
+        <item>Hệ thống hoạt động không trong suốt như SMP: việc cấp phát các trang, các quá trình có thể được thay đổi bởi các phần mềm hệ thống nếu cần.</item>
+        <item>Hệ thống phức tạp.</item>
+      </list>
+      <para id="id7655706">Liên quan đến bộ nhớ trong các máy tính song song, chúng ta có thể chia thành hai nhóm máy:</para>
+      <list id="id7655714" list-type="bulleted">
+        <item>Nhóm máy thứ nhất, mà ta gọi là máy có kiến trúc bộ nhớ chia sẻ, có một bộ nhớ trung tâm duy nhất được phân chia cho các bộ xử lý và một hệ thống bus chia sẻ để nối các bộ xử lý và bộ nhớ. Vì chỉ có một bộ nhớ trong nên hệ thống bộ nhớ không đủ khả năng đáp ứng nhu cầu thâm nhập bộ nhớ của một số lớn các bộ xử lý. Kiểu kiến trúc bộ nhớ chia sẻ được dùng trong hệ thống SMP.</item>
+      </list>
+      <para id="id7655743">Nhóm máy thứ hai bao gồm các máy có bộ nhớ phân tán vật lý. Mỗi máy của nhóm này gồm có các nút, mỗi nút chứa một bộ xử lý, bộ nhớ, một vài ngã vào ra và một giao diện với hệ thống kết nối giữa các nút (hình III.10).</para>
+      <para id="id7655757">Hình III.10: Cấu trúc nền của một bộ nhớ phân tánBỘ XỬ LÝ + CACHEBỘ NHỚ TRONGI/OBỘ XỬ LÝ + CACHEBỘ NHỚ TRONGI/OBỘ XỬ LÝ + CACHEBỘ NHỚ TRONGI/OBỘ XỬ LÝ + CACHEBỘ NHỚ TRONGI/OBỘ XỬ LÝ + CACHEBỘ NHỚ TRONGI/OBỘ XỬ LÝ + CACHEBỘ NHỚ TRONGI/OHệ thống kết nốiL2 cacheHình III.9: Máy tính song song với bộ nhớ dùng chung, hệ thống bus dùng chungBộ xử lýL1 CacheL2 cacheBộ nhớ trongdùng chungĐiều hợp vào raĐiều hợp vào raĐiều hợp vào raBộ xử lýL1 CacheL2 cacheBộ xử lýL1 CacheBus dùng chungBus nối ngoại vi</para>
+      <para id="id7815234">Việc phân tán bộ nhớ cho các nút có hai điểm lợi. Trước hết, đây là một cách phân tán việc thâm nhập bộ nhớ. Thứ hai, cách này làm giảm thời gian chờ đợi lúc thâm nhập bộ nhớ cục bộ. Các lợi điểm trên làm cho kiến trúc có bộ nhớ phân tán được dùng cho các máy đa xử lý có một số ít bộ xử lý. Điểm bất lợi chính của kiến trúc máy tính này là việc trao đổi dữ liệu giữa các bộ xử lý trở nên phức tạp hơn và mất nhiều thời gian hơn vì các bộ xử lý không cùng chia sẻ một bộ nhớ trong chung. Cách thực hiện việc trao đổi thông tin giữa bộ xử lý và bộ nhớ trong, và kiến trúc logic của bộ nhớ phân tán là một tính chất đặc thù của các máy tính với bộ nhớ phân tán. </para>
+      <para id="id7815279">Có 2 phương pháp được dùng để truyền dữ liệu giữa các bộ xử lý.</para>
+      <para id="id7815286">i). Phương pháp thứ nhất là các bộ nhớ được phân chia một cách vật lý có thể được thâm nhập với một định vị chia sẻ một cách logic, nghĩa là nếu một bộ xử lý bất kỳ có quyền truy xuất, thì nó có thể truy xuất bất kỳ ô nhớ nào. Trong phương pháp này các máy được gọi có kiến trúc bộ nhớ chia sẻ phân tán (DSM: Distributed Sharing Memory). Từ bộ nhớ chia sẻ cho biết không gian định vị bị chia sẻ. Nghĩa là cùng một địa chỉ vật lý cho 2 bộ xử lý tường ứng với cùng một ô nhớ.</para>
+      <para id="id6517582">ii). Phương pháp thứ hai, không gian định vị bao gồm nhiều không gian định vị nhỏ không giao nhau và có thể được một bộ xử lý thâm nhập. Trong phương pháp này, một địa chỉ vật lý gắn với 2 máy khác nhau thì tương ứng với 2 ô nhớ khác nhau trong 2 bộ nhớ khác nhau. Mỗi mô-đun bộ xử lý-bộ nhớ thì cơ bản là một máy tính riêng biệt và các máy này được gọi là đa máy tính. Các máy này có thể gồm nhiều máy tính hoàn toàn riêng biệt và được nối vào nhau thành một mạng cục bộ.</para>
+      <para id="id6517617"><figure id="id6517628"><media id="id1170195339540" alt=""><image src=".png" mime-type="image/png" height="395" width="650"/></media></figure>Hình III.11: Tổ chức kết nối của máy tính song song có bộ nhớ phân tán</para>
+      <para id="id6517680">Kiến trúc song song phát triển mạnh trong thời gian gần đây do các lý do:</para>
+      <para id="id6517688">- Việc dùng xử lý song song đặc biệt trong lãnh vực tính toán khoa học và công nghệ. Trong các lãnh vực này người ta luôn cần đến máy tính có tính năng cao hơn.</para>
+      <para id="id6517699">- Người ta đã chấp nhận rằng một trong những cách hiệu quả nhất để chế tạo máy tính có tính năng cao hơn các máy đơn xử lý là chế tạo các máy tính đa xử lý.</para>
+      <para id="id6517710">- Máy tính đa xử lý rất hiệu quả khi dùng cho đa chương trình. Đa chương trình được dùng chủ yếu cho các máy tính lớn và cho các máy phục vụ lớn.</para>
+      <para id="id6517721">Các ví dụ về các siêu máy tính dùng kỹ thuật xử lý song song: </para>
+      <list id="id6517730" list-type="bulleted">
+        <item>Máy điện toán Blue Gene/L của IBM đang được đặt tại Phòng thí nghiệm Lawrence Livermore, và đứng đầu trong số 500 siêu máy tính mạnh nhất thế giới. Siêu máy tính Blue Gene/L sẽ được sử dụng cho các công việc "phi truyền thống", chủ yếu là giả lập và mô phỏng các quá trình sinh học và nguyên tử. Máy điện toán Blue Gene/L đã đạt tốc độ hơn 70 teraflop (nghìn tỷ phép tính/giây). Kết quả này có thể sẽ đưa cỗ máy lên vị trí dẫn đầu trong danh sách các siêu máy tính nhanh nhất thế giới, được công bố ngày 8/11/2004. Theo đó, siêu máy tính do IBM lắp ráp đã đạt tốc độ 70,72 teraflop trong các cuộc thử nghiệm hồi tháng 10/2004. IBM nghiên cứu và phát triển Blue Gene với mục đích thử nghiệm nhằm tạo ra các hệ thống cực mạnh nhưng chiếm ít không gian và tiêu thụ ít năng lượng. IBM dự kiến, sẽ lắp đặt cho phòng thí nghiệm quốc gia Lawrence Livermore một siêu máy tính có tốc độ nhanh gấp 4 lần so với kỷ lục vừa đạt được. Khi đó, thiết bị sẽ được ứng dụng vào nhiều nghiên cứu khoa học. Hệ thống mới bao gồm 16,384 giao điểm điện toán kết nối 32.768 bộ xử lý.</item>
+        <item>Thông tin mới nhất (02/2005) cho biết: siêu máy tính IBM Blue Gene/L vừa thiết lập kỷ lục mới đó là có khả năng xử lý 135,5 nghìn tỷ phép tính/giây (135,3 teraflop), vượt xa kỷ lục 70,72 teraflop do chính siêu máy tính này lập nên. Số bộ xử lý (BXL) của Blue Gene/L vừa được các nhà khoa học tăng lên gấp đôi (64.000 BXL) nhằm tăng cường khả năng tính toán cho siêu máy tính này. Cũng cần phải nhắc lại rằng thiết kế hoàn thiện của siêu máy tính Blue Gene/L, dự kiến sẽ hoàn tất vào khoảng tháng 6 tới, sẽ bao gồm 130.000 BXL với tốc độ tính toán được kỳ vọng vào khoảng 360 teraflop. </item>
+      </list>
+      <para id="id6517823">Blue Gene là tên gọi chung cho dự án nghiên cứu siêu máy tính được IBM khởi động từ năm 2000, với mục đích ban đầu là thiết kế một "cỗ máy" có khả năng xử lý 1 teraflop. Trong khi đó, siêu máy tính Blue Gene/L là một trong nhiều sản phẩm chủ lực của IBM nhằm cạnh tranh với các hãng đối thủ Silicon Graphics và NEC. </para>
+      <list id="id6517838" list-type="bulleted">
+        <item>Hãng điện tử khổng lồ NEC phát hành một supercomputer dạng vector, máy SX-8 mới ra đời có tốc độ xử lý cực đại lên tới 65 teraflop (65 nghìn tỷ phép tính dấu phẩy động/giây) và khả năng hoạt động ổn định ở mức xấp xỉ 90% của tốc độ 58,5% teraflop. Máy SX-8 có kiến trúc khác hẳn Blue Gene/L của IBM. Nó dùng kiến trúc vector nên đem đến độ ổn định khi hoạt động cao hơn nhiều so với dạng máy tính vô hướng (scalar) như của IBM</item>
+        <item>Một hệ thống tại trung tâm nghiên cứu của Cơ quan hàng không vũ trụ Mỹ (NASA) tại California cũng đạt được tốc độ 42,7 teraflop. Với tên gọi Columbia, siêu máy tính này sẽ được sử dụng để nghiên cứu khí tượng và thiết kế máy bay. Hệ thống trị giá 50 triệu USD (thời điểm tháng 10/2004) này sử dụng phần mềm Linux và đã được SGI ký hợp đồng bán cho Cơ quan hàng không vũ trụ Mỹ NASA. Nó có thể thực hiện 42,7 nghìn tỷ phép tính/giây (42,7 teraflop). Tuy nhiên, tốc độ đó chưa phải là tất cả những gì nổi bật của siêu máy tính này: hệ thống mới chỉ khai thác có 4/5 công suất của 10.240 bộ xử lý Intel Itanium 2 trong toàn bộ cỗ máy đặt ở trung tâm nghiên cứu của NASA ở California (Mỹ). Siêu máy tính này không giống với hầu hết các siêu máy tính hiện nay thường được tạo nên theo kiểu cluster, với sự tham gia của nhiều cỗ máy giá rẻ. Columbia được thiết lập từ 20 máy tính mà mỗi chiếc có 512 bộ xử lý, kết nối bằng công nghệ mạng cao tốc và đều chạy một hệ điều hành độc lập. Cách xây dựng này rất hữu ích cho những công việc như giả lập các yếu tố khí động lực cho tàu không gian. Một ứng dụng khác của siêu máy tính Columbia là việc dự báo bão. Phần mềm cho tác vụ này đang được thiết kế và hứa hẹn khả năng dự báo chính xác đường đi của bão sớm 5 ngày. Toàn bộ máy Columbia chiếm dụng một diện tích bằng khoảng 3 sân bóng rổ.</item>
+      </list>
+    </section>
+    <section id="id-352820671257">
+      <title>KIẾN TRÚC IA-64</title>
+      <para id="id6517950">Kiến trúc IA-64 là một kiến trúc mới được giới thiệu trong những năm gần đây. Kiến trúc này là sản phẩm của sự kết hợp nghiên cứu giữa hai công ty máy tính hàng đầu thế giới là Intel, HP (Hewlett Packard) và một số trường đại học. Kiến trúc mới dựa trên sự phát triển của công nghệ mạch tích hợp và kỹ thuật xử lý song song. Kiến trúc IA-64 giới thiệu một sự khởi đầu mới quan trọng của kỹ thuật siêu vô hướng - kỹ thuật xử lý lệnh song song (EPIC: Expicitly Parallel Intruction Computing) - kỹ thuật ảnh hưởng nhiều đến sự phát triển của bộ xử lý hiện nay. Sản phẩm đầu tiên thuộc kiến trúc này là bộ xử lý Itanium. </para>
+      <list id="id6517982" list-type="enumerated">
+        <item>Đặc trưng của kiến trúc IA-64:</item>
+      </list>
+      <list id="id6517987" list-type="bulleted">
+        <item>Cơ chế xử lý song song là song song các lệnh mã máy (EPIC) thay vì các bộ xử lý song song như hệ thống đa bộ xử lý.</item>
+        <item>Các lệnh dài hay rất dài (LIW hay VLIW).</item>
+        <item>Các lệnh rẽ nhánh xác định (thay vì đoán các lệnh rẽ nhánh như các kiến trúc trước).</item>
+        <item>Nạp trước các lệnh (theo sự suy đoán).</item>
+      </list>
+      <para id="id7403055">Các đặc trưng của tổ chức của bộ xử lý theo kiến trúc IA-64:</para>
+      <list id="id7403062" list-type="bulleted">
+        <item>Có nhiều thanh ghi: số lượng thanh ghi các bộ xử lý kiến trúc IA-64 là 256 thanh ghi. Trong đó, 128 thanh ghi tổng quát (GR) 64 bit cho các tính toán số nguyên, luận lý; 128 thanh ghi 82 bit (FR) cho các phép tính dấu chấm động và dữ liệu đồ hoạ; ngoài ra, còn có 64 thanh ghi thuộc tính (PR)1 bit để chỉ ra các thuộc tính lệnh đang thi hành. </item>
+        <item>Nhiều bộ thi hành lệnh: hiện nay, một máy tính có thể có tám hay nhiều hơn các bộ thi hành lệnh song song. Các bộ thi hành lệnh này được chia thành bốn kiểu:<list id="id7403090" list-type="bulleted"><item>Kiểu I (I-Unit): dùng xử lý các lệnh tính toán số nguyên, dịch, luận lý, so sánh, đa phương tiện.</item><item>Kiểu M (M-Unit): Nạp và lưu trữ giữa thanh ghi và bộ nhớ thêm vào một vài tác vụ ALU.</item><item>Kiểu B (B-Unit): Thực hiện các lệnh rẽ nhánh.</item><item>Kiểu F (F-Unit): Các lệnh tính toán số dấu chấm động</item></list></item>
+        <item>Định dạng lệnh trong kiến trúc IA-64</item>
+      </list>
+      <para id="id7403133"><figure id="id7403146"><media id="id2814877" alt=""><image src=".png" mime-type="image/png" height="386" width="600"/></media></figure>Hình III.12: Định dạng lệnh trong kiến trúc IA-64PR: Predicate registerGR: General hay Floating-point registerKiến trúc IA-64 định nghĩa một gói (buldle) 128 bit chứa ba lệnh (mỗi lệnh dài 41 bit) và một trường mẫu (template field) 5 bit. Bộ xử lý có thể lấy một hay nhiều gói lệnh thi hành cùng lúc. Trường mẫu (template field) này chứa các thông tin chỉ ra các lệnh có thể thực hiện song song (Bảng III.1). Các lệnh trong một bó có thể là các lệnh độc lập nhau. Bộ biên dịch sẽ sắp xếp lại các lệnh trong các gói lệnh kề nhau theo một thứ tự để các lệnh có thể được thực hiện song song</para>
+      <para id="id7403257">Hình III.12a chỉ ra định dạng lệnh trong kiến trúc IA-64. Hình III.12b mô tả dạng tổng quát của một lệnh trong gói lệnh. Trong một lệnh, mã lệnh chỉ có 4 bit chỉ ra 16 khả năng có thể để thi thi hành một lệnh và 6 bit chỉ ra thanh ghi thuộc tính được dùng với lệnh. Tuy nhiên, các mã tác vụ này còn tuỳ thuộc vào vị trí của lệnh bên trong gói lệnh, vì vậy khả năng thi hành của lệnh nhiều hơn số mã tác vụ được chỉ ra. Hình III.12c mô tả chi tiết các trường trong một lệnh (41 bit)</para>
+      <para id="id7403282">Trong bảng III.1 , các kiểu L-Unit, X-Unit là các kiểu mở rộng, có thể thực hiện lệnh bởi I-Unit hay B-Unit.</para>
+      <table id="id7403292" summary="">
+        <tgroup cols="4">
+          <colspec colnum="1" colname="c1"/>
+          <colspec colnum="2" colname="c2"/>
+          <colspec colnum="3" colname="c3"/>
+          <colspec colnum="4" colname="c4"/>
+          <tbody>
+            <row>
+              <entry>Template</entry>
+              <entry>Slot 0</entry>
+              <entry>Slot 1</entry>
+              <entry>Slot 2</entry>
+            </row>
+            <row>
+              <entry>00</entry>
+              <entry>M-Unit</entry>
+              <entry>I-Unit</entry>
+              <entry>I-Unit</entry>
+            </row>
+            <row>
+              <entry>01</entry>
+              <entry>M-Unit</entry>
+              <entry>I-Unit</entry>
+              <entry>I-Unit</entry>
+            </row>
+            <row>
+              <entry>02</entry>
+              <entry>M-Unit</entry>
+              <entry>I-Unit</entry>
+              <entry>I-Unit</entry>
+            </row>
+            <row>
+              <entry>03</entry>
+              <entry>M-Unit</entry>
+              <entry>I-Unit</entry>
+              <entry>I-Unit</entry>
+            </row>
+            <row>
+              <entry>04</entry>
+              <entry>M-Unit</entry>
+              <entry>L-Unit</entry>
+              <entry>X-Unit</entry>
+            </row>
+            <row>
+              <entry>05</entry>
+              <entry>M-Unit</entry>
+              <entry>L-Unit</entry>
+              <entry>X-Unit</entry>
+            </row>
+            <row>
+              <entry>08</entry>
+              <entry>M-Unit</entry>
+              <entry>M-Unit</entry>
+              <entry>I-Unit</entry>
+            </row>
+            <row>
+              <entry>09</entry>
+              <entry>M-Unit</entry>
+              <entry>M-Unit</entry>
+              <entry>I-Unit</entry>
+            </row>
+            <row>
+              <entry>0A</entry>
+              <entry>M-Unit</entry>
+              <entry>M-Unit</entry>
+              <entry>I-Unit</entry>
+            </row>
+            <row>
+              <entry>0B</entry>
+              <entry>M-Unit</entry>
+              <entry>M-Unit</entry>
+              <entry>I-Unit</entry>
+            </row>
+            <row>
+              <entry>0C</entry>
+              <entry>M-Unit</entry>
+              <entry>F-Unit</entry>
+              <entry>I-Unit</entry>
+            </row>
+            <row>
+              <entry>0D</entry>
+              <entry>M-Unit</entry>
+              <entry>F-Unit</entry>
+              <entry>I-Unit</entry>
+            </row>
+            <row>
+              <entry>0E</entry>
+              <entry>M-Unit</entry>
+              <entry>M-Unit</entry>
+              <entry>F-Unit</entry>
+            </row>
+            <row>
+              <entry>0F</entry>
+              <entry>M-Unit</entry>
+              <entry>M-Unit</entry>
+              <entry>F-Unit</entry>
+            </row>
+            <row>
+              <entry>10</entry>
+              <entry>M-Unit</entry>
+              <entry>I-Unit</entry>
+              <entry>B-Unit</entry>
+            </row>
+            <row>
+              <entry>11</entry>
+              <entry>M-Unit</entry>
+              <entry>I-Unit</entry>
+              <entry>B-Unit</entry>
+            </row>
+            <row>
+              <entry>12</entry>
+              <entry>M-Unit</entry>
+              <entry>B-Unit</entry>
+              <entry>B-Unit</entry>
+            </row>
+            <row>
+              <entry>13</entry>
+              <entry>M-Unit</entry>
+              <entry>B-Unit</entry>
+              <entry>B-Unit</entry>
+            </row>
+            <row>
+              <entry>16</entry>
+              <entry>B-Unit</entry>
+              <entry>B-Unit</entry>
+              <entry>B-Unit</entry>
+            </row>
+            <row>
+              <entry>17</entry>
+              <entry>B-Unit</entry>
+              <entry>B-Unit</entry>
+              <entry>B-Unit</entry>
+            </row>
+            <row>
+              <entry>18</entry>
+              <entry>M-Unit</entry>
+              <entry>M-Unit</entry>
+              <entry>B-Unit</entry>
+            </row>
+            <row>
+              <entry>19</entry>
+              <entry>M-Unit</entry>
+              <entry>M-Unit</entry>
+              <entry>B-Unit</entry>
+            </row>
+            <row>
+              <entry>1C</entry>
+              <entry>M-Unit</entry>
+              <entry>F-Unit</entry>
+              <entry>B-Unit</entry>
+            </row>
+            <row>
+              <entry>1D</entry>
+              <entry>M-Unit</entry>
+              <entry>F-Unit</entry>
+              <entry>B-Unit</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <para id="id7832208">Bảng III.1: Bảng mã hoá tập hợp các ánh xạ trong trường mẫu.</para>
+      <para id="id7832223">*****</para>
+      <para id="id7832227">CÂU HỎI ÔN TẬP VÀ BÀI TẬP CHƯƠNG III</para>
+      <para id="id7832234">*****</para>
+      <list id="id7832238" list-type="enumerated">
+        <item>Các thành phần và nhiệm vụ của đường đi dữ liệu?</item>
+        <item>Mô tả đường đi dữ liệu ứng với các lệnh sau:</item>
+      </list>
+      <list id="id7426966" list-type="bulleted">
+        <item>ADD R1,R2,R3</item>
+        <item>SUB R1, R2, (R3)</item>
+        <item>ADD R1, R5, #100</item>
+        <item>JMP R1 (Nhảy đến ô nhớ mà R1 trỏ tới)</item>
+        <item>BRA +5 (Nhảy bỏ 5 lệnh)</item>
+        <item>Thế nào là ngắt quãng? Các giai đoạn thực hiện ngắt quãng của CPU.</item>
+        <item>Vẽ hình để mô tả kỹ thuật ống dẫn. Kỹ thuật ống dẫn làm tăng tốc độ CPU lên bao nhiêu lần (theo lý thuyết)? Tại sao trên thực tế sự gia tăng này lại ít hơn?</item>
+        <item>Các điều kiện mà một CPU cần phải có để tối ưu hoá kỹ thuật ống dẫn. Giải thích từng điều kiện.</item>
+        <item>Các khó khăn trong kỹ thuật ống dẫn và cách giải quyết khó khăn này.</item>
+        <item>Thế nào là máy tính vectơ? Các kiểu của kiến trúc vectơ?</item>
+        <item>Cho ví dụ về máy tính một dòng lệnh, nhiều dòng số liệu (SIMD)</item>
+        <item>Các máy tính song song nhiều dòng lệnh, nhiều dòng số liệu (MIMD) dùng nhiều bộ xử lý, được phân thành 2 loại tuỳ theo tổ chức bộ nhớ của chúng là: máy tính đa xử lý có bộ nhớ tập trung chia sẻ và máy tính đa xử lý có bộ nhớ phân tán. Phân tích ưu - khuyết điểm của hai loại máy tính này.</item>
+        <item>Các loại hệ thống MIMD.</item>
+        <item>Các đặc trưng của kiến trúc IA-64? Định dạng lệnh trong kiến trúc IA-64?</item>
+      </list>
+    </section>
+  </content>
+</document>

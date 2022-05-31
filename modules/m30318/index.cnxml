@@ -1,0 +1,885 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Các cấp bộ nhớ</title>
+  <metadata>
+  <md:content-id>m30318</md:content-id><md:title>Các cấp bộ nhớ</md:title>
+  <md:abstract>Chương này giới thiệu chức năng và nguyên lý hoạt động của các cấp bộ nhớ máy tính: bộ nhớ cache: nguyên lý vận hành, phân loại các mức, đánh giá hiệu quả hoạt động; và nguyên lý vận hành của bộ nhớ ảo.
+Yêu cầu: 
+Sinh viên phải hiểu được các cấp bộ nhớ và cách thức vận hành của các loại bộ nhớ được giới thiệu để có thể đánh giá được hiệu năng hoạt động của các loại bộ nhớ.</md:abstract>
+  <md:uuid>e09aefd9-1704-48ae-b773-cf2ee6bebe44</md:uuid>
+</metadata>
+
+<content>
+    <para id="id7520167">CÁC LOẠI BỘ NHỚ</para>
+    <para id="id7520172">Bộ nhớ chứa chương trình, nghĩa là chứa lệnh và số liệu. Người ta phân biệt các loại bộ nhớ: Bộ nhớ trong (RAM-Bộ nhớ vào ra ngẫu nhiên), được chế tạo bằng chất bán dẫn; bộ nhớ chỉ đọc (ROM) cũng là loại bộ nhớ chỉ đọc và bộ nhớ ngoài bao gồm: đĩa cứng, đĩa mềm, băng từ, trống từ, các loại đĩa quang, các loại thẻ nhớ,...</para>
+    <para id="id7520186">Bộ nhớ RAM có đặc tính là các ô nhớ có thể được đọc hoặc viết vào trong khoảng thời gian bằng nhau cho dù chúng ở bất kỳ vị trí nào trong bộ nhớ. Mỗi ô nhớ có một địa chỉ, thông thường, mỗi ô nhớ là một byte (8 bit), nhưng hệ thống có thể đọc ra hay viết vào nhiều byte (2,4, hay 8 byte). Bộ nhớ trong (RAM) được đặc trưng bằng dung lượng và tổ chức của nó (số ô nhớ và số bit cho mỗi ô nhớ), thời gian thâm nhập (thời gian từ lúc đua ra địa chỉ ô nhớ đến lúc đọc được nội dung ô nhớ đó) và chu kỳ bộ nhớ (thời gian giữa hai lần liên tiếp thâm nhập bộ nhớ).</para>
+    <para id="id7520215">MARRAMMBRWiWjR/WHình IV.1: Vận hành của bộ nhớ RAM(Wi, Wj, R/W là các tín hiệu điều khiển)Tuỳ theo công nghệ chế tạo, người ta phân biệt RAM tĩnh (SRAM: Static RAM) và RAM động (Dynamic RAM).</para>
+    <para id="id7437885">RAM tĩnh được chế tạo theo công nghệ ECL (CMOS và BiCMOS). Mỗi bit nhớ gồm có các cổng logic với độ 6 transistor MOS, việc nhớ một dữ liệu là tồn tại nếu bộ nhớ được cung cấp điện. SRAM là bộ nhớ nhanh, việc đọc không làm huỷ nội dung của ô nhớ và thời gian thâm nhập bằng chu kỳ bộ nhớ.</para>
+    <para id="id7437899">RAM động dùng kỹ thuật MOS. Mỗi bit nhớ gồm có một transistor và một tụ điện. Cũng như SRAM, việc nhớ một dữ liệu là tồn tại nếu bộ nhớ được cung cấp điện. Việc ghi nhớ dựa vào việc duy trì điện tích nạp vào tụ điện và như vậy việc đọc một bit nhớ làm nội dung bit này bị huỷ. Vậy sau mỗi lần đọc một ô nhớ, bộ phận điều khiển bộ nhớ phải viết lại ô nhớ đó nội dung vừa đọc và do đó chu kỳ bộ nhớ động ít nhất là gấp đôi thời gian thâm nhập ô nhớ. Việc lưu giữ thông tin trong bit nhớ chỉ là tạm thời vì tụ điện sẽ phóng hết điện tích đã nạp vào và như vậy phải làm tươi bộ nhớ sau mỗi 2s. Làm tươi bộ nhớ là đọc ô nhớ và viết lại nội dung đó vào lại ô nhớ. Việc làm tươi được thực hiện với tất cả các ô nhớ trong bộ nhớ. Việc làm tươi bộ nhớ được thực hiện tự động bởi một vi mạch bộ nhớ. Bộ nhớ DRAM chậm nhưng rẻ tiền hơn SRAM.</para>
+    <figure id="id7437950">
+      <media id="id1167589885515" alt=""><image src="../../media/graphics1-6a77.png" mime-type="image/png" height="373" width="675"/></media>
+    </figure>
+    <para id="id7437974">Hình IV.2: SRAM và DRAM</para>
+    <para id="id7437983">SDRAM (Synchronous DRAM – DRAM đồng bộ), một dạng DRAM đồng bộ bus bộ nhớ. Tốc độ SDRAM đạt từ 66-133MHz (thời gian thâm nhập bộ nhớ từ 75ns-150ns).</para>
+    <para id="id7437994">DDR SDRAM (Double Data Rate SDRAM) là cải tiến của bộ nhớ SDRAM với tốc độ truyền tải gấp đôi SDRAM nhờ vào việc truyền tải hai lần trong một chu kỳ bộ nhớ. Tốc độ DDR SDRAM đạt từ 200-400MHz </para>
+    <para id="id7438006">RDRAM (Rambus RAM) là một loại DRAM được thiết kế với kỹ thuật hoàn toàn mới so với kỹ thuật SDRAM. RDRAM hoạt động đồng bộ theo một hệ thống lặp và truyền dữ liệu theo một hướng. Một kênh bộ nhớ RDRAM có thể hỗ trợ đến 32 chip DRAM. Mỗi chip được ghép nối tuần tự trên một module gọi là RIMM (Rambus Inline Memory Module) nhưng việc truyền dữ liệu giữa các mạch điều khiển và từng chíp riêng biệt chứ không truyền giữa các chip với nhau. Bus bộ nhớ RDRAM là đường dẫn liên tục đi qua các chip và module trên bus, mỗi module có các chân vào và ra trên các đầu đối diện. Do đó, nếu các khe cắm không chứa RIMM sẽ phải gắn một module liên tục để đảm bảo đường truyền được nối liền.Tốc độ RDRAM đạt từ 400-800MHz </para>
+    <para id="id7438042">Bộ nhớ chỉ đọc ROM cũng được chế tạo bằng công nghệ bán dẫn. Chương trình trong ROM được viết vào lúc chế tạo nó. Thông thường, ROM chứa chương trình khởi động máy tính, chương trình điều khiển trong các thiết bị điều khiển tự động,...</para>
+    <para id="id7438056">PROM (Programable ROM): Chế tạo bằng các mối nối (cầu chì - có thể làm đứt bằng điện). Chương trình nằm trong PROM có thể được viết vào bởi người sử dụng bằng thiết bị đặc biệt và không thể xóa được. </para>
+    <para id="id7438079">EPROM (Erasable Programable ROM): Chế tạo bằng nguyên tắt phân cực tĩnh điện. Chương trình nằm trong ROM có thể được viết vào (bằng điện) và có thể xóa (bằng tia cực tím - trung hòa tĩnh điện) để viết lại bởi người sử dụng. </para>
+    <para id="id7438100">EEPROM (Eletrically Erasable Programable ROM): Chế tạo bằng công nghệ bán dẫn. Chương trình nằm trong ROM có thể được viết vào và có thể xóa (bằng điện) để viết lại bởi người sử dụng. </para>
+    <table id="id7438120" summary="">
+      <tgroup cols="5">
+        <colspec colnum="1" colname="c1"/>
+        <colspec colnum="2" colname="c2"/>
+        <colspec colnum="3" colname="c3"/>
+        <colspec colnum="4" colname="c4"/>
+        <colspec colnum="5" colname="c5"/>
+        <tbody>
+          <row>
+            <entry>Kiểu bộ nhớ</entry>
+            <entry>Loại</entry>
+            <entry>Cơ chế xoá</entry>
+            <entry>Cơ chế ghi</entry>
+            <entry>Tính bay hơi</entry>
+          </row>
+          <row>
+            <entry>RAM</entry>
+            <entry>đọc/ghi</entry>
+            <entry>bằng điện, mức byte</entry>
+            <entry>bằng điện</entry>
+            <entry>Có </entry>
+          </row>
+          <row>
+            <entrytbl namest="c1" nameend="c4" cols="4">
+              <colspec colnum="1" colname="c1"/>
+              <colspec colnum="2" colname="c2"/>
+              <colspec colnum="3" colname="c3"/>
+              <colspec colnum="4" colname="c4"/>
+              <tbody>
+                <row>
+                  <entrytbl cols="1">
+                    <colspec colnum="1" colname="c1"/>
+                    <tbody>
+                      <row>
+                        <entry>ROM</entry>
+                      </row>
+                      <row>
+                        <entry>Programmable ROM (PROM)</entry>
+                      </row>
+                    </tbody>
+                  </entrytbl>
+                  <entry>chỉ đọc</entry>
+                  <entry>Không thể xoá</entry>
+                  <entrytbl cols="1">
+                    <colspec colnum="1" colname="c1"/>
+                    <tbody>
+                      <row>
+                        <entry>Mặt nạ</entry>
+                      </row>
+                      <row>
+                        <entry>bằng điện</entry>
+                      </row>
+                    </tbody>
+                  </entrytbl>
+                </row>
+                <row>
+                  <entrytbl cols="1">
+                    <colspec colnum="1" colname="c1"/>
+                    <tbody>
+                      <row>
+                        <entry>Erasable PROM</entry>
+                      </row>
+                      <row>
+                        <entry>Electrically Erasable PROM (EEPROM)</entry>
+                      </row>
+                      <row>
+                        <entry>Flash Memory</entry>
+                      </row>
+                    </tbody>
+                  </entrytbl>
+                  <entry>hầu hết chỉ đọc</entry>
+                  <entrytbl namest="c3" nameend="c4" cols="2">
+                    <colspec colnum="1" colname="c1"/>
+                    <colspec colnum="2" colname="c2"/>
+                    <tbody>
+                      <row>
+                        <entry>Tia cực tím, mức chip</entry>
+                        <entry/>
+                      </row>
+                      <row>
+                        <entry>bằng điện, mức byte</entry>
+                        <entry/>
+                      </row>
+                      <row>
+                        <entry>bằng điện, mức khối</entry>
+                        <entry/>
+                      </row>
+                    </tbody>
+                  </entrytbl>
+                </row>
+              </tbody>
+            </entrytbl>
+            <entry>Không</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+    <para id="id7268996">Bảng IV.1: Các kiểu bộ nhớ bán dẫn</para>
+    <section id="id-414206090872">
+      <title>CÁC CẤP BỘ NHỚ</title>
+      <para id="id7269017"><figure id="id7269027"><media id="id7473341" alt=""><image src=".png" mime-type="image/png" height="398" width="596"/></media></figure>Hình IV.3: Các cấp bộ nhớCác đặc tính như lượng thông tin lưu trữ, thời gian thâm nhập bộ nhớ, chu kỳ bộ nhớ, giá tiền mỗi bit nhớ khiến ta phải phân biệt các cấp bộ nhớ: các bộ nhớ nhanh với dung lượng ít đến các bộ nhớ chậm với dung lượng lớn (hình IV.3)</para>
+      <para id="id7269089">Lower LevelUpper Leveluser/operatorMbytesOS512-4K bytescache cntl8-128 bytesprog./compiler1-8 bytesStagingXfer UnitFilesPagesBlocksInstr. OperandsTapeDiskMemoryCacheRegisters-8Tapeinfinitesec-min10CapacityAccess TimeCost-6-5DiskG Bytes, 5 ms (5,000,000 ns)10 - 10 cents/bitMain MemoryM Bytes100ns- 300ns$.0001-.00001 cents /bitCacheK Bytes4 ns1-0.1 cents/bitCPU Registers100s Bytes1s nsLargerfasterCác đặc tính chính của các cấp bộ nhớ dẫn đến hai mức chính là: mức cache - bộ nhớ trong và mức bộ nhớ ảo (bao gồm bộ nhớ trong và không gian cấp phát trên đĩa cứng) (hình IV.4). Cách tổ chức này trong suốt đối với người sử dụng. Người sử dụng chỉ thấy duy nhất một không gian định vị ô nhớ, độc lập với vị trí thực tế của các lệnh và dữ liệu cần thâm nhập. </para>
+      <figure id="id7679011">
+        <media id="id1167589100051" alt=""><image src="../../media/graphics2-5d06.png" mime-type="image/png" height="328" width="600"/></media>
+      </figure>
+      <para id="id7679035">Các cấp bộ nhớ giúp ích cho người lập trình muốn có một bộ nhớ thật nhanh với chi phí đầu tư giới hạn. Vì các bộ nhớ nhanh đắt tiền nên các bộ nhớ được tổ chức thành nhiều cấp, cấp có dung lượng ít thì nhanh nhưng đắt tiền hơn cấp có dung lượng cao hơn. Mục tiêu của việc thiết lập các cấp bộ nhớ là người dùng có một hệ thống bộ nhớ rẻ tiền như cấp bộ nhớ thấp nhất và gần nhanh như cấp bộ nhớ cao nhất. Các cấp bộ nhớ thường được lồng vào nhau. Mọi dữ liệu trong một cấp thì được gặp lại trong cấp thấp hơn và có thể tiếp tục gặp lại trong cấp thấp nhất. </para>
+      <para id="id7679065">Chúng ta có nhận xét rằng, mỗi cấp bộ nhớ có dung lượng lớn hơn cấp trên mình, ánh xạ một phần địa chỉ các ô nhớ của mình vào địa chỉ ô nhớ của cấp trên trực tiếp có tốc độ nhanh hơn, và các cấp bộ nhớ phải có cơ chế quản lý và kiểm tra các địa chỉ ánh xạ. </para>
+    </section>
+    <section id="id-436526498149">
+      <title>XÁC SUẤT TRUY CẬP DỮ LIỆU TRONG BỘ NHỚ TRONG</title>
+      <para id="id7679089">Cache là bộ nhớ nhanh, nó chứa lệnh và dữ liệu thường xuyên dùng đến. Việc lựa chọn lệnh và dữ liệu cần đặt vào cache dựa vào các nguyên tắc sau đây: </para>
+      <para id="id7679100">Một chương trình mất 90% thời gian thi hành lệnh của nó để thi hành 10% số lệnh của chương trình.</para>
+      <para id="id7679108">Nguyên tắc trên cũng được áp dụng cho việc thâm nhập dữ liệu, nhưng ít hiệu nghiệm hơn việc thâm nhập lệnh. Như vậy có hai nguyên tắc: nguyên tắc về không gian và nguyên tắc về thời gian</para>
+      <list id="id7679130" list-type="bulleted">
+        <item>Nguyên tắc về thời gian: cho biết các ô nhớ được hệ thống xử lý thâm nhập có khả năng sẽ được thâm nhập trong tương lai gần. Thật vậy, các chương trình được cấu tạo với phần chính là phần được thi hành nhiều nhất và các phần phụ dùng để xử lý các trường hợp ngoại lệ. Còn số liệu luôn có cấu trúc và thông thường chỉ có một phần số liệu được thâm nhập nhiều nhất mà thôi.</item>
+        <item>Nguyên tắc về không gian: cho biết, bộ xử lý thâm nhập vào một ô nhớ thì có nhiều khả năng thâm nhập vào ô nhớ có địa chỉ kế tiếp do các lệnh được sắp xếp thành chuỗi có thứ tự.</item>
+      </list>
+      <para id="id7679182">Tổ chức các cấp bộ nhớ sao cho các lệnh và dữ liệu thường dùng được nằm trong bộ nhớ cache, điều này làm tăng hiệu quả của máy tính một cách đáng kể.</para>
+      <para id="id7679193">VẬN HÀNH CỦA CACHE</para>
+      <para id="id7679198">Bộ nhớ trongBộ xử lýCacheChuyển từng từChuyển từng khốiMức cache -bộ nhớ trong trong bảng các cấp bộ nhớ có cơ cấu vận hành trong suốt đối với bộ xử lý. Với thao tác đọc bộ nhớ, bộ xử lý gởi một địa chỉ và nhận một dữ liệu từ bộ nhớ trong. Với thao tác ghi bộ nhớ, bộ xử lý viết một dữ liệu vào một ô nhớ với một địa chỉ được chỉ ra trong bộ nhớ. Để cho chương trình vận hành bình thường thì cache phải chứa một phần con của bộ nhớ trong để bộ xử lý có thể thâm nhập vào các lệnh hoặc dữ liệu thường dùng từ bộ nhớ cache. Do dung lượng của bộ nhớ cache nhỏ nên nó chỉ chứa một phần chương trình nằm trong bộ nhớ trong. Để đảm bảo sự đồng nhất giữa nội dung của cache và bộ nhớ trong thì cache và bộ nhớ trong phải có cùng cấu trúc. Việc chuyển dữ liệu giữa cache và bộ nhớ trong là việc tải lên hay ghi xuống các khối dữ liệu. Mỗi khối chứa nhiều từ bộ nhớ tuỳ thuộc vào cấu trúc bộ nhớ cache. Sự lựa chọn kích thước của khối rất quan trọng cho vận hành của cache có hiệu quả.</para>
+      <para id="id7055138">Hình IV.5: Trao đổi dữ liệu giữa các thành phần CPU-Cache-Bộ nhớ trong</para>
+      <para id="id7055152">Trước khi khảo sát vận hành của cache, ta xét đến các khái niệm liên quan:</para>
+      <list id="id7055160" list-type="bulleted">
+        <item>Thành công cache (cache hit): bộ xử lý tìm gặp phần tử cần đọc (ghi) trong cache.</item>
+        <item>Thất bại cache (cache miss): bộ xử lý không gặp phần tử cần đọc (ghi) trong cache.</item>
+        <item>Trừng phạt thất bại cache (cache penalty): Thời gian cần thiết để xử lý một thất bại cache. Thời gian bao gồm thời gian thâm nhập bộ nhớ trong cộng với thời gian chuyển khối chứa từ cần đọc từ bộ nhớ trong đến cache</item>
+      </list>
+      <para id="id7055217">. Thời gian này tuỳ thuộc vào kích thước của khối.</para>
+      <para id="id7055224">Để hiểu được cách vận hành của cache, ta lần lượt xem xét và trả lời bốn câu hỏi liên quan đến các tình huống khác nhau xảy ra trong bộ nhớ trong.</para>
+      <para id="id7055231">Câu hỏi 1: Phải để một khối bộ nhớ vào chỗ nào của cache (sắp xếp khối)?</para>
+      <para id="id7055250">Câu hỏi 2: Làm sao để tìm một khối khi nó hiện diện trong cache (nhận diện khối)?</para>
+      <para id="id7055269">Câu hỏi 3: Khối nào phải được thay thế trong trường hợp thất bại cache (thay thế khối)?</para>
+      <para id="id7055289">Câu hỏi 4: Việc gì xảy ra khi ghi vào bộ nhớ (chiến thuật ghi)?</para>
+      <para id="id7055307">Trả lời câu hỏi 1: Phải để một khối bộ nhớ vào chỗ nào của cache (sắp xếp khối)?</para>
+      <para id="id7055327">Một khối bộ nhớ được đặt vào trong cache theo một trong ba cách sau:</para>
+      <list id="id7055334" list-type="bulleted">
+        <item>Kiểu tương ứng trực tiếp: Nếu mỗi khối bộ nhớ chỉ có một vị trí đặt khối duy nhất trong cache được xác định theo công thức: K= i mod n</item>
+      </list>
+      <para id="id7055360">Trong đó: </para>
+      <para id="id7055365">K: vị trí khối đặt trong cache</para>
+      <para id="id7055372">i:số thứ tự của khối trong bộ nhớ trong</para>
+      <para id="id7055380">n: số khối của cache</para>
+      <para id="id7055388">Như vậy, trong kiểu xếp đặt khối này, mỗi vị trí đặt khối trong cache có thể chứa một trong các khối trong bộ nhớ cách nhau xn khối (x: 0,1,...,m; n: số khối của cache)</para>
+      <para id="id7055397">Ví dụ:</para>
+      <table id="id7344222" summary="">
+        <tgroup cols="2">
+          <colspec colnum="1" colname="c1"/>
+          <colspec colnum="2" colname="c2"/>
+          <tbody>
+            <row>
+              <entry>Số thứ tự khối cache</entry>
+              <entry>Số thứ tự của khối trong bộ nhớ trong</entry>
+            </row>
+            <row>
+              <entry>0</entry>
+              <entry>0, n, 2n,...mn</entry>
+            </row>
+            <row>
+              <entry>1</entry>
+              <entry>1,n+1, 2n+1,...,mn+1</entry>
+            </row>
+            <row>
+              <entry>...</entry>
+              <entry>...</entry>
+            </row>
+            <row>
+              <entry>n-1</entry>
+              <entry>n-1, 2n-1,...mn-1</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <list id="id7344356" list-type="bulleted">
+        <item>Kiểu hoàn toàn phối hợp: trong kiểu đặt khối này, một khối trong bộ nhớ trong có thể được đặt vào vị trí bất kỳ trong cache.</item>
+      </list>
+      <para id="id7344377">Như vậy, trong kiểu xếp đặt khối này, mỗi vị trí đặt khối trong cache có thể chứa một trong tất cả các khối trong bộ nhớ </para>
+      <list id="id7344387" list-type="bulleted">
+        <item>Kiểu phối hợp theo tập hợp: với cách tổ chức này, cache bao gồm các tập hợp của các khối cache. Mỗi tập hợp của các khối cache chứa số khối như nhau. Một khối của bộ nhớ trong có thể được đặt vào một số vị trí khối giới hạn trong tập hợp được xác định bởi công thức: K= i mod s</item>
+      </list>
+      <para id="id7344423">Trong đó: </para>
+      <para id="id7344428">K: vị trí khối đặt trong cache</para>
+      <para id="id7344435">i:số thứ tự của khối trong bộ nhớ trong</para>
+      <para id="id7344443">s: số lượng tập hợp trong cache.</para>
+      <para id="id7344451">Trong cách đặt khối theo kiểu phối hợp theo tập hợp, nếu tập hợp có m khối, sự tương ứng giữa các khối trong bộ nhớ trong và các khối của cache được gọi là phối hợp theo tập hợp m khối. </para>
+      <para id="id7344484">Nếu m=1 (mỗi tập hợp có 1 khối), ta có kiểu tương ứng trực tiếp.</para>
+      <para id="id7344491">Nếu m=n (n: số khối của cache), ta có kiểu tương hoàn toàn phối hợp.</para>
+      <para id="id7344498">Hiện nay, phần lớn các cache của các bộ xử lý đều là kiểu tương ứng trực tiếp hay kiểu phối hợp theo tập hợp (mỗi tập hợp gồm 2 hoặc 4 khối).</para>
+      <para id="id7344509">Ví dụ: Bộ nhớ trong có 32 khối, cache có 8 khối, mỗi khối gồm 32 byte, khối thứ 12 của bộ nhớ trong được đưa vào cache.</para>
+      <para id="id7344530">TH0TH1TH2TH33012345670123456701234567Hoàn toàn phối hợpPhối hợp theo tập hợpTương ứng trực tiếpBộ nhớ cacheSố thứ tự khốiSố thứ tự khốiBộ nhớ trong012345678910111213141516171819202122232425262728293031Trả lời câu hỏi 2: Làm sao để tìm một khối khi nó hiện diện trong cache (nhận diện khối)?</para>
+      <para id="id6963504">Mỗi khối của cache đều có một nhãn địa chỉ cho biết số thứ tự của các khối bộ nhớ trong đang hiện diện trong cache. Nhãn của một khối của cache có thể chứ thông tin cần thiết được xem xét để biết được các khối nằm trong cache có chứa thông tin mà bộ xử lý cần đọc hay không. Tất cả các nhãn đều được xem xét song song (trong kiểu tương ứng trực tiếp và phối hợp theo tập hợp) vì tốc độ là yếu tố then chốt. Để biết xem một khối của của cache có chứa thông tin mà bộ xử lý cần tìm hay không, người ta thêm một bit đánh dấu (valid bit) vào nhãn để nói lên khối đó có chứa thông tin mà bộ xử lý cần tìm hay không.</para>
+      <para id="id6963535">Như đã mô tả ở phần đầu, với thao tác đọc (ghi) bộ nhớ, bộ xử lý đưa ra một địa chỉ và nhận (viết vào) một dữ liệu từ (vào) bộ nhớ trong. Địa chỉ mà bộ xử lý đưa ra có thể phân tích thành hai thành phần: phần nhận dạng số thứ tự khối và phần xác định vị trí từ cần đọc trong khối. </para>
+      <para id="id6963560">Tương ứng với ba kiểu lắp đặt khối đã xét, ta có:</para>
+      <list id="id6963567" list-type="enumerated">
+        <item>Căn cứ vào tổ chức số từ trong khối bộ nhớ mà số bit trong địa chỉ xác định vị trí từ cần đọc trong khối. Cách này đúng với cả ba cách xếp đặt khối đã xét.</item>
+        <item>Phần nhận dạng số thứ tự khối sẽ khác nhau tuỳ thuộc vào cách xếp đặt khối, trường chỉ số khối được so sánh với nhãn của cache để xác định khối trong cache. </item>
+      </list>
+      <para id="id6963595">Dữ liệu được bộ xử lý đọc cùng lúc với việc đọc nhãn. Phần chỉ số khối của khối trong bộ nhớ trong được so sánh với bảng tương quan để xác định khối có nằm trong cache hay không. Để chắc rằng nhãn chứa thông tin đúng đắn (tức là khối có chứa từ mà bộ xử lý cần đọc-ghi), nếu việc so sánh nhãn của khối cache giống với số thứ tự khối, bit đánh dấu (Valid bit) phải được bật lên. Ngược lại, kết quả so sánh được bỏ qua. Bộ xử lý căn cứ vào phần xác định từ trong khối để đọc (ghi) dữ liệu từ (vào) cache.</para>
+      <list id="id6963622" list-type="bulleted">
+        <item>Đối với kiểu tương ứng trực tiếp, phần nhận dạng chỉ số khối được chia thành hai phần: </item>
+      </list>
+      <list id="id6963633" list-type="bulleted">
+        <item>Phần chỉ số khối cache: chỉ ra số thứ tự khối cache tương ứng cần xem xét.</item>
+        <item>Phần nhãn: so sánh tương ứng với nhãn của khối cache được chỉ ra bởi phần chỉ số khối.</item>
+      </list>
+      <table id="id6963654" summary="">
+        <tgroup cols="2">
+          <colspec colnum="1" colname="c1"/>
+          <colspec colnum="2" colname="c2"/>
+          <tbody>
+            <row>
+              <entrytbl cols="2">
+                <colspec colnum="1" colname="c1"/>
+                <colspec colnum="2" colname="c2"/>
+                <tbody>
+                  <row>
+                    <entry namest="c1" nameend="c2">Chỉ số khối trong bộ nhớ</entry>
+                  </row>
+                  <row>
+                    <entry>Nhãn</entry>
+                    <entry>Chỉ số khối cache</entry>
+                  </row>
+                </tbody>
+              </entrytbl>
+              <entry>Địa chỉ từ cần đọc trong khối</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <list id="id6963736" list-type="bulleted">
+        <item>Đối với kiểu hoàn toàn phối hợp, phần nhận dạng chỉ số khối trong địa chỉ sẽ được so sánh với nhãn của tất cả các khối cache.</item>
+      </list>
+      <table id="id7494634" summary="">
+        <tgroup cols="2">
+          <colspec colnum="1" colname="c1"/>
+          <colspec colnum="2" colname="c2"/>
+          <tbody>
+            <row>
+              <entry>Chỉ số khối</entry>
+              <entry>Địa chỉ từ cần đọc trong khối</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <list id="id7494675" list-type="bulleted">
+        <item>Đối với kiểu phối hợp theo tập hợp, phần nhận dạng chỉ số khối được chia thành hai phần: </item>
+      </list>
+      <list id="id7494686" list-type="bulleted">
+        <item>Phần chỉ số tập hợp: chỉ ra số thứ tự tập hợp trong cache cần xem xét.</item>
+        <item>Phần nhãn: so sánh tương ứng với nhãn của các khối cache thuộc tập hợp được chỉ ra bởi phần chỉ số tập hợp.</item>
+      </list>
+      <table id="id7494708" summary="">
+        <tgroup cols="2">
+          <colspec colnum="1" colname="c1"/>
+          <colspec colnum="2" colname="c2"/>
+          <tbody>
+            <row>
+              <entrytbl cols="2">
+                <colspec colnum="1" colname="c1"/>
+                <colspec colnum="2" colname="c2"/>
+                <tbody>
+                  <row>
+                    <entry namest="c1" nameend="c2">Chỉ số khối bộ nhớ</entry>
+                  </row>
+                  <row>
+                    <entry>Nhãn</entry>
+                    <entry>Chỉ số tập hợp</entry>
+                  </row>
+                </tbody>
+              </entrytbl>
+              <entry>Địa chỉ từ cần đọc trong khối</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <para id="id7494789">Ví dụ: phân tích địa chỉ một từ trong được cho ở trên, địa chỉ xác định một từ trong bộ nhớ có 10 bit, tuỳ theo cách xếp đặt khối mà ta có thể phân tích địa chỉ này thành các thành phần như sau:</para>
+      <para id="id7494802">Đối với kiểu tương ứng trực tiếp: </para>
+      <figure id="id7494810">
+        <media id="id6007319" alt=""><image src="../../media/graphics3-c747.png" mime-type="image/png" height="124" width="600"/></media>
+      </figure>
+      <list id="id7494834" list-type="bulleted">
+        <item>Đối với kiểu hoàn toàn phối hợp: </item>
+      </list>
+      <figure id="id7494847">
+        <media id="id6977758" alt=""><image src="../../media/graphics4.png" mime-type="image/png" height="130" width="599"/></media>
+      </figure>
+      <list id="id7494871" list-type="bulleted">
+        <item>Đối với kiểu phối hợp theo tập hợp, giả sử cache gồm 4 tập hợp, mỗi tập hợp gồm hai khối: </item>
+      </list>
+      <figure id="id7494885">
+        <media id="id3679171" alt=""><image src="../../media/graphics5.png" mime-type="image/png" height="120" width="599"/></media>
+      </figure>
+      <para id="id7494908">Trả lời câu hỏi 3: Khối nào phải được thay thế trong trường hợp thất bại cache (thay thế khối)?</para>
+      <para id="id7494928">Khi có thất bại cache, bộ điều khiển cache thâm nhập bộ nhớ trong và chuyển khối mà bộ xử lý cần đọc (ghi) vào cache. Như vậy, khối nào trong cache sẽ bị thay thế bới khối mới được chuyển lên. Đối với kiểu tương ứng trực tiếp, vị trí đặt khối không có sự lựa chọn, nó được xác định bởi trường chỉ số khối cache trong địa chỉ của từ cần đọc (ghi). Nếu cache là kiểu hoàn toàn phối hợp hay phối hợp theo tập hợp thì khi thất bại phải chọn lựa thay thế trong nhiều khối. Có bốn chiến thuật chủ yếu dùng để chọn khối thay thế trong cache:</para>
+      <list id="id7494957" list-type="bulleted">
+        <item>Thay thế ngẫu nhiên: để phân bố đồng đều việc thay thế, các khối cần thay thế trong cache được chọn ngẫu nhiên.</item>
+        <item>Khối xưa nhất (LRU: Least Recently Used): các khối đã được thâm nhập sẽ được đánh dấu và khối bị thay thế là khối không được dùng từ lâu nhất.</item>
+        <item>Vào trước ra trước (FIFO: First In First Out): Khối được đưa vào cache đầu tiên, nếu bị thay thế, khối đó sẽ được thay thế trước nhất.</item>
+        <item>Tần số sử dụng ít nhất (LFU: Least Frequently Used): Khối trong cache được tham chiếu ít nhất</item>
+      </list>
+      <para id="id7495032">Điều này sử dụng hệ quả của nguyên tắc sử dụng ô nhớ theo thời gian: nếu các khối mới được dùng có khả năng sẽ được dùng trong tương lai gần, khối bị thay thế là khối không dùng trong thời gian lâu nhất.</para>
+      <para id="id7495042">Trả lời câu hỏi 4: Việc gì xảy ra khi ghi vào bộ nhớ (chiến thuật ghi)?</para>
+      <para id="id7495060">Thông thường bộ xử lý thâm nhập cache để đọc thông tin. Chỉ có khoảng 15% các thâm nhập vào cache là để thực hiện thao tác ghi (con số này là 33% với các tính toán vectơ-vectơ và 55% đối với các phép dịch chuyển ma trận). Như vậy, để tối ưu hoá các hoạt động của cache, các nhà thiết kế tìm cách tối ưu hoá việc đọc bởi vì các bộ xử lý phải đợi đến khi việc đọc hoàn thành nhưng sẽ không đợi đến khi việc ghi hoàn tất. Hơn nữa, một khối có thể được đọc, so sánh và như thế việc đọc một khối có thể được bắt đầu khi chỉ số khối được biết. Nếu thao tác đọc thành công, dữ liệu ô nhớ cần đọc sẽ được giao ngay cho bộ xử lý. Chú ý rằng, khi một khối được ánh xạ từ bộ nhớ trong vào cache, việc đọc nội dung của khối cache không làm thay đổi nội dung của khối so với khối còn nằm trong bộ nhớ trong.</para>
+      <para id="id7495095">Đối với việc ghi vào bộ nhớ thì không giống như trên, việc thay đổi nội dung của một khối không thể bắt đầu trước khi nhãn được xem xét để biết có thành công hay thất bại. Thao tác ghi vào bộ nhớ sẽ tốn nhiều thời gian hơn thao tác đọc bộ nhớ. Trong việc ghi bộ nhớ còn có một khó khăn khác là bộ xử lý cho biết số byte cần phải ghi, thường là từ 1 đến 8 byte. Để đảm bảo đồng nhất dữ liệu khi lưu trữ, có hai cách chính để ghi vào cache:</para>
+      <list id="id7495119" list-type="bulleted">
+        <item>Ghi đồng thời: Thông tin được ghi đồng thời vào khối của cache và khối của bộ nhớ trong. Cách ghi này làm chậm tốc độ chung của hệ thống. Các ngoại vi có thể truy cập bộ nhớ trực tiếp</item>
+        <item>Ghi lại: Để đảm bảo tốc độ xử lý của hệ thống, thông tin cần ghi chỉ được ghi vào khối trong cache. Để quản lý sự khác biệt nội dung giữa khối của cache và khối của bộ nhớ trong, một bit trạng thái (Dirty bit hay Update bit) được dùng để chỉ thị. Khi một thao tác ghi vào trong cache, bit trạng thái (Dirty bit hay Update bit) của khối cache sẽ được thiết lập. Khi một khối bị thay thế, khối này sẽ được ghi lại vào bộ nhớ trong chỉ khi bit trạng thái đã được thiết lập. Với cách ghi này, các ngoại vi liên hệ đến bộ nhớ trong thông qua cache.</item>
+      </list>
+      <para id="id7495179">Khi có một thất bại ghi vào cache thì phải lựa chọn một trong hai giải pháp sau:</para>
+      <list id="id7495187" list-type="bulleted">
+        <item>Ghi có nạp: khối cần ghi từ bộ nhớ trong được nạp vào trong cache như mô tả ở trên. Cách này thường được dùng trong cách ghi lại.</item>
+        <item>Ghi không nạp: khối được thay đổi ở bộ nhớ trong không được đưa vào cache. Cách này được dùng trong cách ghi đồng thời.</item>
+      </list>
+      <para id="id7495220">Trong các tổ chức có nhiều hơn một bộ xử lý với các tổ chức cache và bộ nhớ chia sẻ, các vấn đề liên quan đến tính đồng nhất của dữ liệu cần được đảm bảo. Sự thay đổi dữ liệu trên một cache riêng lẻ sẽ làm cho dữ liệu trên các hệ thống cache và bộ nhớ liên quan không đồng nhất. Vấn đề trên có thể được giải quyết bằng một trong các hệ thống cache tổ chức như sau:</para>
+      <list id="id7495235" list-type="bulleted">
+        <item>Mỗi bộ điều khiển cache sẽ theo dõi các thao tác ghi vào bộ nhớ từ các bộ phận khác. Nếu thao tác ghi vào phần bộ nhớ chia sẻ được ánh xạ vào cache của nó quản lý, bộ điều khiển cache sẽ vô hiệu hoá sự thâm nhập này. Chiến lược này phụ thuộc vào cách ghi đồng thời trên tất cả các bộ điều khiển cache.</item>
+        <item>Một vi mạch được dùng để điều khiển việc cập nhật, một thao tác ghi vào bộ nhớ từ một cache nào đó sẽ được cập nhật trên các cache khác.</item>
+        <item>Một vùng nhớ chia sẻ cho một hay nhiều bộ xử lý thì không được ánh xạ lên cache. Như vậy, tất cả các thâm nhập vào vùng nhớ chia sẻ này đều bị thất bại cache. </item>
+      </list>
+    </section>
+    <section id="id-21846862177">
+      <title>HIỆU QUẢ CỦA CACHE</title>
+      <para id="id7914878">Thông thường người ta dùng thời gian thâm nhập trung bình bộ nhớ trong để đánh giá hiệu quả của cache.</para>
+      <para id="id7914886">Thời gian thâm nhập trung bình được cho bởi công thức:</para>
+      <para id="id7914893">
+        <m:math>
+          <m:semantics>
+            <m:mtable>
+              <m:mtr>
+                <m:mrow>
+                  <m:mtext>Thåìi gian thám nháûp </m:mtext>
+                  <m:mrow/>
+                </m:mrow>
+              </m:mtr>
+              <m:mtr>
+                <m:mrow>
+                  <m:mtext>trung bçnh bäü nhåï</m:mtext>
+                  <m:mrow/>
+                </m:mrow>
+              </m:mtr>
+              <m:mtr>
+                <m:mrow/>
+              </m:mtr>
+              <m:mtr>
+                <m:mi fontstyle="italic">righ</m:mi>
+              </m:mtr>
+              <m:mtr>
+                <m:mrow/>
+              </m:mtr>
+              <m:mtr>
+                <m:mrow/>
+              </m:mtr>
+              <m:mtr>
+                <m:mrow/>
+              </m:mtr>
+              <m:mtr>
+                <m:mrow>
+                  <m:mtext>Thåìi gian thám </m:mtext>
+                  <m:mrow/>
+                </m:mrow>
+              </m:mtr>
+              <m:mtr>
+                <m:mrow>
+                  <m:mtext>nháûp thaình cäng</m:mtext>
+                  <m:mrow/>
+                </m:mrow>
+              </m:mtr>
+              <m:mtr>
+                <m:mrow/>
+              </m:mtr>
+              <m:mtr>
+                <m:mi fontstyle="italic">righ</m:mi>
+              </m:mtr>
+              <m:mtr>
+                <m:mrow/>
+              </m:mtr>
+              <m:mtr>
+                <m:mrow/>
+              </m:mtr>
+              <m:mtr>
+                <m:mrow/>
+              </m:mtr>
+              <m:mtr>
+                <m:mrow>
+                  <m:mtext>Tè lãû </m:mtext>
+                  <m:mrow/>
+                </m:mrow>
+              </m:mtr>
+              <m:mtr>
+                <m:mrow>
+                  <m:mtext>tháút baûi</m:mtext>
+                  <m:mrow/>
+                </m:mrow>
+              </m:mtr>
+              <m:mtr>
+                <m:mrow/>
+              </m:mtr>
+              <m:mtr>
+                <m:mi fontstyle="italic">righ</m:mi>
+              </m:mtr>
+              <m:mtr>
+                <m:mrow/>
+              </m:mtr>
+              <m:mtr>
+                <m:mrow/>
+              </m:mtr>
+              <m:mtr>
+                <m:mrow/>
+              </m:mtr>
+              <m:mtr>
+                <m:mrow>
+                  <m:mtext>Træìng phaût </m:mtext>
+                  <m:mrow/>
+                </m:mrow>
+              </m:mtr>
+              <m:mtr>
+                <m:mrow>
+                  <m:mtext>tháút baûi</m:mtext>
+                  <m:mrow/>
+                </m:mrow>
+              </m:mtr>
+              <m:mtr>
+                <m:mrow/>
+              </m:mtr>
+              <m:mtr>
+                <m:mi fontstyle="italic">righ</m:mi>
+              </m:mtr>
+              <m:mtr>
+                <m:mrow/>
+              </m:mtr>
+              <m:mtr>
+                <m:mrow/>
+              </m:mtr>
+              <m:mtr>
+                <m:mrow/>
+              </m:mtr>
+              <m:mtr>
+                <m:mtable>
+                  <m:mtr>
+                    <m:mrow>
+                      <m:mfenced open="" close="">
+                        <m:mrow/>
+                      </m:mfenced>
+                      <m:mrow/>
+                    </m:mrow>
+                  </m:mtr>
+                </m:mtable>
+              </m:mtr>
+              <m:mtr>
+                <m:mrow>
+                  <m:mrow/>
+                </m:mrow>
+              </m:mtr>
+              <m:mtr>
+                <m:mstyle fontsize="12pt">
+                  <m:mrow>
+                    <m:mrow/>
+                  </m:mrow>
+                </m:mstyle>
+              </m:mtr>
+            </m:mtable>
+            <m:annotation encoding="StarMath 5.0"> size 12{alignl { stack {
+ left ("Thåìi gian thám nháûp " {} # 
+ right ) left ("trung bçnh bäü nhåï" {} # 
+ righ)} }  \(  \) =alignl { stack {
+ left ("Thåìi gian thám " {} # 
+ right ) left ("nháûp thaình cäng" {} # 
+ righ)} }  \(  \) +alignl { stack {
+ left ("Tè lãû " {} # 
+ right ) left ("tháút baûi" {} # 
+ righ)} }  \(  \) *alignl { stack {
+ left ("Træìng phaût " {} # 
+ right ) left ("tháút baûi" {} # 
+ righ)} }  \(  \) } {}</m:annotation>
+          </m:semantics>
+        </m:math>
+      </para>
+      <para id="id7915074">Thời gian thâm nhập thành công là thời gian thâm nhập vào một thông tin trong một thành công cache. Tỉ số thất bại là tỉ số giữa số thất bại cache và tổng số thâm nhập cache. Thời gian thâm nhập thành công và trừng phạt thất bại được đo bằng đơn vị thời gian hoặc bằng chu kỳ xung nhịp (clock cycle).</para>
+      <para id="id7915091">Trong việc tìm kiếm thông tin trong cache phải chú ý làm giảm tỉ lệ thất bại mà các nguyên nhân chính là như sau:</para>
+      <para id="id7915100">- Khởi động: trong lần thâm nhập cache đầu tiên, không có thông tin cần tìm trong cache nên phải chuyển khối chứa thông tin đó vào cache.</para>
+      <para id="id7915116">- Khả năng: vì cache không thể chứa tất cả các khối cần thiết cho việc thi hành một chương trình nên gặp thất bại do cache thiếu khả năng, do đó một khối bị lấy ra khỏi cache rồi lại được đưa vào sau này.</para>
+      <para id="id7915134">- Tranh chấp: Nếu chiến thuật thay thế các khối là phối hợp theo tập hợp hay tương ứng trực tiếp, các thất bại do tranh chấp xảy ra vì một khối có thể bị đưa ra khỏi cache rồi được gọi vào sau đó nếu có nhiều khối phải được thay thế trong các tập hợp.</para>
+      <para id="id7915154">Ba nguyên nhân trên cho ta ý niệm về nguyên nhân thất bại, nhưng mô hình đơn giản trên có những hạn chế của nó. Mô hình này giúp ta thấy một số liệu trung bình nhưng chưa giải thích được từng thất bại một. Ví dụ, nếu tăng kích thước cache thì giảm thất bại do tranh chấp và thất bại do khả năng vì cache càng lớn thì nhiều khối có thể được đưa vào. Tuy nhiên, một thất bại có thể đi từ thất bại do khả năng đến thất bại do tranh chấp khi kích thước của cache thay đổi. Khi nêu ba nguyên nhân trên ta đã không lưu ý đến cách thức thay thế các khối. Cách thức này có thể dẫn đến những vận hành bất thường như là tỉ lệ thất bại cao lên khi độ phối hợp lớn lên.</para>
+    </section>
+    <section id="id-204292391243">
+      <title>CACHE DUY NHẤT HAY CACHE RIÊNG LẺ</title>
+      <para id="id7915197">Cache duy nhất chứa đồng thời lệnh và dữ liệu. </para>
+      <para id="id7915208">Cache riêng lẻ phân biệt cache lệnh và cache dữ liệu. </para>
+      <para id="id7915218">Giải pháp sau có lợi là tránh các khó khăn do kiến trúc, khi thi hành các lệnh dùng kỹ thuật ống dẫn.</para>
+      <para id="id7915227">Với một cache duy nhất, sẽ có tranh chấp khi một lệnh muốn thâm nhập một số liệu trong cùng một chu kỳ của giai đoạn đọc một lệnh khác. Cache riêng lẻ còn giúp tối ưu hoá mỗi loại cache về mặt kích thước tổng quát, kích thước các khối và độ phối hợp các khối.</para>
+    </section>
+    <section id="id-295893683523">
+      <title>CÁC MỨC CACHE</title>
+      <para id="id7915250">Việc dùng cache trong có thể làm cho sự cách biệt giữa kích thước và thời gian thâm nhập giữa cache trong và bộ nhớ trong càng lớn. Người ta đưa vào nhiều mức cache: </para>
+      <list id="id7915261" list-type="bulleted">
+        <item>Cache mức một (L1 cache): thường là cache trong (on-chip cache; nằm bên trong CPU) </item>
+        <item>Cache mức hai (L2 cache) thường là cache ngoài (off-chip cache; cache này nằm bên ngoài CPU). </item>
+        <item>Ngoài ra, trong một số hệ thống (PowerPC G4, IBM S/390 G4, Itanium của Intel) còn có tổ chức cache mức ba (L3 cache), đây là mức cache trung gian giữa cache L2 và một thẻ bộ nhớ. </item>
+      </list>
+      <table id="id7915322" summary="">
+        <tgroup cols="6">
+          <colspec colnum="1" colname="c1"/>
+          <colspec colnum="2" colname="c2"/>
+          <colspec colnum="3" colname="c3"/>
+          <colspec colnum="4" colname="c4"/>
+          <colspec colnum="5" colname="c5"/>
+          <colspec colnum="6" colname="c6"/>
+          <tbody>
+            <row>
+              <entry>Bộ xử lý</entry>
+              <entry>Kiểu</entry>
+              <entry>Năm phát hành</entry>
+              <entry>L1 Cache a</entry>
+              <entry>L2 Cache</entry>
+              <entry>L3 Cache</entry>
+            </row>
+            <row>
+              <entry>IBM 360/85</entry>
+              <entry>Mainframe</entry>
+              <entry>1968</entry>
+              <entry>16 to 32 KB</entry>
+              <entry>-</entry>
+              <entry>-</entry>
+            </row>
+            <row>
+              <entry>PDP-11/70</entry>
+              <entry>Mini Computer</entry>
+              <entry>1975</entry>
+              <entry>1 KB</entry>
+              <entry>-</entry>
+              <entry>-</entry>
+            </row>
+            <row>
+              <entry>VAX 11/780</entry>
+              <entry>Mini Computer</entry>
+              <entry>1978</entry>
+              <entry>16 KB</entry>
+              <entry>-</entry>
+              <entry>-</entry>
+            </row>
+            <row>
+              <entry>IBM 3033</entry>
+              <entry>Mainframe</entry>
+              <entry>1978</entry>
+              <entry>64 KB</entry>
+              <entry>-</entry>
+              <entry>-</entry>
+            </row>
+            <row>
+              <entry>IBM 3090</entry>
+              <entry>Mainframe</entry>
+              <entry>1985</entry>
+              <entry>128 to 256 KB</entry>
+              <entry>-</entry>
+              <entry>-</entry>
+            </row>
+            <row>
+              <entry>Intel 80486</entry>
+              <entry>PC</entry>
+              <entry>1989</entry>
+              <entry>8 KB</entry>
+              <entry>-</entry>
+              <entry>-</entry>
+            </row>
+            <row>
+              <entry>Pentium</entry>
+              <entry>PC</entry>
+              <entry>1993</entry>
+              <entry>8 KB / 8 KB</entry>
+              <entry>256 to 512 KB</entry>
+              <entry>-</entry>
+            </row>
+            <row>
+              <entry>PowerPC 601</entry>
+              <entry>PC</entry>
+              <entry>1993</entry>
+              <entry>32 KB</entry>
+              <entry>-</entry>
+              <entry>-</entry>
+            </row>
+            <row>
+              <entry>PowerPC 620</entry>
+              <entry>PC</entry>
+              <entry>1996</entry>
+              <entry>32 KB / 32 KB</entry>
+              <entry>-</entry>
+              <entry>-</entry>
+            </row>
+            <row>
+              <entry>PowerPC G4</entry>
+              <entry>PC/Server</entry>
+              <entry>1999</entry>
+              <entry>32 KB / 32 KB</entry>
+              <entry>256KB to 1MB </entry>
+              <entry>2 MB </entry>
+            </row>
+            <row>
+              <entry>IBM S390/G4</entry>
+              <entry>Mainframe</entry>
+              <entry>1997</entry>
+              <entry>32 KB </entry>
+              <entry>256 KB </entry>
+              <entry>2 MB </entry>
+            </row>
+            <row>
+              <entry>IBM S390/G6</entry>
+              <entry>Mainframe</entry>
+              <entry>1999</entry>
+              <entry>256 KB</entry>
+              <entry>8 MB </entry>
+              <entry>-</entry>
+            </row>
+            <row>
+              <entry>Pentium 4</entry>
+              <entry>PC/Server</entry>
+              <entry>2000</entry>
+              <entry>8 KB / 8 KB</entry>
+              <entry>256 KB </entry>
+              <entry>-</entry>
+            </row>
+            <row>
+              <entry>IBM SP</entry>
+              <entry>High-End server/ Super Computer</entry>
+              <entry>2000</entry>
+              <entry>64 KB / 32 KB</entry>
+              <entry>8 MB </entry>
+              <entry>-</entry>
+            </row>
+            <row>
+              <entry>CRAY MTA b</entry>
+              <entry>Super Computer</entry>
+              <entry>2000</entry>
+              <entry>8 KB</entry>
+              <entry>2 MB </entry>
+              <entry>-</entry>
+            </row>
+            <row>
+              <entry>Itanium</entry>
+              <entry>PC/Server</entry>
+              <entry>2001</entry>
+              <entry>16 KB / 16 KB</entry>
+              <entry>96 KB</entry>
+              <entry>2 MB </entry>
+            </row>
+            <row>
+              <entry>SGI Origin 2001</entry>
+              <entry>High-End server</entry>
+              <entry>2001</entry>
+              <entry>32 KB / 32 KB</entry>
+              <entry>4 MB</entry>
+              <entry>-</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <para id="id7855228">a Hai giá trị cách nhau bởi dấu “/” chỉ giá trị cache lệnh và cache dữ liệu</para>
+      <para id="id7855240">b Cả hai giá trị đều là cache lệnh</para>
+      <para id="id7855250">Bảng IV.2: Kích thước cache của một số hệ thống</para>
+    </section>
+    <section id="id-259263694643">
+      <title>BỘ NHỚ TRONG</title>
+      <para id="id7855275">Bộ nhớ trong thoả mãn các yêu cầu của cache và được dùng làm đệm vào ra vì bộ nhớ trong vừa là nơi chứa các thông tin từ ngoài đưa vào, vừa là nơi xuất ra các thông tin cho cache. Việc đo hiệu quả của bộ nhớ trong dựa vào thời gian thâm nhập và bề rộng dãi thông. Thông thường thời gian thâm nhập bộ nhớ trong là phần tử quan trọng cho cache trong lúc dãi thông bộ nhớ là phần chính cho các tác vụ xuất nhập. Với việc dùng phổ biến các cache ngoài, dãi thông của bộ nhớ trong cũng trở thành quan trọng cho cache.</para>
+      <para id="id7855305">Mặc dù cache cần bộ nhớ trong có thời gian thâm nhập nhỏ, nhưng thường thì dễ cải thiện dãi thông bộ nhớ nhờ nhiều cách tổ chức bộ nhớ mới, hơn là giảm thời gian thâm nhập cho cache. Cache thụ hưởng các tiến bộ về dãi thông bằng cách tăng kích thước của mỗi khối của cache mà không tăng đáng kể trừng phạt thất bại cache.</para>
+      <para id="id7855322">Người ta dùng các kỹ thuật sau đây để nới rộng dãi thông của bộ nhớ trong: </para>
+      <list id="id7855333" list-type="bulleted">
+        <item>Nới rộng chiều dài ô nhớ trong. Đây là kỹ thuật đơn giản để tăng giải thông bộ nhớ. Thông thường cache và bộ nhớ trong có chiều rộng ô nhớ là chiều rộng 1 từ vì bộ xử lý thâm nhập vào một từ ô nhớ. Nhân đôi, nhân bốn chiều rộng ô nhớ của cache và bộ nhớ trong làm lưu lượng thâm nhập bộ nhớ trong được nhân đôi hay nhân bốn. Vậy cũng phải chi tiêu thêm để nới rộng bus bộ nhớ (là bus nối bộ xử lý với bộ nhớ).</item>
+      </list>
+      <para id="id7855357">Một ví dụ bộ xử lý có chiều dài ô nhớ trong lớn là bộ xử lý ALPHA AXP 21064 (Hãng DEC). Cache ngoài, bộ nhớ trong và bus bộ nhớ đều có độ rộng là 256 bit.</para>
+      <list id="id7855371" list-type="bulleted">
+        <item>Bộ nhớ đan chéo đơn giản: các IC bộ nhớ có thể được tổ chức thành dãi để đọc hay viết nhiều từ cùng một lúc thay vì chỉ đọc một từ, độ rộng của bus và của cache không thay đổi. Khi gởi nhiều địa chỉ đến nhiều dãi thì ta đọc được nhiều từ cùng một lúc. Bộ nhớ đan chéo cũng cho phép ghi vào bộ nhớ nhiều từ cùng một lúc. Tổ chức bộ nhớ đan chéo đơn giản không rắc rối nhiều so với tổ chức bình thường của bộ nhớ trong vì các dãi có thể dùng chung các đường địa chỉ với bộ điều khiển ô nhớ, và như thế mỗi dãi có thể dùng phần số liệu của bus bộ nhớ. SDRAM và DDR SDRAM là các loại RAM dùng kỹ thuật này</item>
+        <item>Bộ nhớ đan chéo tổ chức thành dãi độc lập: một tổ chức bộ nhớ đan chéo hiệu quả hơn, là cho phép nhiều thâm thập bộ nhớ và như thế cho phép các dãi làm việc độc lập với nhau. Mỗi dãi cần có các đường địa chỉ riêng biệt và đôi khi cần bus số liệu riêng biệt: Trong trường hợp này bộ xử lý có thể tiếp tục công việc của mình trong lúc chờ đợi số liệu (trường hợp thất bại cache). RDRAM là bộ nhớ loại này</item>
+        <item>Tránh xung đột giữa các dãi bộ nhớ. Trong các máy tính đa xử lý và máy tính vectơ, hệ thống bộ nhớ được thiết kế nhằm cho phép nhiều yêu cầu thâm nhập độc lập nhau. Sự hiệu quả của hệ thống tuỳ thuộc vào tần số các trường hợp có yêu cầu độc lập thâm nhập vào các dãi khác nhau. Với sự đan chéo bình thường (hình IV.6), các thâm nhập tuần tự hoặc tất cả các thâm nhập vào các địa chỉ cách biệt nhau một số chẳn, thì vận hành tốt nhưng sẽ gặp rắc rối nếu sự cách biệt giữa các địa chỉ là một số lẻ. Một biện pháp mà các máy tính lớn dùng là làm giảm bớt các trường hợp xung đột tĩnh bằng cách tăng số lượng các dãi. Thí dụ, máy NEC SX/3 chia bộ nhớ trong ra 128 dãi. </item>
+      </list>
+      <table id="id7855472" summary="">
+        <tgroup cols="8">
+          <colspec colnum="1" colname="c1"/>
+          <colspec colnum="2" colname="c2"/>
+          <colspec colnum="3" colname="c3"/>
+          <colspec colnum="4" colname="c4"/>
+          <colspec colnum="5" colname="c5"/>
+          <colspec colnum="6" colname="c6"/>
+          <colspec colnum="7" colname="c7"/>
+          <colspec colnum="8" colname="c8"/>
+          <tbody>
+            <row>
+              <entry>Địa chỉ</entry>
+              <entry>Dãi 0</entry>
+              <entry>Địa chỉ</entry>
+              <entry>Dãi 1</entry>
+              <entry>Địa chỉ</entry>
+              <entry>Dãi 2</entry>
+              <entry>Địa chỉ</entry>
+              <entry>Dãi 3</entry>
+            </row>
+            <row>
+              <entry>0</entry>
+              <entry/>
+              <entry>1</entry>
+              <entry/>
+              <entry>2</entry>
+              <entry/>
+              <entry>3</entry>
+              <entry/>
+            </row>
+            <row>
+              <entry>4</entry>
+              <entry/>
+              <entry>5</entry>
+              <entry/>
+              <entry>6</entry>
+              <entry/>
+              <entry>7</entry>
+              <entry/>
+            </row>
+            <row>
+              <entry>8</entry>
+              <entry/>
+              <entry>9</entry>
+              <entry/>
+              <entry>10</entry>
+              <entry/>
+              <entry>11</entry>
+              <entry/>
+            </row>
+            <row>
+              <entry>12</entry>
+              <entry/>
+              <entry>13</entry>
+              <entry/>
+              <entry>14</entry>
+              <entry/>
+              <entry>15</entry>
+              <entry/>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <para id="id7487328">Hình IV.6: Bộ nhớ đan chéo bậc 4. </para>
+      <para id="id7487341">Dãi thứ i chứa tất cả các từ có địa chỉ thoả mãn công thức (địa chỉ) mod 4 = i</para>
+    </section>
+    <section id="id-720811976424">
+      <title>BỘ NHỚ ẢO</title>
+      <para id="id7487368">Bộ nhớ ảo xác định một cơ chế vận chuyển tự động số liệu giữa bộ nhớ trong và bộ nhớ ngoài (đĩa từ).</para>
+      <para id="id7487378">Trước đây, khi độ dài của chương trình vượt quá giới hạn dung lượng bộ nhớ thì người lập trình phải phân chia chương trình của mình thành từng phần tự loại bỏ nhau (overlays) và phải tự quản lý việc trao đổi thông tin giữa bộ nhớ và đĩa từ. Bộ nhớ ảo làm nhẹ trách nhiệm của các nhà lập trình bằng cách làm cho việc trao đổi thông tin này được thực hiện một cách tự động.</para>
+      <para id="id7487392">0A4KB8KC12KD16K20K24K28K32K............16M04KC8K12K16KA20K24KB28Kđịa chỉ ảođịa chỉ vật lýbộ nhớ ảobộ nhớ trongĐĩa cứngDTrong các bộ xử lý hiện đại, bộ nhớ ảo được dùng để cho phép thực hiện cùng lúc nhiều tiến trình (process), mỗi tiến trình có một không gian định vị riêng. Nếu tất cả các không gian định vị này đều thuộc không gian định vị bộ nhớ trong thì rất tốn kém. Bộ nhớ ảo bao gồm bộ nhớ trong và bộ nhớ ngoài được phân tích thành khối để có thể cung cấp cho mỗi chương trình một số khối cần thiết cho việc thực hiện chương trình đó. Hình IV.7 cho thấy một chương trình chứa trong bộ nhớ ảo gồm 4 khối, 3 trong 4 khối nằm ở bộ nhớ trong, khối thứ tư nằm trên đĩa.</para>
+      <para id="id7615726"/>
+      <para id="id7615730">D</para>
+      <para id="id7615778">Hình IV.7. Một chương trình gồm 4 trang A,B,C,D</para>
+      <para id="id7615791">trong đó trang D nằm trong ổ đĩa</para>
+      <para id="id7615800">Ngoài việc phân chia không gian bộ nhớ, cần bảo vệ và quản lý tự động các cấp bộ nhớ, bộ nhớ ảo đơn giản hoá việc nạp chương trình vào bộ nhớ để thi hành nhờ một cơ chế được gọi là sự tái định địa chỉ (address relocation). Cơ chế này cho phép một chương trình có thể được thi hành khi nó nằm ở bất cứ vị trí nào trong bộ nhớ.</para>
+      <table id="id7615825" summary="">
+        <tgroup cols="3">
+          <colspec colnum="1" colname="c1"/>
+          <colspec colnum="2" colname="c2"/>
+          <colspec colnum="3" colname="c3"/>
+          <tbody>
+            <row>
+              <entry>Tham số</entry>
+              <entry>Cache</entry>
+              <entry>Bộ nhớ ảo</entry>
+            </row>
+            <row>
+              <entry>Chiều dài mỗi khối (trang)</entry>
+              <entry>16 - 128 byte</entry>
+              <entry>4096 - 65536 bytes </entry>
+            </row>
+            <row>
+              <entry>Thời gian thâm nhập thành công</entry>
+              <entry>1 - 2 xung nhịp </entry>
+              <entry>40 - 100 xung nhịp</entry>
+            </row>
+            <row>
+              <entry>Trừng phạt khi thất bại</entry>
+              <entry>8 - 100 xung nhịp</entry>
+              <entry>700.000 - 6 triệu xung</entry>
+            </row>
+            <row>
+              <entry>(Thời gian thâm nhập)</entry>
+              <entry>6 - 60 xung </entry>
+              <entry>500.000 - 4 triệu xung</entry>
+            </row>
+            <row>
+              <entry>(Di chuyển số liệu) </entry>
+              <entry>2 - 40 xung </entry>
+              <entry>200.000 - 2 triệu xung</entry>
+            </row>
+            <row>
+              <entry>Tỉ số thất bại</entry>
+              <entry>0,5% - 10%</entry>
+              <entry>0,00001% - 0,001%</entry>
+            </row>
+            <row>
+              <entry>Dung lượng</entry>
+              <entry>8 KB – 8MB</entry>
+              <entry>16 MB – 8GB</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <para id="id7587848">Bảng IV.3: Đại lượng điển hình cho bộ nhớ cache và bộ nhớ ảo.</para>
+      <para id="id7587862">So với bộ nhớ cache thì các tham số của bộ nhớ ảo tăng từ 10 đến 100.000 lần</para>
+      <para id="id7587873">Ngoài sự khác biệt định lượng mà ta thấy trong hình IV.9, có những khác biệt khác giữa bộ nhớ cache và bộ nhớ ảo là:</para>
+      <para id="id7587886">- Khi thất bại cache, sự thay thế một khối trong cache được điều khiển bằng phần cứng, trong khi sự thay thế trong bộ nhớ ảo là chủ yếu do hệ điều hành.</para>
+      <para id="id7587900">- Không gian định vị mà bộ xử lý quản lý là không gian định vị của bộ nhớ ảo, trong lúc đó thì dung lượng bộ nhớ cache không tuỳ thuộc vào không gian định vị bộ xử lý.</para>
+      <para id="id7587914">- Bộ nhớ ngoài còn được dùng để lưu trữ tập tin ngoài nhiệm vụ là hậu phương của bộ nhớ trong (trong các cấp bộ nhớ).</para>
+      <para id="id7587927">Bộ nhớ ảo cũng được thiết kế bằng nhiều kỹ thuật đặc thù cho chính nó.</para>
+      <para id="id7587935">Các hệ thống bộ nhớ ảo có thể được chia thành 2 loại: loại với khối có dung lượng cố định gọi là trang, và loại với khối có chiều dài thay đổi gọi là đoạn. Định vị trang xác định một địa chỉ trong trang, giống như định vị trong cache. Trong định vị đoạn cần 2 từ: một từ chứa số thứ tự đoạn và một từ chứa độ dời trong đoạn. Chương trình dịch gặp khó khăn nhiều hơn trong định vị đoạn.</para>
+      <para id="id7587952">Do việc thay thế các đoạn, ngày nay ít máy tính dùng định vị đoạn thuần tuý. Một vài máy dùng cách hỗn hợp gọi là đoạn trang. Trong đó mỗi đoạn chứa một số nguyên các trang.Bây giờ chúng ta trả lời 4 câu hỏi đặt ra trong các cấp bộ nhớ cho bộ nhớ ảo.</para>
+      <para id="id7587969">Câu hỏi 1: Một khối được đặt tại đâu trong bộ nhớ trong?</para>
+      <para id="id7587988">Việc trừng phạt bộ nhớ ảo khi có thất bại, tương ứng với việc phải thâm nhập vào ổ đĩa. Việc thâm nhập này rất chậm nên người ta chọn phương án hoàn toàn phối hợp trong đó các khối (trang) có thể nằm ở bất kỳ vị trí nào trong bộ nhớ trong. Cách này cho tỉ lệ thất bại thấp.</para>
+      <para id="id7588005">Hình IV.8: Ánh xạ các trang ảo vào bộ nhớ vật lý
+        ***SORRY, THIS MEDIA TYPE IS NOT SUPPORTED.***
+      </para>
+      <para id="id7588331">Câu hỏi 2: Làm thế nào để tìm một khối khi nó đang nằm trong bộ nhớ trong? </para>
+      <para id="id7588352">Định vị trang và định vị đoạn đều dựa vào một cấu trúc dữ liệu trong đó số thứ tự trang hoặc số thứ tự đoạn được có chỉ số. Cho định vị trang, dựa vào bảng trang, địa chỉ trong bộ nhớ vật lý được xác lập cuối cùng là việc đặt kề nhau số thứ của trang vật lý với địa chỉ trong trang (hình IV.9). Cho định vị đoạn, dựa vào thông tin trên bảng đoạn, việc kiểm tra tính hợp lệ của địa chỉ được tiến hành. Địa chỉ vật cuối cùng được xác lập bằng cách cộng địa chỉ đoạn và địa chỉ trong đoạn (độ dời trong đoạn) (hình IV.10).</para>
+      <para id="id7588379">CPUBỘ NHỚ TRONGLimit Base+&lt;saiđịa chỉ logicđúngĐịa chỉ vật lýBảng đoạnS DHình IV.10 : Ánh xạ địa chỉ giữa bộ nhớ ảo và bộ nhớ vật lý trong cách định vị đoạnS: địa chỉ đoạn trong bộ nhớ ảoD: độ dài đoạn trong bộ nhớ ảoLimit: giới hạn tối đa của đoạnBase: độ dời trong đoạnHình IV.9 : Minh hoạ sự ánh xạ địa chỉ giữa bộ nhớ ảo và bộ nhớ vật lýtrong định vị trang
+        ***SORRY, THIS MEDIA TYPE IS NOT SUPPORTED.***
+      </para>
+      <para id="id7648197">Câu hỏi 3: Khối nào phải được thay thế khi có thất bại trang?</para>
+      <para id="id7648212">Hầu hết các hệ điều hành đều cố gắng thay thế khối ít dùng gần đây nhất (LRU: Least Recent Utilized) vì nghĩ rằng đây là khối ít cần nhất.</para>
+      <para id="id7648223">Câu hỏi 4: Việc gì xảy ra khi cần ghi số liệu?</para>
+      <para id="id7648238">Chiến thuật ghi luôn là một sự ghi lại nghĩa là thông tin chỉ được viết vào trong khối của bộ nhớ trong. Khối có thay đổi thông tin, được chép vào đĩa từ nếu khối này bị thay thế.</para>
+    </section>
+    <section id="id-50056817229">
+      <title>BẢO VỆ CÁC TIẾN TRÌNH BẰNG CÁCH DÙNG BỘ NHỚ ẢO</title>
+      <para id="id7648260">Sự xuất hiện của đa chương trình (multiprogram) trong đó máy tính chạy nhiều chương trình song song với nhau, dẫn tới các đòi hỏi mới về việc bảo vệ và phân chia giữa các chương trình.</para>
+      <para id="id7648272">Đa chương trình đưa đến khái niệm tiến trình (process): một tiến trình gồm có một chương trình đang thực hiện và tất cả các thông tin cần thiết để tiếp tục thực hiện chương trình này.</para>
+      <para id="id7648288">Trong đa chương trình, bộ xử lý và bộ nhớ trong được nhiều người sử dụng chia sẻ một cách qua lại (interactive), cùng một thời điểm, để tạo cảm giác rằng mỗi người dùng đang có một máy tính riêng. Và như thế, tại bất cứ lúc nào, phải có thể chuyển đổi từ một tiến trình này sang một tiến trình khác.</para>
+      <para id="id7648306">Một tiến trình phải vận hành đúng đắn, dù nó được thi hành liên tục từ đầu tới cuối, hay nó bị ngắt qua lại bởi các tiến trình khác. Trách nhiệm đảm bảo các tiến trình đều chạy đúng, được chia sẻ giữa nhà thiết kế máy tính và nhà thiết kế hệ điều hành. Nhà thiết kế máy tính phải đảm bảo bộ xử lý có thể lưu giữ trạng thái các tiến trình và phục hồi các trạng thái này, còn nhà thiết kế hệ điều hành phải đảm bảo các tiến trình không ảnh hưởng lên nhau. Hệ điều hành giải quyết vấn đề này bằng cách chia bộ nhớ trong cho các tiến trình và trạng thái của mỗi tiến trình này hiện diện trong phần bộ nhớ được chia cho nó. Điều này có nghĩa rằng các nhà thiết kế hệ điều hành phải được sự giúp sức của các nhà chế tạo máy tính để bảo vệ một tiến trình không bị ảnh hưởng bởi tiến trình khác.</para>
+      <para id="id7648341">Nhà thiết kế máy tính có thêm 3 trách nhiệm trong việc giúp các nhà thiết kế hệ điều hành bảo vệ các tiến trình là:</para>
+      <list id="id7648350" list-type="enumerated">
+        <item>Cung cấp hai chế độ vận hành cho biết tiến trình đang thực hiện là tiến trình của người sử dụng hay tiến trình hệ thống (của người điều hành).</item>
+        <item>Cung cấp một tập hợp con trạng thái của bộ xử lý mà tiến trình người sử dụng có thể dùng nhưng không thể sửa đổi.</item>
+        <item>Cung cấp các cơ chế để có thể chuyển đổi từ chế độ người dùng sang chế độ người điều hành và ngược lại.</item>
+      </list>
+      <para id="id7648387">Chúng ta đã thấy, địa chỉ mà bộ xử lý đưa ra phải được biến đổi từ địa chỉ ảo sang địa chỉ vật lý. Điều này giúp phần cứng đi xa nữa trong việc bảo vệ các tiến trình. Cách đơn giản nhất làm việc này là cho phép tiến trình người sử dụng tác động lên các bit cho phép thâm nhập vào mỗi trang hay mỗi đoạn. Khi bộ xử lý phát ra tín hiệu đọc (hay viết) và tín hiệu người dùng (hay hệ thống) thì rất dễ dàng phát hiện các việc thâm nhập trái phép bộ nhớ trước khi việc thâm nhập này gây hư hại. Các tiến trình được bảo vệ và có bảng trang riêng cho mình trỏ đến các trang tách rời nhau trong bộ nhớ. </para>
+      <para id="id7648418">*****</para>
+      <para id="id7648422">CÂU HỎI ÔN TẬP VÀ BÀI TẬP CHƯƠNG IV</para>
+      <para id="id7648428">*****</para>
+      <list id="id7648433" list-type="enumerated">
+        <item>Sự khác nhau giữa SRAM và DRAM? Trong máy tính chúng được dùng ở đâu?</item>
+        <item>Mục tiêu của các cấp bộ nhớ?</item>
+        <item>Nêu hai nguyên tắc mà cache dựa vào đó để vận hành.</item>
+        <item>Cho một bộ nhớ cache tương ứng trực tiếp có 8 khối, mỗi khối có 16 byte. Bộ nhớ trong có 64 khối. Giả sử lúc khởi động máy, 8 khối đầu tiên của bộ nhớ trong được đưa lên cache.</item>
+      </list>
+      <list id="id7648473" list-type="enumerated">
+        <item>Viết bảng nhãn của các khối hiện đang nằm trong cache</item>
+        <item>CPU lần lượt đưa các địa chỉ sau đây để đọc số liệu: O4AH, 27CH, 3F5H. Nếu thất bại thì cập nhật bãng nhãn.</item>
+        <item>CPU dùng cách ghi lại. Khi thất bại cache, CPU dùng cách ghi có nạp. Mô tả công việc của bộ quản lý cache khi CPU đưa ra các từ sau đây để ghi vào bộ nhớ trong: 0C3H, 05AH, 1C5H.</item>
+        <item>Các nguyên nhân chính gây thất bại cache?</item>
+        <item>Các giải pháp đảm bảo tính đồng nhất dữ liệu trong hệ thống bộ đa xử lý có bộ nhớ chia sẻ dùng chung?</item>
+        <item>Các cách nới rộng dãy thông của bộ nhớ trong?</item>
+        <item>Tại sao phải dùng bộ nhớ ảo?</item>
+        <item>Sự khác biệt giữa cache và bộ nhớ ảo?</item>
+      </list>
+    </section>
+  </content>
+</document>

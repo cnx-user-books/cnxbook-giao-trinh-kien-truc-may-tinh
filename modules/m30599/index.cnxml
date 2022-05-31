@@ -1,0 +1,983 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Đại cương về Kiến trúc máy tính</title>
+  <metadata>
+  <md:content-id>m30599</md:content-id><md:title>Đại cương về Kiến trúc máy tính</md:title>
+  <md:abstract/>
+  <md:uuid>4525ef1b-738d-4736-8f51-6d24c4eca56a</md:uuid>
+</metadata>
+
+<content>
+    <section id="id-238217985496">
+      <title>ĐẠI CƯƠNG</title>
+      <para id="id7257953">Mục đích: Giới thiệu lịch sử phát triển của máy tính, các thế hệ máy tính và cách phân loại máy tính. Giới thiệu các cách biến đổi cơ bản của hệ thống số, các bảng mã thông dụng được dùng để biểu diễn các ký tự.</para>
+      <para id="id7257975">Yêu cầu: Sinh viên được trang bị kiến thức về lịch sử phát triển của máy tính, các thế hệ máy tính và cách phân loại máy tính. Nắm vững các khái niệm cơ bản liên quan đến các hệ thống số được dùng trong máy tính. Thành thạo các thao tác biến đổi số giữa các hệ thống số.</para>
+    </section>
+    <section id="id-0341629312292">
+      <title>CÁC THẾ HỆ MÁY TÍNH</title>
+      <para id="id7824943">Sự phát triển của máy tính được mô tả dựa trên sự tiến bộ của các công nghệ chế tạo các linh kiện cơ bản của máy tính như: bộ xử lý, bộ nhớ, các ngoại vi,…Ta có thể nói máy tính điện tử số trải qua bốn thế hệ liên tiếp. Việc chuyển từ thế hệ trước sang thế hệ sau được đặc trưng bằng một sự thay đổi cơ bản về công nghệ.</para>
+      <list id="id7824967" list-type="enumerated">
+        <item><figure id="id7824975"><media id="id1166783164670" alt=""><image src="../../media/graphics1.jpg" mime-type="image/jpeg" height="427" width="640"/></media></figure>Thế hệ đầu tiên (1946-1957)</item>
+      </list>
+      <para id="id7697456">Hình 1.1: Máy tính ENIAC</para>
+      <para id="id7697483">ENIAC (Electronic Numerical Integrator and Computer) là máy tính điện tử số đầu tiên do Giáo sư Mauchly và người học trò Eckert tại Đại học </para>
+      <para id="id7254987">Pennsylvania thiết kế vào năm 1943 và</para>
+      <para id="id7254993">được hoàn thành vào năm 1946. Đây là một máy tính khổng lồ với thể tích dài 20 mét, cao 2,8 mét và rộng vài mét. ENIAC bao gồm: 18.000 đèn điện tử, 1.500 công tắc tự động, cân nặng 30 tấn, và tiêu thụ 140KW giờ. Nó có 20 thanh ghi 10 bit (tính toán trên số thập phân). Có khả năng thực hiện 5.000 phép toán cộng trong một giây. Công việc lập trình bằng tay bằng cách đấu nối các đầu cắm điện và dùng các ngắt điện.</para>
+      <para id="id7255028">Giáo sư toán học John Von Neumann đã đưa ra ý tưởng thiết kế máy tính IAS (Princeton </para>
+      <para id="id7255048">Institute for Advanced Studies): chương trình được lưu trong bộ nhớ, bộ điều khiển sẽ lấy lệnh và biến đổi giá trị của dữ liệu trong phần bộ nhớ, bộ làm toán và luận lý (ALU: Arithmetic And Logic Unit) được điều khiển để tính toán trên dữ liệu nhị phân, điều khiển hoạt động của các thiết bị vào ra. Đây là một ý tưởng nền tảng cho các máy tính hiện đại ngày nay. Máy tính này còn được gọi là máy tính Von Neumann.</para>
+      <para id="id7756854">Vào những năm đầu của thập niên 50, những máy tính thương mại đầu tiên được đưa ra thị trường: 48 hệ máy UNIVAC I và 19 hệ máy IBM 701 đã được bán ra.</para>
+      <list id="id7756865" list-type="enumerated">
+        <item>Thế hệ thứ hai (1958-1964)</item>
+      </list>
+      <para id="id7756874">Công ty Bell đã phát minh ra transistor vào năm 1947 và do đó thế hệ thứ hai của máy tính được đặc trưng bằng sự thay thế các đèn điện tử bằng các transistor lưỡng cực. Tuy nhiên, đến cuối thập niên 50, máy tính thương mại dùng transistor mới xuất hiện trên thị trường. Kích thước máy tính giảm, rẻ tiền hơn, tiêu tốn năng lượng ít hơn. Vào thời điểm này, mạch in và bộ nhớ bằng xuyến từ được dùng. Ngôn ngữ cấp cao xuất hiện (như FORTRAN năm 1956, COBOL năm 1959, ALGOL năm 1960) và hệ điều hành kiểu tuần tự (Batch Processing) được dùng. Trong hệ điều hành này, chương trình của người dùng thứ nhất được chạy, xong đến chương trình của người dùng thứ hai và cứ thế tiếp tục.</para>
+      <list id="id7496400" list-type="enumerated">
+        <item>Thế hệ thứ ba (1965-1971)</item>
+      </list>
+      <para id="id7496409">Thế hệ thứ ba được đánh dấu bằng sự xuất hiện của các mạch kết (mạch tích hợp - IC: Integrated Circuit). Các mạch kết độ tích hợp mật độ thấp (SSI: Small Scale Integration) có thể chứa vài chục linh kiện và kết độ tích hợp mật độ trung bình (MSI: Medium Scale Integration) chứa hàng trăm linh kiện trên mạch tích hợp.</para>
+      <para id="id7156362">Mạch in nhiều lớp xuất hiện, bộ nhớ bán dẫn bắt đầu thay thế bộ nhớ bằng xuyến từ. Máy tính đa chương trình và hệ điều hành chia thời gian được dùng.</para>
+      <list id="id7156374" list-type="enumerated">
+        <item>Thế hệ thứ tư (1972-????)</item>
+      </list>
+      <para id="id7156383">Thế hệ thứ tư được đánh dấu bằng các IC có mật độ tích hợp cao (LSI: Large Scale Integration) có thể chứa hàng ngàn linh kiện. Các IC mật độ tích hợp rất cao (VLSI: Very Large Scale Integration) có thể chứa hơn 10 ngàn linh kiện trên mạch. Hiện nay, các chip VLSI chứa hàng triệu linh kiện.</para>
+      <para id="id7156405">Với sự xuất hiện của bộ vi xử lý (microprocessor) chứa cả phần thực hiện và phần điều khiển của một bộ xử lý, sự phát triển của công nghệ bán dẫn các máy vi tính đã được chế tạo và khởi đầu cho các thế hệ máy tính cá nhân. </para>
+      <para id="id7960334">Các bộ nhớ bán dẫn, bộ nhớ cache, bộ nhớ ảo được dùng rộng rãi. </para>
+      <para id="id7960341">Các kỹ thuật cải tiến tốc độ xử lý của máy tính không ngừng được phát triển: kỹ thuật ống dẫn, kỹ thuật vô hướng, xử lý song song mức độ cao,…</para>
+      <list id="id7960353" list-type="enumerated">
+        <item>Khuynh hướng hiện tại</item>
+      </list>
+      <para id="id7960362">Việc chuyển từ thế hệ thứ tư sang thế hệ thứ 5 còn chưa rõ ràng. Người Nhật đã và đang đi tiên phong trong các chương trình nghiên cứu để cho ra đời thế hệ thứ 5 của máy tính, thế hệ của những máy tính thông minh, dựa trên các ngôn ngữ trí tuệ nhân tạo như LISP và PROLOG,... và những giao diện người - máy thông minh. Đến thời điểm này, các nghiên cứu đã cho ra các sản phẩm bước đầu và gần đây nhất (2004) là sự ra mắt sản phẩm người máy thông minh gần giống với con người nhất: ASIMO (Advanced Step Innovative Mobility: Bước chân tiên tiến của đổi mới và chuyển động). Với hàng trăm nghìn máy móc điện tử tối tân đặt trong cơ thể, ASIMO có thể lên/xuống cầu thang một cách uyển chuyển, nhận diện người, các cử chỉ hành động, giọng nói và đáp ứng một số mệnh lệnh của con người. Thậm chí, nó có thể bắt chước cử động, gọi tên người và cung cấp thông tin ngay sau khi bạn hỏi, rất gần gũi và thân thiện. Hiện nay có nhiều công ty, viện nghiên cứu của Nhật thuê Asimo tiếp khách và hướng dẫn khách tham quan như: Viện Bảo tàng Khoa học năng lượng và Đổi mới quốc gia, hãng IBM Nhật Bản, Công ty điện lực Tokyo. Hãng Honda bắt đầu nghiên cứu ASIMO từ năm 1986 dựa vào nguyên lý chuyển động bằng hai chân. Cho tới nay, hãng đã chế tạo được 50 robot ASIMO.</para>
+      <para id="id7960375">Các tiến bộ liên tục về mật độ tích hợp trong VLSI đã cho phép thực hiện các mạch vi xử lý ngày càng mạnh (8 bit, 16 bit, 32 bit và 64 bit với việc xuất hiện các bộ xử lý RISC năm 1986 và các bộ xử lý siêu vô hướng năm 1990). Chính các bộ xử lý này giúp thực hiện các máy tính song song với từ vài bộ xử lý đến vài ngàn bộ xử lý. Điều này làm các chuyên gia về kiến trúc máy tính tiên đoán thế hệ thứ 5 là thế hệ các máy tính xử lý song song. </para>
+      <table id="id7832268" summary="">
+        <tgroup cols="5">
+          <colspec colnum="1" colname="c1"/>
+          <colspec colnum="2" colname="c2"/>
+          <colspec colnum="3" colname="c3"/>
+          <colspec colnum="4" colname="c4"/>
+          <colspec colnum="5" colname="c5"/>
+          <tbody>
+            <row>
+              <entry>Thế hệ</entry>
+              <entry>Năm</entry>
+              <entry>Kỹ thuật</entry>
+              <entry>Sản phẩm mới</entry>
+              <entry>Hãng sản xuất và máy tính</entry>
+            </row>
+            <row>
+              <entry>1</entry>
+              <entry>1946-1957</entry>
+              <entry>Đèn điện tử</entry>
+              <entry>Máy tính điện tử tung ra thị trường</entry>
+              <entry>IBM 701. UNIVAC</entry>
+            </row>
+            <row>
+              <entry>2</entry>
+              <entry>1958-1964</entry>
+              <entry>Transistors</entry>
+              <entry>Máy tính rẻ tiền</entry>
+              <entry>Burroughs 6500, NCR, CDC 6600, Honeywell</entry>
+            </row>
+            <row>
+              <entry>3</entry>
+              <entry>1965-1971</entry>
+              <entry>Mach IC</entry>
+              <entry>Máy tính mini</entry>
+              <entry>50 hãng mới: DEC PDP-11, Data general ,Nova</entry>
+            </row>
+            <row>
+              <entry>4</entry>
+              <entry>1972-????</entry>
+              <entry>LSI - VLSI</entry>
+              <entry>Máy tính cá nhân và trạm làm việc</entry>
+              <entry>Apple II, IBM-PC, Appolo DN 300, Sun 2</entry>
+            </row>
+            <row>
+              <entry>5 ??</entry>
+              <entry>????-????</entry>
+              <entry>Xử lý song song</entry>
+              <entry>Máy tính đa xử lý. Đa máy tính</entry>
+              <entry>Sequent ? Thinking Machine Inc.? Honda, Casio</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <para id="id7734790">Bảng 1.1: Các thế hệ máy tính</para>
+    </section>
+    <section id="id-911670914633">
+      <title>Phân loại máy tính</title>
+      <para id="id7553218">Thông thường máy tính được phân loại theo tính năng kỹ thuật và giá tiền.</para>
+      <list id="id7553226" list-type="enumerated">
+        <item>Các siêu máy tính (Super Computer): là các máy tính đắt tiền nhất và tính năng kỹ thuật cao nhất. Giá bán một siêu máy tính từ vài triệu USD. Các siêu máy tính thường là các máy tính vectơ hay các máy tính dùng kỹ thuật vô hướng và được thiết kế để tính toán khoa học, mô phỏng các hiện tượng. Các siêu máy tính được thiết kế với kỹ thuật xử lý song song với rất nhiều bộ xử lý (hàng ngàn đến hàng trăm ngàn bộ xử lý trong một siêu máy tính).</item>
+        <item>Các máy tính lớn (Mainframe) là loại máy tính đa dụng. Nó có thể dùng cho các ứng dụng quản lý cũng như các tính toán khoa học. Dùng kỹ thuật xử lý song song và có hệ thống vào ra mạnh. Giá một máy tính lớn có thể từ vài trăm ngàn USD đến hàng triệu USD.</item>
+        <item>Máy tính mini (Minicomputer) là loại máy cở trung, giá một máy tính mini có thể từ vài chục USD đến vài trăm ngàn USD.</item>
+        <item>Máy vi tính (Microcomputer) là loại máy tính dùng bộ vi xử lý, giá một máy vi tính có thể từ vài trăm USD đến vài ngàn USD.</item>
+      </list>
+    </section>
+    <section id="id-199266929767">
+      <title>THÀNH QUẢ CỦA MÁY TÍNH </title>
+      <section id="id-543945834955">
+        <title>Qui luật Moore về sự phát triển của máy tính</title>
+        <para id="id7797826">10001001010.119651970197519801985199019952000Super ComputersMainframesMini ComputersMicro ProcessorHình 1.2: Đánh giá thành quả của máy tínhHình I-2 cho thấy diễn biến của thành quả tối đa của máy tính. Thành quả này tăng theo hàm số mũ, độ tăng trưởng các máy vi tính là 35% mỗi năm, còn đối với các loại máy khác, độ tăng trưởng là 20% mỗi năm. Điều này cho thấy tính năng các máy vi tính đã vượt qua các loại máy tính khác vào đầu thập niên 90 .</para>
+        <para id="id7170810">Máy tính dùng thật nhiều bộ xử lý song song rất thích hợp khi phải làm tính thật nhiều.</para>
+        <para id="id7170818">Sự tăng trưởng theo hàm số mũ của công nghệ chế tạo transistor MOS là nguồn gốc của thành quả các máy tính.</para>
+        <para id="id7970923">Hình I.4 cho thấy sự tăng trưởng về tần số xung nhịp của các bộ xử lý MOS. Độ tăng trưởng của tần số xung nhịp bộ xử lý tăng gấp đôi sau mỗi thế hệ và độ trì hoãn trên mỗi cổng / xung nhịp giảm 25% cho mỗi năm .</para>
+        <para id="id7970937">Sự phát triển của công nghệ máy tính và đặc biệt là sự phát triển của bộ vi xử lý của các máy vi tính làm cho các máy vi tính có tốc độ vượt qua tốc độ bộ xử lý của các máy tính lớn hơn.</para>
+        <para id="id7970952"><figure id="id7970962"><media id="id1166773629766" alt=""><image src=".png" mime-type="image/png" height="282" width="650"/></media></figure>Số lượng transistor tích hợpNăm SXBộ xử lý Intel410,000,0002003Intel® Itanium® 2 processor220,000,0002002Intel® Itanium® processor42,000,0002000Intel® Pentium® 4 processor24,000,0001999Intel® Pentium® III processor7,500,0001997Intel® Pentium® II processor3,100,0001993Intel® Pentium® processor1,180,0001989Intel486™ processor275,0001985Intel386™ processor120,000198228629,000197880865,000197480802,500197280082,25019714004Hình I.3 và Bảng I.2: Sự phát triển của bộ xử lý Intel dựa vào số lượng transistor trong một mạch tích hợp theo qui luật MooreTừ năm 1965, Gordon Moore (đồng sáng lập công ty Intel) quan sát và nhận thấy số transistor trong mỗi mạch tích hợp có thể tăng gấp đôi sau mỗi năm, G. Moore đã đưa ra dự đoán: Khả năng của máy tính sẽ tăng lên gấp đôi sau 18 tháng với giá thành là như nhau. </para>
+        <para id="id7954848">Kết quả của quy luật Moore là:</para>
+        <list id="id7954854" list-type="bulleted">
+          <item>Chi phí cho máy tính sẽ giảm.</item>
+          <item>Giảm kích thước các linh kiện, máy tính sẽ giảm kích thước</item>
+          <item>Hệ thống kết nối bên trong mạch ngắn: tăng độ tin cậy, tăng tốc độ .</item>
+          <item>Tiết kiệm năng lượng cung cấp, toả nhiệt thấp.</item>
+          <item>Các IC thay thế cho các linh kiện rời.</item>
+        </list>
+        <para id="id7176965">Một số khái niệm liên quan:</para>
+        <list id="id7176971" list-type="bulleted">
+          <item><figure id="id7176986"><media id="id930820" alt=""><image src=".png" mime-type="image/png" height="388" width="606"/></media></figure>Hình I.4: Xung nhịp các bộ xử lý MOSMật độ tích hợp là số linh kiện tích hợp trên một diện tích bề mặt tấm silicon cho sẵn, cho biết số nhiệm vụ và mạch có thực hiện.</item>
+          <item>Tần số xung nhịp bộ xử lý cho biết </item>
+        </list>
+        <list id="id7699978" list-type="bulleted">
+          <item>tần số thực hiện các nhiệm vụ.</item>
+          <item>Tốc độ xử lý của máy tính trong một giây (hay công suất tính toán của mỗi mạch): được tính bằng tích của mật độ tích hợp và tần số xung nhịp. Công suất này cũng tăng theo hàm mũ đối với thời gian.</item>
+        </list>
+      </section>
+    </section>
+    <section id="id-589600778913">
+      <title>THÔNG TIN VÀ SỰ MÃ HOÁ THÔNG TIN</title>
+      <section id="id-0646834607628">
+        <title>VHVLVt1Vt2Hiệu thết1 t2 Thời gian Hình I.5: Thông tin về 2 trạng thái có ý nghĩa của hiệu điện thế Khái niệm thông tin</title>
+        <para id="id7756904">Khái niệm về thông tin gắn liền với sự hiểu biết một trạng thái cho sẵn trong nhiều trạng thái có thể có vào một thời điểm cho trước. </para>
+        <para id="id7756924">Trong hình này, chúng ta quy ước có hai trạng thái có ý nghĩa: trạng thái thấp khi hiệu điện thế thấp hơn VL và trạng thái cao khi hiệu điện thế lớn hơn VH. Để có thông tin, ta phải xác định thời điểm ta nhìn trạng thái của tín hiệu. Thí dụ, tại thời điểm t1 thì tín hiệu ở trạng thái thấp và tại thời điểm t2 thì tín hiệu ở trạng thái cao.</para>
+      </section>
+      <section id="id-434299868422">
+        <title>Lượng thông tin và sự mã hoá thông tin</title>
+        <para id="id7347424">Thông tin được đo lường bằng đơn vị thông tin mà ta gọi là bit. Lượng thông tin được định nghĩa bởi công thức:</para>
+        <para id="id7347445">I = Log2(N)</para>
+        <para id="id7177526">Trong đó:I: là lượng thông tin tính bằng bit</para>
+        <para id="id7177534">N: là số trạng thái có thể có</para>
+        <para id="id7177542">Vậy một bit ứng với sự hiểu biết của một trạng thái trong hai trạng thái có thể có. Thí dụ, sự hiểu biết của một trạng thái trong 8 trạng thái có thể ứng với một lượng thông tin là:</para>
+        <para id="id7177564">I = Log2(8) = 3 bit</para>
+        <para id="id7682306">Tám trạng thái được ghi nhận nhờ 3 số nhị phân (mỗi số nhị phân có thể có giá trị 0 hoặc 1).</para>
+        <para id="id7682314">Như vậy lượng thông tin là số con số nhị phân cần thiết để biểu diễn số trạng thái có thể có. Do vậy, một con số nhị phân được gọi là một bit. Một từ n bit có thể tượng trưng một trạng thái trong tổng số 2n trạng thái mà từ đó có thể tượng trưng. Vậy một từ n bit tương ứng với một lượng thông tin n bit.</para>
+        <table id="id7682344" summary="">
+          <tgroup cols="4">
+            <colspec colnum="1" colname="c1"/>
+            <colspec colnum="2" colname="c2"/>
+            <colspec colnum="3" colname="c3"/>
+            <colspec colnum="4" colname="c4"/>
+            <tbody>
+              <row>
+                <entry>Trạng thái</entry>
+                <entry>X2</entry>
+                <entry>X­1</entry>
+                <entry>X0</entry>
+              </row>
+              <row>
+                <entry>0</entry>
+                <entry>0</entry>
+                <entry>0</entry>
+                <entry>0</entry>
+              </row>
+              <row>
+                <entry>1</entry>
+                <entry>0</entry>
+                <entry>0</entry>
+                <entry>1</entry>
+              </row>
+              <row>
+                <entry>2</entry>
+                <entry>0</entry>
+                <entry>1</entry>
+                <entry>0</entry>
+              </row>
+              <row>
+                <entry>3</entry>
+                <entry>0</entry>
+                <entry>1</entry>
+                <entry>1</entry>
+              </row>
+              <row>
+                <entry>4</entry>
+                <entry>1</entry>
+                <entry>0</entry>
+                <entry>0</entry>
+              </row>
+              <row>
+                <entry>5</entry>
+                <entry>1</entry>
+                <entry>0</entry>
+                <entry>1</entry>
+              </row>
+              <row>
+                <entry>6</entry>
+                <entry>1</entry>
+                <entry>1</entry>
+                <entry>0</entry>
+              </row>
+              <row>
+                <entry>7</entry>
+                <entry>1</entry>
+                <entry>1</entry>
+                <entry>1</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+        <para id="id7560359">Bảng I.3: Tám trạng thái khác nhau ứng với 3 số nhị phân</para>
+      </section>
+      <section id="id-487733197336">
+        <title>Biểu diễn các số:</title>
+        <para id="id7560382">Khái niệm hệ thống số: Cơ sở của một hệ thống số định nghĩa phạm vi các giá trị có thể có của một chữ số. Ví dụ: trong hệ thập phân, một chữ số có giá trị từ 0-9, trong hệ nhị phân, một chữ số (một bit) chỉ có hai giá trị là 0 hoặc 1.</para>
+        <para id="id7560408"><figure id="id7545639"><media id="id2670412" alt=""><image src=".png" mime-type="image/png" height="69" width="159"/></media></figure>VkDạng tổng quát để biểu diễn giá trị của một số:</para>
+        <para id="id7545693">Trong đó: </para>
+        <para id="id7545697">Vk: Số cần biểu diễn giá trị</para>
+        <para id="id6967114">m: số thứ tự của chữ số phần lẻ </para>
+        <para id="id6967120">(phần lẻ của số có m chữ số được đánh số thứ tự từ -1 đến -m)</para>
+        <para id="id6967130">n-1: số thứ tự của chữ số phần nguyên </para>
+        <para id="id6967136">(phần nguyên của số có n chữ số được đánh số thứ tự từ 0 đến n-1)</para>
+        <para id="id6967145">bi: giá trị của chữ số thứ i</para>
+        <para id="id6967162">k:</para>
+        <para id="id6967166">hệ số (k=10: hệ thập phân; k=2: hệ nhị phân;...).</para>
+        <para id="id7734641">Ví dụ: biểu diễn số 541.25 10</para>
+        <para id="id7734658">541.2510 = 5 * 102 + 4 * 101 + 1 * 100 + 2 * 10-1 + 5 * 10-2</para>
+        <para id="id6150844">= (500)10 + (40)10 + (1)10 + (2/10)10 + (5/100)10 </para>
+        <para id="id7299230">Một máy tính được chủ yếu cấu tạo bằng các mạch điện tử có hai trạng thái. Vì vậy, rất tiện lợi khi dùng các số nhị phân để biểu diễn số trạng thái của các mạch điện hoặc để mã hoá các ký tự, các số cần thiết cho vận hành của máy tính.</para>
+        <para id="id7299254">Để biến đổi một số hệ thập phân sang nhị phân, ta có hai phương thức biến đổi:</para>
+        <list id="id7299260" list-type="bulleted">
+          <item>Phương thức số dư để biến đổi phần nguyên của số thập phân sang nhị phân.</item>
+        </list>
+        <para id="id7299272">
+        ***SORRY, THIS MEDIA TYPE IS NOT SUPPORTED.***
+      bit có trọng số nhỏ nhấtbit giữVí dụ: Đổi 23.37510 sang nhị phân. Chúng ta sẽ chuyển đổi phần nguyên dùng phương thức số dư:</para>
+        <list id="id6361404" list-type="bulleted">
+          <item>
+        ***SORRY, THIS MEDIA TYPE IS NOT SUPPORTED.***
+      bit có trọng số lớn nhấtPhương thức nhân để biến đổi phần lẻ của số thập phân sang nhị phân</item>
+        </list>
+        <para id="id7170700">bit có trọng số nhỏ nhất</para>
+        <para id="id7170729">Kết quả cuối cùng nhận được là: 23.37510 = 10111.0112</para>
+        <para id="id7170755">Tuy nhiên, trong việc biến đổi phần lẻ của một số thập phân sang số nhị phân theo phương thức nhân, có một số trường hợp việc biến đổi số lặp lại vô hạn</para>
+        <para id="id7586946"><figure id="id7586949"><media id="id1166781047119" alt=""><image src="../../media/graphics2-2c64.png" mime-type="image/png" height="248" width="163"/></media></figure>Ví dụ: </para>
+        <para id="id7586979">Trường hợp biến đổi số nhị phân sang các hệ thống số khác nhau, ta có thể nhóm một số các số nhị phân để biểu diễn cho số trong hệ thống số tương ứng.</para>
+        <table id="id7586990" summary="">
+          <tgroup cols="4">
+            <colspec colnum="1" colname="c1"/>
+            <colspec colnum="2" colname="c2"/>
+            <colspec colnum="3" colname="c3"/>
+            <colspec colnum="4" colname="c4"/>
+            <tbody>
+              <row>
+                <entry>Binary(Base 2)</entry>
+                <entry>Octal(Base 8)</entry>
+                <entry>Decimal(Base 10)</entry>
+                <entry>Hexadecimal(Base 16)</entry>
+              </row>
+              <row>
+                <entry>0000</entry>
+                <entry>0</entry>
+                <entry>0</entry>
+                <entry>0</entry>
+              </row>
+              <row>
+                <entry>0001</entry>
+                <entry>1</entry>
+                <entry>1</entry>
+                <entry>1</entry>
+              </row>
+              <row>
+                <entry>0010</entry>
+                <entry>2</entry>
+                <entry>2</entry>
+                <entry>2</entry>
+              </row>
+              <row>
+                <entry>0011</entry>
+                <entry>3</entry>
+                <entry>3</entry>
+                <entry>3</entry>
+              </row>
+              <row>
+                <entry>0100</entry>
+                <entry>4</entry>
+                <entry>4</entry>
+                <entry>4</entry>
+              </row>
+              <row>
+                <entry>0101</entry>
+                <entry>5</entry>
+                <entry>5</entry>
+                <entry>5</entry>
+              </row>
+              <row>
+                <entry>0110</entry>
+                <entry>6</entry>
+                <entry>6</entry>
+                <entry>6</entry>
+              </row>
+              <row>
+                <entry>0111</entry>
+                <entry>7</entry>
+                <entry>7</entry>
+                <entry>7</entry>
+              </row>
+              <row>
+                <entry>1000</entry>
+                <entry>10</entry>
+                <entry>8</entry>
+                <entry>8</entry>
+              </row>
+              <row>
+                <entry>1001</entry>
+                <entry>11</entry>
+                <entry>9</entry>
+                <entry>9</entry>
+              </row>
+              <row>
+                <entry>1010</entry>
+                <entry>12</entry>
+                <entry>10</entry>
+                <entry>A</entry>
+              </row>
+              <row>
+                <entry>1011</entry>
+                <entry>13</entry>
+                <entry>11</entry>
+                <entry>B</entry>
+              </row>
+              <row>
+                <entry>1100</entry>
+                <entry>14</entry>
+                <entry>12</entry>
+                <entry>C</entry>
+              </row>
+              <row>
+                <entry>1101</entry>
+                <entry>15</entry>
+                <entry>13</entry>
+                <entry>D</entry>
+              </row>
+              <row>
+                <entry>1110</entry>
+                <entry>16</entry>
+                <entry>14</entry>
+                <entry>E</entry>
+              </row>
+              <row>
+                <entry>1111</entry>
+                <entry>17</entry>
+                <entry>15</entry>
+                <entry>F</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+        <para id="id7181827">Thông thường, người ta nhóm 4 bit trong hệ nhị phân hệ để biểu diễn số dưới dạng thập lục phân (Hexadecimal).</para>
+        <para id="id7181836">Như vậy, dựa vào cách biến đổi số trong bảng nêu trên, chúng ta có ví dụ về cách biến đổi các số trong các hệ thống số khác nhau theo hệ nhị phân:</para>
+        <list id="id7181847" list-type="bulleted">
+          <item>10112 = (102)(112) = 234</item>
+        </list>
+        <list id="id6995522" list-type="bulleted">
+          <item>234 = (24)(34) = (102)(112) = 10112</item>
+        </list>
+        <list id="id6995580" list-type="bulleted">
+          <item>1010102 = (1012)(0102) = 528</item>
+          <item>011011012 = (01102)(11012) = 6D16</item>
+        </list>
+        <para id="id7282150">Một từ n bit có thể biểu diễn tất cả các số dương từ 0 tới 2n-1. Nếu di là một số nhị phân thứ i, một từ n bit tương ứng với một số nguyên thập phân.</para>
+        <para id="id7282180">N = 
+<m:math><m:semantics><m:mrow><m:mstyle fontsize="12pt"><m:mrow><m:mrow><m:munderover><m:mo stretchy="false">∑</m:mo><m:mstyle fontsize="8pt"><m:mrow><m:mrow><m:mi>i</m:mi><m:mo stretchy="false">=</m:mo><m:mn>0</m:mn></m:mrow></m:mrow></m:mstyle><m:mstyle fontsize="8pt"><m:mrow><m:mrow><m:mi>n</m:mi><m:mo stretchy="false">−</m:mo><m:mn>1</m:mn></m:mrow></m:mrow></m:mstyle></m:munderover><m:mrow><m:msub><m:mi>d</m:mi><m:mstyle fontsize="8pt"><m:mrow><m:mi>i</m:mi></m:mrow></m:mstyle></m:msub><m:msup><m:mn>2</m:mn><m:mstyle fontsize="8pt"><m:mrow><m:mi>i</m:mi></m:mrow></m:mstyle></m:msup></m:mrow></m:mrow></m:mrow></m:mstyle><m:mrow/></m:mrow><m:annotation encoding="StarMath 5.0"> size 12{ Sum cSub { size 8{i=0} }  cSup { size 8{n-1} }  {d rSub { size 8{i} } 2 rSup { size 8{i} } } } {}</m:annotation></m:semantics></m:math></para>
+        <para id="id7962585">Một Byte (gồm 8 bit) có thể biểu diễn các số từ 0 tới 255 và một từ 32 bit cho phép biểu diễn các số từ 0 tới 4294967295.</para>
+      </section>
+      <section id="id-157905197557">
+        <title>Số nguyên có dấu</title>
+        <para id="id6961488">Có nhiều cách để biểu diễn một số n bit có dấu. Trong tất cả mọi cách thì bit cao nhất luôn tượng trưng cho dấu. </para>
+        <para id="id6961497">Khi đó, bit dấu có giá trị là 0 thì số nguyên dương, bit dấu có giá trị là 1 thì số nguyên âm. Tuy nhiên, cách biểu diễn dấu này không đúng trong trường hợp số được biểu diễn bằng số thừa K mà ta sẽ xét ở phần sau trong chương này (bit dấu có giá trị là 1 thì số nguyên dương, bit dấu có giá trị là 0 thì số nguyên âm).</para>
+        <para id="id6961511">dn-1 dn-2 dn-3 . . . . d2d1d0 </para>
+        <table id="id6991131" summary="">
+          <tgroup cols="11">
+            <colspec colnum="1" colname="c1"/>
+            <colspec colnum="2" colname="c2"/>
+            <colspec colnum="3" colname="c3"/>
+            <colspec colnum="4" colname="c4"/>
+            <colspec colnum="5" colname="c5"/>
+            <colspec colnum="6" colname="c6"/>
+            <colspec colnum="7" colname="c7"/>
+            <colspec colnum="8" colname="c8"/>
+            <colspec colnum="9" colname="c9"/>
+            <colspec colnum="10" colname="c10"/>
+            <colspec colnum="11" colname="c11"/>
+            <tbody>
+              <row>
+                <entry/>
+                <entry/>
+                <entry/>
+                <entry/>
+                <entry/>
+                <entry/>
+                <entry/>
+                <entry>. . . . </entry>
+                <entry/>
+                <entry/>
+                <entry/>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+        <para id="id7894885"> bit dấu</para>
+        <para id="id7894931">Số nguyên có bit dn-1 là bit dấu và có trị số tượng trưng bởi các bit từ d0 tới dn-2 .</para>
+        <section id="id-419666305783">
+          <title>a) Cách biểu diễn bằng trị tuyệt đối và dấu</title>
+          <para id="id7308686">Trong cách này, bit dn-1 là bit dấu và các bit từ d0 tới dn-2 cho giá trị tuyệt đối. Một từ n bit tương ứng với số nguyên thập phân có dấu.</para>
+          <para id="id7308724">N = 
+<m:math><m:semantics><m:mrow><m:mstyle fontsize="12pt"><m:mrow><m:mrow><m:mrow><m:mo stretchy="false">(</m:mo><m:mo stretchy="false">−</m:mo><m:mn>1</m:mn></m:mrow><m:msup><m:mo stretchy="false">)</m:mo><m:mstyle fontsize="8pt"><m:mrow><m:msub><m:mi>d</m:mi><m:mstyle fontsize="6pt"><m:mrow><m:mrow><m:mi>n</m:mi><m:mo stretchy="false">−</m:mo><m:mn>1</m:mn></m:mrow></m:mrow></m:mstyle></m:msub></m:mrow></m:mstyle></m:msup><m:mrow><m:munderover><m:mo stretchy="false">∑</m:mo><m:mrow><m:mi>i</m:mi><m:mo stretchy="false">=</m:mo><m:mn>0</m:mn></m:mrow><m:mrow><m:mi>n</m:mi><m:mo stretchy="false">−</m:mo><m:mn>2</m:mn></m:mrow></m:munderover><m:mrow><m:msub><m:mi>d</m:mi><m:mi>i</m:mi></m:msub><m:mstyle fontsize="12pt"><m:mrow><m:msup><m:mn>2</m:mn><m:mi>i</m:mi></m:msup></m:mrow></m:mstyle></m:mrow></m:mrow></m:mrow></m:mrow></m:mstyle><m:mrow/></m:mrow><m:annotation encoding="StarMath 5.0"> size 12{ \(  - 1 \)  rSup { size 8{d rSub { size 6{n - 1} } } }  Sum cSub {i=0}  cSup {n - 2}  {d rSub {i}  size 12{2 rSup {i} }} } {}</m:annotation></m:semantics></m:math></para>
+          <para id="id7456960">Ví dụ: +2510 = 000110012</para>
+          <para id="id7965652">-2510 = 100110012</para>
+          <list id="id7965676" list-type="bulleted">
+            <item>Một Byte (8 bit) có thể biểu diễn các số có dấu từ -127 tới +127. </item>
+            <item>Có hai cách biểu diễn số không là 0000 0000 (+0) và 1000 0000 (-0).</item>
+          </list>
+        </section>
+        <section id="id-0546447102959">
+          <title>b) Cách biểu diễn hằng số bù 1</title>
+          <para id="id6989345">Trong cách biểu diễn này, số âm -N được có bằng cách thay các số nhị phân di của số đương N bằng số bù của nó (nghĩa là nếu di = 0 thì người ta đổi nó thành 1 và ngược lại).</para>
+          <para id="id6989377">Ví dụ: +2510 = 000110012</para>
+          <para id="id7587274">-2510 = 111001102</para>
+          <list id="id7587298" list-type="bulleted">
+            <item>Một Byte cho phép biểu diễn tất cả các số có dấu từ -127 (1000 00002) đến 127 (0111 11112) </item>
+            <item>Có hai cách biểu diễn cho 0 là 0000 0000 (+0) và 1111 1111 (-0).</item>
+          </list>
+        </section>
+        <section id="id-682117725996">
+          <title>c) Cách biểu diễn bằng số bù 2</title>
+          <para id="id7587346">Để có số bù 2 của một số nào đó, người ta lấy số bù 1 rồi cộng thêm 1. Vậy một từ n bit (dn-1 ....... d0) có trị thập phân.</para>
+          <para id="id7914820">
+            <m:math>
+              <m:semantics>
+                <m:mrow>
+                  <m:mstyle fontsize="12pt">
+                    <m:mrow>
+                      <m:mrow>
+                        <m:mi>N</m:mi>
+                        <m:mtext>=-</m:mtext>
+                        <m:msub>
+                          <m:mi>d</m:mi>
+                          <m:mstyle fontsize="8pt">
+                            <m:mrow>
+                              <m:mrow>
+                                <m:mi>n</m:mi>
+                                <m:mo stretchy="false">−</m:mo>
+                                <m:mn>1</m:mn>
+                              </m:mrow>
+                            </m:mrow>
+                          </m:mstyle>
+                        </m:msub>
+                        <m:mrow>
+                          <m:msup>
+                            <m:mn>2</m:mn>
+                            <m:mstyle fontsize="8pt">
+                              <m:mrow>
+                                <m:mrow>
+                                  <m:mi>n</m:mi>
+                                  <m:mo stretchy="false">−</m:mo>
+                                  <m:mn>1</m:mn>
+                                </m:mrow>
+                              </m:mrow>
+                            </m:mstyle>
+                          </m:msup>
+                          <m:mo stretchy="false">+</m:mo>
+                          <m:mrow>
+                            <m:munderover>
+                              <m:mo stretchy="false">∑</m:mo>
+                              <m:mstyle fontsize="8pt">
+                                <m:mrow>
+                                  <m:mtext>i=0</m:mtext>
+                                </m:mrow>
+                              </m:mstyle>
+                              <m:mstyle fontsize="8pt">
+                                <m:mrow>
+                                  <m:mtext>n-2</m:mtext>
+                                </m:mrow>
+                              </m:mstyle>
+                            </m:munderover>
+                            <m:mrow>
+                              <m:msub>
+                                <m:mi>d</m:mi>
+                                <m:mstyle fontsize="8pt">
+                                  <m:mrow>
+                                    <m:mi>i</m:mi>
+                                  </m:mrow>
+                                </m:mstyle>
+                              </m:msub>
+                              <m:msup>
+                                <m:mn>2</m:mn>
+                                <m:mstyle fontsize="8pt">
+                                  <m:mrow>
+                                    <m:mi>i</m:mi>
+                                  </m:mrow>
+                                </m:mstyle>
+                              </m:msup>
+                            </m:mrow>
+                          </m:mrow>
+                        </m:mrow>
+                      </m:mrow>
+                    </m:mrow>
+                  </m:mstyle>
+                  <m:mrow/>
+                </m:mrow>
+                <m:annotation encoding="StarMath 5.0"> size 12{N"=-" d rSub { size 8{n-1} } 2 rSup { size 8{n-1} } +  Sum cSub { size 8{"i=0"} }  cSup { size 8{"n-2"} }  {d rSub { size 8{i} } 2 rSup { size 8{i} } } } {}</m:annotation>
+              </m:semantics>
+            </m:math>
+          </para>
+          <para id="id7374353">Một từ n bit có thể biểu diễn các số có dấu từ - 2n-1 đến 2n-1 - 1. Chỉ có một cách duy nhất để biểu diễn cho số không là tất cả các bit của số đó đều bằng không.</para>
+          <para id="id7374386">Ví dụ: +2510 = 000110012</para>
+          <para id="id6151508">-2510 = 111001112</para>
+          <list id="id6151532" list-type="bulleted">
+            <item>Dùng 1 Byte (8 bit) để biểu diễn một số có dấu lớn nhất là +127 và số nhỏ nhất là –128.</item>
+          </list>
+          <list id="id6151544" list-type="bulleted">
+            <item>Chỉ có một giá trị 0: +0 = 000000002, -0 = 000000002</item>
+            <item/>
+          </list>
+          <table id="id6151571" summary="">
+            <tgroup cols="11">
+              <colspec colnum="1" colname="c1"/>
+              <colspec colnum="2" colname="c2"/>
+              <colspec colnum="3" colname="c3"/>
+              <colspec colnum="4" colname="c4"/>
+              <colspec colnum="5" colname="c5"/>
+              <colspec colnum="6" colname="c6"/>
+              <colspec colnum="7" colname="c7"/>
+              <colspec colnum="8" colname="c8"/>
+              <colspec colnum="9" colname="c9"/>
+              <colspec colnum="10" colname="c10"/>
+              <colspec colnum="11" colname="c11"/>
+              <tbody>
+                <row>
+                  <entry>d3</entry>
+                  <entry>d2</entry>
+                  <entry>d1</entry>
+                  <entry>d0</entry>
+                  <entry>N</entry>
+                  <entry/>
+                  <entry>d3</entry>
+                  <entry>d2</entry>
+                  <entry>d1</entry>
+                  <entry>d0</entry>
+                  <entry>N</entry>
+                </row>
+                <row>
+                  <entry>0</entry>
+                  <entry>0</entry>
+                  <entry>0</entry>
+                  <entry>0</entry>
+                  <entry>0</entry>
+                  <entry/>
+                  <entry>1</entry>
+                  <entry>0</entry>
+                  <entry>0</entry>
+                  <entry>0</entry>
+                  <entry>-8</entry>
+                </row>
+                <row>
+                  <entry>0</entry>
+                  <entry>0</entry>
+                  <entry>0</entry>
+                  <entry>1</entry>
+                  <entry>1</entry>
+                  <entry/>
+                  <entry>1</entry>
+                  <entry>0</entry>
+                  <entry>0</entry>
+                  <entry>1</entry>
+                  <entry>-7</entry>
+                </row>
+                <row>
+                  <entry>0</entry>
+                  <entry>0</entry>
+                  <entry>1</entry>
+                  <entry>0</entry>
+                  <entry>2</entry>
+                  <entry/>
+                  <entry>1</entry>
+                  <entry>0</entry>
+                  <entry>1</entry>
+                  <entry>0</entry>
+                  <entry>-6</entry>
+                </row>
+                <row>
+                  <entry>0</entry>
+                  <entry>0</entry>
+                  <entry>1</entry>
+                  <entry>1</entry>
+                  <entry>3</entry>
+                  <entry/>
+                  <entry>1</entry>
+                  <entry>0</entry>
+                  <entry>1</entry>
+                  <entry>1</entry>
+                  <entry>-5</entry>
+                </row>
+                <row>
+                  <entry>0</entry>
+                  <entry>1</entry>
+                  <entry>0</entry>
+                  <entry>0</entry>
+                  <entry>4</entry>
+                  <entry/>
+                  <entry>1</entry>
+                  <entry>1</entry>
+                  <entry>0</entry>
+                  <entry>0</entry>
+                  <entry>-4</entry>
+                </row>
+                <row>
+                  <entry>0</entry>
+                  <entry>1</entry>
+                  <entry>0</entry>
+                  <entry>1</entry>
+                  <entry>5</entry>
+                  <entry/>
+                  <entry>1</entry>
+                  <entry>1</entry>
+                  <entry>0</entry>
+                  <entry>1</entry>
+                  <entry>-3</entry>
+                </row>
+                <row>
+                  <entry>0</entry>
+                  <entry>1</entry>
+                  <entry>1</entry>
+                  <entry>0</entry>
+                  <entry>6</entry>
+                  <entry/>
+                  <entry>1</entry>
+                  <entry>1</entry>
+                  <entry>1</entry>
+                  <entry>0</entry>
+                  <entry>-2</entry>
+                </row>
+                <row>
+                  <entry>0</entry>
+                  <entry>1</entry>
+                  <entry>1</entry>
+                  <entry>1</entry>
+                  <entry>7</entry>
+                  <entry/>
+                  <entry>1</entry>
+                  <entry>1</entry>
+                  <entry>1</entry>
+                  <entry>1</entry>
+                  <entry>-1</entry>
+                </row>
+              </tbody>
+            </tgroup>
+          </table>
+          <para id="id7156686">Bảng I.4: Số 4 bit có dấu theo cách biểu diễn số âm bằng số bù 2</para>
+        </section>
+        <section id="id-365692003631">
+          <title>d) Cách biểu diễn bằng số thừa K</title>
+          <para id="id7156725">Trong cách này, số dương của một số N có được bằng cách “cộng thêm vào” số thừa K được chọn sao cho tổng của K và một số âm bất kỳ luôn luôn dương. Số âm -N của số N có được bằng cáck lấy K-N (hay lấy bù hai của số vừa xác định). </para>
+          <para id="id6531418">Ví dụ: (số thừa K=128, số “cộng thêm vào” 128 là một số nguyên dương. Số âm là số lấy bù hai số vừa tính, bỏ qua số giữ của bit cao nhất) :</para>
+          <para id="id6531436">+2510 = 100110012</para>
+          <para id="id6531457"> -2510 = 011001112</para>
+          <list id="id6531482" list-type="bulleted">
+            <item>Dùng 1 Byte (8 bit) để biểu diễn một số có dấu lớn nhất là +127 và số nhỏ nhất là –128.</item>
+            <item>Chỉ có một giá trị 0: +0 = 100000002, -0 = 100000002</item>
+          </list>
+          <para id="id6967624">Cách biểu diễn số nguyên có dấu bằng số bù 2 được dùng rộng rãi cho các phép tính số nguyên. Nó có lợi là không cần thuật toán đặc biệt nào cho các phép tính cộng và tính trừ, và giúp phát hiện dễ dàng các trường hợp bị tràn.</para>
+          <para id="id6967648">Các cách biểu diễn bằng "dấu , trị tuyệt đối" hoặc bằng "số bù 1" dẫn đến việc dùng các thuật toán phức tạp và bất lợi vì luôn có hai cách biểu diễn của số không. Cách biểu diễn bằng "dấu , trị tuyệt đối" được dùng cho phép nhân của số có dấu chấm động.</para>
+          <para id="id7173678">Cách biểu diễn bằng số thừa K được dùng cho số mũ của các số có dấu chấm động. Cách này làm cho việc so sánh các số mũ có dấu khác nhau trở thành việc so sánh các số nguyên dương.</para>
+        </section>
+      </section>
+      <section id="id-81234662453">
+        <title>Cách biểu diễn số với dấu chấm động:</title>
+        <para id="id7173701">Trước khi đi vào cách biểu diễn số với dấu chấm động, chúng ta xét đến cách biểu diễn một số dưới dạng dấu chấm xác định. </para>
+        <para id="id7173711">Ví dụ: </para>
+        <list id="id7173715" list-type="bulleted">
+          <item>Trong hệ thập phân, số 25410 có thể biểu diễn dưới các dạng sau:</item>
+        </list>
+        <para id="id7649499">254 * 100; 25.4 * 101; 2.54 * 102; 0.254 * 103; 0.0254 * 104; …</para>
+        <list id="id7649558" list-type="bulleted">
+          <item>Trong hệ nhị phân, số (0.00011)2 (tương đương với số 0.0937510) có thể biểu diễn dưới các dạng :</item>
+        </list>
+        <para id="id7545730">0.00011; 0.00011 * 20 ; 0.0011 * 2-1; 0.011 * 2-2; 0.11 * 2-3; 1.1 * 2-4</para>
+        <para id="id7677264">Các cách biểu diễn này gây khó khăn trong một số phép so sánh các số. Để dễ dàng trong các phép tính, các số được chuẩn hoá về một dạng biểu diễn:</para>
+        <para id="id7677286"> 1. fff...f x 2 E</para>
+        <para id="id7677306">Trong đó: f là phần lẻ; E là phần mũ</para>
+        <para id="id7677312">Số chấm động được chuẩn hoá, cho phép biểu diễn gần đúng các số thập phân rất lớn hay rất nhỏ dưới dạng một số nhị phân theo một dạng qui ước. Thành phần của số chấm động bao gồm: phần dấu, phần mũ và phần định trị. Như vậy, cách này cho phép biểu diễn gần đúng các số thực, tất cả các số đều có cùng cách biểu diễn. </para>
+        <para id="id6966437">3</para>
+        <para id="id6966442">Có nhiều cách biểu diễn dấu chấm động, trong đó cách biểu diễn theo chuẩn IEEE 754 được dùng rộng rãi trong khoa học máy tính hiện nay. Trong cách biểu diễn này, phần định trị có dạng 1,f với số 1 ẩn tăng và f là phần số lẽ.</para>
+        <para id="id7883260">Chuẩn IEEE 754 định nghĩa hai dạng biểu diễn số chấm động:</para>
+        <list id="id7883267" list-type="bulleted">
+          <item>Số chấm động chính xác đơn với định dạng được định nghĩa: chiều dài số: 32 bit được chia thành các trường: dấu S (Sign bit - 1 bit), mũ E (Exponent - 8 bit), phần lẻ F (Fraction - 23 bit). </item>
+        </list>
+        <para id="id7883283">Số này tương ứng với số thực (-1)S * (1,f1 f2 ..... f23) * 2(E - 127)</para>
+        <para id="id7413849">bit 31 30 23 22 bit 1 bit 0</para>
+        <table id="id7413874" summary="">
+          <tgroup cols="7">
+            <colspec colnum="1" colname="c1"/>
+            <colspec colnum="2" colname="c2"/>
+            <colspec colnum="3" colname="c3"/>
+            <colspec colnum="4" colname="c4"/>
+            <colspec colnum="5" colname="c5"/>
+            <colspec colnum="6" colname="c6"/>
+            <colspec colnum="7" colname="c7"/>
+            <tbody>
+              <row>
+                <entry>S</entry>
+                <entry>E</entry>
+                <entry>f1</entry>
+                <entry>f2</entry>
+                <entry>...........</entry>
+                <entry>f22</entry>
+                <entry>f23</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+        <para id="id7457235">Hình I.7: Biểu diễn số có dấu chấm động chính xác đơn với 32 bit</para>
+        <list id="id7457250" list-type="bulleted">
+          <item>Số chấm động chính xác kép với định dạng được định nghĩa: chiều dài số: 64 bit được chia thành các trường: dấu S (Sign bit - 1 bit), mũ E (Exponent - 11 bit), phần lẻ F (Fraction - 52 bit)</item>
+        </list>
+        <para id="id7457267">Số này tương ứng với số thực (-1)S * (1,f1 f2 ..... f52) * 2(E - 1023)</para>
+        <para id="id6266200">bit 63 62 52 51 bit 1 bit 0</para>
+        <table id="id6266226" summary="">
+          <tgroup cols="7">
+            <colspec colnum="1" colname="c1"/>
+            <colspec colnum="2" colname="c2"/>
+            <colspec colnum="3" colname="c3"/>
+            <colspec colnum="4" colname="c4"/>
+            <colspec colnum="5" colname="c5"/>
+            <colspec colnum="6" colname="c6"/>
+            <colspec colnum="7" colname="c7"/>
+            <tbody>
+              <row>
+                <entry>S</entry>
+                <entry>E</entry>
+                <entry>f1</entry>
+                <entry>f2</entry>
+                <entry>...........</entry>
+                <entry>f51</entry>
+                <entry>f52</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+        <para id="id7452277">Hình I.8: Biểu diễn số có dấu chấm động chính xác kép với 64 bit</para>
+        <para id="id7452292">Để thuận lợi trong một số phép tính toán, IEEE định nghĩa một số dạng mở rộng của chuẩn IEEE 754:</para>
+        <table id="id7452298" summary="">
+          <tgroup cols="5">
+            <colspec colnum="1" colname="c1"/>
+            <colspec colnum="2" colname="c2"/>
+            <colspec colnum="3" colname="c3"/>
+            <colspec colnum="4" colname="c4"/>
+            <colspec colnum="5" colname="c5"/>
+            <tbody>
+              <row>
+                <entry>Tham số</entry>
+                <entry>Chính xác đơn</entry>
+                <entry>Mở rộngchính xác đơn</entry>
+                <entry>Chính xác kép</entry>
+                <entry>Mở rộngchính xác kép</entry>
+              </row>
+              <row>
+                <entry>Chiều dài (bit)</entry>
+                <entry>32</entry>
+                <entry> 43</entry>
+                <entry>64</entry>
+                <entry> 79</entry>
+              </row>
+              <row>
+                <entry>Chiều dài trường mũ (E)</entry>
+                <entry>8</entry>
+                <entry> 11</entry>
+                <entry>11</entry>
+                <entry> 15</entry>
+              </row>
+              <row>
+                <entry>Số thừa</entry>
+                <entry>127</entry>
+                <entry>-</entry>
+                <entry>1023</entry>
+                <entry>-</entry>
+              </row>
+              <row>
+                <entry>Giá trị mũ tối đa</entry>
+                <entry>127</entry>
+                <entry> 1023</entry>
+                <entry>1023</entry>
+                <entry> 16383</entry>
+              </row>
+              <row>
+                <entry>Giá trị mũ tối thiểu</entry>
+                <entry>-126</entry>
+                <entry> - 1022</entry>
+                <entry>-1022</entry>
+                <entry> -16382</entry>
+              </row>
+              <row>
+                <entry>Chiều dài trường lẻ F (bit)</entry>
+                <entry>23</entry>
+                <entry> 31</entry>
+                <entry>52</entry>
+                <entry>63</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+        <para id="id7500082">Chuẩn IEEE 754 cho phép biểu diễn các số chuẩn hoá (các bit của E không cùng lúc bằng 0 hoặc bằng 1), các số không chuẩn hoá (các bit của E không cùng lúc bằng 0 và phần số lẻ f1 f2 ... khác không), trị số 0 (các bit của E không cùng lúc bằng 0 và phần số lẻ bằng không), và các ký tự đặc biệt (các bit của E không cùng lúc bằng 1 và phần lẻ khác không).</para>
+        <para id="id6268910">Ví dụ các bước biến đổi số thập phân -12.62510 sang số chấm động chuẩn IEEE 754 chính xác đơn (32 bit):</para>
+        <list id="id6268934" list-type="bulleted">
+          <item>Bước 1: Đổi số -12.62510 sang nhị phân: -12.62510 = -1100.1012.</item>
+        </list>
+        <para id="id7743407"/>
+        <list id="id7743436" list-type="bulleted">
+          <item/>
+          <item>Bước 2: Chuẩn hoá: -1100.1012 = -1.1001012 x 23 (Số 1.1001012 dạng 1.f)</item>
+          <item>Bước 3: Điền các bit vào các trường theo chuẩn:</item>
+        </list>
+        <para id="id6965938">Số âm: bit dấu S có giá trị 1. </para>
+        <para id="id6965943">Phần mũ E với số thừa K=127, ta có: E-127=3 </para>
+        <para id="id6965952"> E = 3 + 127 = 130 (1000 00102). </para>
+        <para id="id6965978">32 bit</para>
+        <para id="id7960039">S E FKết quả nhận được: </para>
+        <para id="id6991067">1 1000 0010 1001 0100 0000 0000 0000 000</para>
+      </section>
+      <section id="id-819423644258">
+        <title>Biểu diễn các số thập phân</title>
+        <para id="id6949714">Một vài ứng dụng, đặc biệt ứng dụng quản lý, bắt buộc các phép tính thập phân phải chính xác, không làm tròn số. Với một số bit cố định, ta không thể đổi một cách chính xác số nhị phân thành số thập phân và ngược lại. Vì vậy, khi cần phải dùng số thập phân, ta dùng cách biểu diễn số thập phân mã bằng nhị phân (BCD: Binary Coded Decimal) theo đó mỗi số thập phân được mã với 4 số nhị phân (bảng I.6).</para>
+        <table id="id6949743" summary="">
+          <tgroup cols="10">
+            <colspec colnum="1" colname="c1"/>
+            <colspec colnum="2" colname="c2"/>
+            <colspec colnum="3" colname="c3"/>
+            <colspec colnum="4" colname="c4"/>
+            <colspec colnum="5" colname="c5"/>
+            <colspec colnum="6" colname="c6"/>
+            <colspec colnum="7" colname="c7"/>
+            <colspec colnum="8" colname="c8"/>
+            <colspec colnum="9" colname="c9"/>
+            <colspec colnum="10" colname="c10"/>
+            <tbody>
+              <row>
+                <entry>Số thập phân</entry>
+                <entry>d3</entry>
+                <entry>d2</entry>
+                <entry>d1</entry>
+                <entry>d0</entry>
+                <entry>Số thập phân</entry>
+                <entry>d3</entry>
+                <entry>d2</entry>
+                <entry>d1</entry>
+                <entry>d0</entry>
+              </row>
+              <row>
+                <entry>0</entry>
+                <entry>0</entry>
+                <entry>0</entry>
+                <entry>0</entry>
+                <entry>0</entry>
+                <entry>5</entry>
+                <entry>0</entry>
+                <entry>1</entry>
+                <entry>0</entry>
+                <entry>1</entry>
+              </row>
+              <row>
+                <entry>1</entry>
+                <entry>0</entry>
+                <entry>0</entry>
+                <entry>0</entry>
+                <entry>1</entry>
+                <entry>6</entry>
+                <entry>0</entry>
+                <entry>1</entry>
+                <entry>1</entry>
+                <entry>0</entry>
+              </row>
+              <row>
+                <entry>2</entry>
+                <entry>0</entry>
+                <entry>0</entry>
+                <entry>1</entry>
+                <entry>0</entry>
+                <entry>7</entry>
+                <entry>0</entry>
+                <entry>1</entry>
+                <entry>1</entry>
+                <entry>1</entry>
+              </row>
+              <row>
+                <entry>3</entry>
+                <entry>0</entry>
+                <entry>0</entry>
+                <entry>1</entry>
+                <entry>1</entry>
+                <entry>8</entry>
+                <entry>1</entry>
+                <entry>0</entry>
+                <entry>0</entry>
+                <entry>0</entry>
+              </row>
+              <row>
+                <entry>4</entry>
+                <entry>0</entry>
+                <entry>1</entry>
+                <entry>0</entry>
+                <entry>0</entry>
+                <entry>9</entry>
+                <entry>1</entry>
+                <entry>0</entry>
+                <entry>0</entry>
+                <entry>1</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+        <para id="id7757528">Bảng I.5: Số thập phân mã bằng nhị phân</para>
+        <para id="id7156481">Để biểu diễn số BCD có dấu, người ta thêm số 0 trước một số dương cần tính, ta có số âm của số BCD bằng cách lấy bù 10 số cần tính.</para>
+        <para id="id7156489">Ví dụ: biểu diễn số +07910 bằng số BCD: 0000 0111 1001</para>
+        <para id="id7156509">Bù 91001 0010 0000</para>
+        <para id="id7156522">+1</para>
+        <para id="id7156536">Bù 101001 0010 0001</para>
+        <para id="id7156548">Vây, ta có:Số - 07910 trong cách biểu diễn số BCD: 1001 0010 0001BCD. </para>
+        <para id="id7683035">Cách tính toán trên tương đương với cách sau:</para>
+        <list id="id7683041" list-type="bulleted">
+          <item>Trước hết ta lấy số bù 9 của số 079 bằng cách: 999 - 079 = 920. </item>
+          <item>Cộng 1 vào số bù 9 ta được số bù 10: 920 + 1 = 921. </item>
+          <item>Biểu diễn số 921 dưới dạng số BCD, ta có: 1001 0010 0001BCD</item>
+        </list>
+      </section>
+      <section id="id-369012698981">
+        <title>Biểu diễn các ký tự</title>
+        <para id="id7683089">Tuỳ theo các hệ thống khác nhau, có thể sử dụng các bảng mã khác nhau: ASCII, EBCDIC, UNICODE,....Các hệ thống trước đây thường dùng bảng mã ASCII (American Standard Codes for Information Interchange) để biểu diễn các chữ, số và một số dấu thường dùng mà ta gọi chung là ký tự. Mỗi ký tự được biểu diễn bởi 7 bit trong một Byte. Hiện nay, một trong các bảng mã thông dụng được dùng là Unicode, <figure id="id7617004"><media id="id1166782718180" alt=""><image src="../../media/graphics3-f89c.png" mime-type="image/png" height="438" width="615"/></media></figure>trong bảng mã này, mỗi ký tự được mã hoá bởi 2 Byte.</para>
+        <section id="id-215065097936">
+          <title>Bảng mã ASCII</title>
+          <para id="id7617046"><figure id="id7617057"><media id="id2824997" alt=""><image src=".png" mime-type="image/png" height="412" width="650"/></media></figure>Bảng mã EBCDIC</para>
+          <para id="id7557580"><figure id="id7557591"><media id="id8351664" alt=""><image src=".png" mime-type="image/png" height="588" width="613"/></media></figure>Bảng mã UNICODE</para>
+        </section>
+      </section>
+    </section>
+    <section id="id-00525173792e-05">
+      <title>CÂU HỎI ÔN TẬP VÀ BÀI TẬP CHƯƠNG I</title>
+      <para id="id7656138">*****</para>
+      <list id="id7656143" list-type="enumerated">
+        <item>Dựa vào tiêu chuẩn nào người ta phân chia máy tính thành các thế hệ?</item>
+        <item>Đặc trưng cơ bản của các máy tính thế hệ thứ nhất?</item>
+        <item>Đặc trưng cơ bản của các máy tính thế hệ thứ hai?</item>
+        <item>Đặc trưng cơ bản của các máy tính thế hệ thứ ba?</item>
+        <item>Đặc trưng cơ bản của các máy tính thế hệ thứ tư?</item>
+        <item>Khuynh hướng phát triển của máy tính điện tử ngày nay là gì?</item>
+        <item>Việc phân loại máy tính dựa vào tiêu chuẩn nào?</item>
+        <item>Khái niệm thông tin trong máy tính được hiểu như thế nào?</item>
+        <item>Lượng thông tin là gì ?</item>
+        <item>Sự hiểu biết về một trạng thái trong 4096 trạng thái có thể có ứng với lượng thông tin là bao nhiêu?</item>
+        <item>Điểm chung nhất trong các cách biểu diễn một số nguyên n bit có dấu là gì?</item>
+      </list>
+      <para id="id7780508">C</para>
+      <list id="id7780512" list-type="enumerated">
+        <item>Số nhị phân 8 bit (11001100)2, số này tương ứng với số nguyên thập phân có dấu là bao nhiêu nếu số đang được biểu diễn trong cách biểu diễn:<list id="id7780541" list-type="bulleted"><item>Dấu và trị tuyệt đối.</item><item>Số bù 1.</item><item>Số bù 2.</item></list></item>
+        <item>Đổi các số sau đây:<list id="id7890258" list-type="bulleted"><item>(011011)2 ra số thập phân.</item><item>(-2005)10 ra số nhị phân 16 bits.</item><item>(55.875)10 ra số nhị phân.</item></list></item>
+        <item>Biểu diễn số thực (31.75)10 dưới dạng số có dấu chấm động chính xác đơn 32 bit.</item>
+      </list>
+    </section>
+  </content>
+</document>
