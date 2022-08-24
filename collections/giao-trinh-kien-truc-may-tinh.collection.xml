@@ -1,3 +1,19 @@
-<col:collection xmlns="http://cnx.rice.edu/collxml" xmlns:col="http://cnx.rice.edu/collxml" xml:lang="en">  <metadata xmlns:md="http://cnx.rice.edu/mdml" mdml-version="0.5">  <md:content-id>col10818</md:content-id>  <md:title>Giáo trình kiến trúc máy tính</md:title>      <md:license url="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution License 3.0</md:license>  <md:language>vi</md:language>              <md:uuid>054acb5f-0b9a-49a1-b737-7beed84419b6</md:uuid>
-<md:slug>giao-trinh-kien-truc-may-tinh</md:slug>
-</metadata>  <col:content>          <col:module document="m30362"/>                            <col:module document="m30599"/>                            <col:module document="m30617"/>                            <col:module document="m30565"/>                            <col:module document="m30318"/>                            <col:module document="m30574"/>                    </col:content></col:collection>
+<?xml version="1.0"?>
+<col:collection xmlns="http://cnx.rice.edu/collxml" xmlns:col="http://cnx.rice.edu/collxml" xml:lang="en" authors="ThS. V&#xF5; V&#x103;n Ch&#xED;n ,KS. Ph&#x1EA1;m H&#x1EEF;u T&#xE0;i ,ThS. Nguy&#x1EC5;n H&#xF4;ng V&#xE2;n">
+  <metadata xmlns:md="http://cnx.rice.edu/mdml" mdml-version="0.5">
+    <md:content-id>col10818</md:content-id>
+    <md:title>Gi&#xE1;o tr&#xEC;nh ki&#x1EBF;n tr&#xFA;c m&#xE1;y t&#xED;nh</md:title>
+    <md:license url="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution License 3.0</md:license>
+    <md:language>vi</md:language>
+    <md:uuid>054acb5f-0b9a-49a1-b737-7beed84419b6</md:uuid>
+    <md:slug>giao-trinh-kien-truc-may-tinh</md:slug>
+  </metadata>
+  <col:content>
+    <col:module document="m30362"/>
+    <col:module document="m30599"/>
+    <col:module document="m30617"/>
+    <col:module document="m30565"/>
+    <col:module document="m30318"/>
+    <col:module document="m30574"/>
+  </col:content>
+</col:collection>
